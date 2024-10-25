@@ -8,15 +8,15 @@ All user interactions, including inquiries and feedback, are automatically logge
 
 # Key Features:
 
-Manage Packages: Create, update, and delete travel packages easily.
-User Accounts: Secure sign-up, login, and logout for clients and employees.
-Admin Panel: Manage users, assign roles, and set permissions effortlessly.
-Inquiry and Contact Forms: Simple forms for users with automatic email confirmations.
-Email Notifications: Admins receive detailed updates for inquiries; users get confirmation emails.
-Chat Feature: Collects user info for quick admin responses.
-Security Measures: Protects against XSS attacks using DOMPurify.
-Data Management: Displays all inquiries and employee details in the admin panel.
-Responsive Design: Works well on all devices for a smooth user experience.
-Dynamic Data Fetching: Reduces static content by pulling data from the backend.
-Attractive Pages: Engaging "About Us" and "Contact Us" designs.
-Google Sheets Integration: Automatically logs user information for easy tracking.
+**Manage Packages**: Create, update, and delete travel packages easily.
+**User Accounts**: Secure sign-up, login, and logout for clients and employees.
+**Admin Panel**: Manage users, assign roles, and set permissions effortlessly.
+**Inquiry and Contact Forms**: Simple forms for users with automatic email confirmations.
+**Email Notifications**: Admins receive detailed updates for inquiries; users get confirmation emails.
+**Chat Feature**: Collects user info for quick admin responses.
+**Security Measures**: Protects against XSS attacks using DOMPurify.
+**Data Management**: Displays all inquiries and employee details in the admin panel.
+**Responsive Design**: Works well on all devices for a smooth user experience.
+**Dynamic Data Fetching**: Reduces static content by pulling data from the backend.
+**Attractive Pages**: Engaging "About Us" and "Contact Us" designs.
+**Google Sheets Integration**: Automatically logs user information for easy tracking.
