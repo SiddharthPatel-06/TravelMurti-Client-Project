@@ -8,15 +8,17 @@ All user interactions, including inquiries and feedback, are automatically logge
 
 # Key Features:
 
-**Manage Packages**: Create, update, and delete travel packages easily.
-**User Accounts**: Secure sign-up, login, and logout for clients and employees.
-**Admin Panel**: Manage users, assign roles, and set permissions effortlessly.
-**Inquiry and Contact Forms**: Simple forms for users with automatic email confirmations.
-**Email Notifications**: Admins receive detailed updates for inquiries; users get confirmation emails.
-**Chat Feature**: Collects user info for quick admin responses.
-**Security Measures**: Protects against XSS attacks using DOMPurify.
-**Data Management**: Displays all inquiries and employee details in the admin panel.
-**Responsive Design**: Works well on all devices for a smooth user experience.
-**Dynamic Data Fetching**: Reduces static content by pulling data from the backend.
-**Attractive Pages**: Engaging "About Us" and "Contact Us" designs.
-**Google Sheets Integration**: Automatically logs user information for easy tracking.
+<ul>
+    <li>Manage Packages: Create, update, and delete travel packages easily.</li>
+    <li>User Accounts: Secure sign-up, login, and logout for clients and employees.</li>
+    <li>Admin Panel: Manage users, assign roles, and set permissions effortlessly.</li>
+    <li>Inquiry and Contact Forms: Simple forms for users with automatic email confirmations.</li>
+    <li>Email Notifications: Admins receive detailed updates for inquiries; users get confirmation emails.</li>
+    <li>Chat Feature: Collects user info for quick admin responses.</li>
+    <li>Security Measures: Protects against XSS attacks using DOMPurify.</li>
+    <li>Data Management: Inquiry data and employee details displayed for easy management.</li>
+    <li>Responsive Design: Looks great and works well on all devices.</li>
+    <li>Dynamic Data Fetching: Fetches data from the backend server, minimizing static content.</li>
+    <li>Attractive Pages: Beautifully designed "About Us" and "Contact Us" pages.</li>
+    <li>Google Sheets Integration: Automatically logs user information for tracking.</li>
+</ul>
