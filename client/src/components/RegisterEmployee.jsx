@@ -36,7 +36,7 @@ const Register = () => {
         position: "top-right",
       });
       setIsLoading(false);
-      navigate("/login");
+      navigate("/admin/login");
     } catch (error) {
       if (error.response?.status === 500) {
         toast.error("Server issue, please try again later.", {

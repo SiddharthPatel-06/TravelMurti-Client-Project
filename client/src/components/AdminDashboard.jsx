@@ -135,6 +135,7 @@ const AdminDashboard = () => {
 
   const handleUpdateClick = (subPkg) => {
     setSelectedSubPackage(subPkg);
+    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
   };
 
   const handleUpdateSubPackage = async (id, updatedData) => {
@@ -160,7 +161,7 @@ const AdminDashboard = () => {
       });
     } catch (error) {
       console.error("Network error:", error);
-      toast.error("Error updating SubPackage. Please try again.", {
+      toast.error("You are not authorized!", {
         position: "top-right",
       });
     }

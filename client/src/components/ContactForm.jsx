@@ -53,7 +53,7 @@ export default function ContactForm() {
     };
 
     axios
-      .post(`${process.env.REACT_APP_BASE_URL}/contact`, data)
+      .post(`http://localhost:4000/api/contact`, data)
       .then(() => {
         setUser(initialUserService);
         setLoading(false);

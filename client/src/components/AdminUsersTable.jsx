@@ -6,6 +6,14 @@ const AdminUsersTable = () => {
   const [users, setUsers] = useState([]);
   const [editUser, setEditUser] = useState(null);
   const [formData, setFormData] = useState({ name: "", email: "" });
+  const [permissions, setPermissions] = useState({
+    canCreatePackages: false,
+    canUpdatePackages: false,
+    canDeletePackages: false,
+    canCreateSubPackages: false,
+    canUpdateSubPackages: false,
+    canDeleteSubPackages: false,
+  });
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -33,6 +41,7 @@ const AdminUsersTable = () => {
   const handleEditClick = (user) => {
     setEditUser(user);
     setFormData({ name: user.name, email: user.email });
+    setPermissions(user.permissions);
   };
 
   const handleUpdateUser = async (e) => {
@@ -40,7 +49,11 @@ const AdminUsersTable = () => {
     try {
       const res = await axiosInstance.put(
         `/users/${editUser._id}`,
-        { name: formData.name, email: formData.email },
+        {
+          name: formData.name,
+          email: formData.email,
+          permissions: permissions,
+        },
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -63,21 +76,21 @@ const AdminUsersTable = () => {
       <div className="relative py-3 sm:max-w-4xl mx-auto text-center">
         <h2 className="text-4xl font-bold text-gray-800">Manage Users</h2>
         <div className="relative mt-6 bg-white shadow-xl rounded-lg overflow-hidden">
-          {/* Responsive Table for Desktop */}
+          {/* Table for Desktop */}
           <div className="hidden lg:block">
-            <table className="min-w-full leading-normal table-auto">
+            <table className="min-w-full leading-normal">
               <thead>
-                <tr className="bg-gradient-to-r from-gray-800 to-gray-700 text-white">
-                  <th className="px-4 py-3 text-sm uppercase font-semibold tracking-wide">
+                <tr className="bg-gray-800 text-white">
+                  <th className="px-4 py-3 text-sm uppercase font-semibold">
                     Name
                   </th>
-                  <th className="px-4 py-3 text-sm uppercase font-semibold tracking-wide">
+                  <th className="px-4 py-3 text-sm uppercase font-semibold">
                     Email
                   </th>
-                  <th className="px-4 py-3 text-sm uppercase font-semibold tracking-wide">
+                  <th className="px-4 py-3 text-sm uppercase font-semibold">
                     Role
                   </th>
-                  <th className="px-4 py-3 text-sm uppercase font-semibold tracking-wide">
+                  <th className="px-4 py-3 text-sm uppercase font-semibold">
                     Actions
                   </th>
                 </tr>
@@ -88,50 +101,22 @@ const AdminUsersTable = () => {
                     key={user._id}
                     className="bg-white border-b hover:bg-gray-100 transition-all duration-150"
                   >
-                    <td className="px-4 py-4 text-gray-700">{user.name}</td>
-                    <td className="px-4 py-4 text-gray-600">{user.email}</td>
-                    <td className="px-4 py-4 text-gray-600">{user.role}</td>
+                    <td className="px-4 py-4">{user.name}</td>
+                    <td className="px-4 py-4">{user.email}</td>
+                    <td className="px-4 py-4">{user.role}</td>
                     <td className="px-4 py-4">
                       <div className="flex justify-center space-x-2">
                         <button
-                          className="flex items-center bg-red-500 text-white px-3 py-2 rounded-md hover:bg-red-600 transition-all duration-200 shadow-lg"
+                          className="bg-red-500 text-white px-3 py-2 rounded-md hover:bg-red-600 transition-all duration-200"
                           onClick={() => handleDelete(user._id)}
                         >
-                          <span className="mr-1">Delete</span>
-                          <svg
-                            className="w-4 h-4"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="M6 18L18 6M6 6l12 12"
-                            />
-                          </svg>
+                          Delete
                         </button>
                         <button
-                          className="flex items-center bg-blue-500 text-white px-3 py-2 rounded-md hover:bg-blue-600 transition-all duration-200 shadow-lg"
+                          className="bg-blue-500 text-white px-3 py-2 rounded-md hover:bg-blue-600 transition-all duration-200"
                           onClick={() => handleEditClick(user)}
                         >
-                          <span className="mr-1">Edit</span>
-                          <svg
-                            className="w-4 h-4"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="M15.232 5.232a2.828 2.828 0 010 4l-.707.707L7.5 16.5l-2 2V18h-.707L3 20.707l2-.707V17.5l6.293-6.293.707-.707a2.828 2.828 0 014 0l.707-.707z"
-                            />
-                          </svg>
+                          Edit
                         </button>
                       </div>
                     </td>
@@ -141,7 +126,7 @@ const AdminUsersTable = () => {
             </table>
           </div>
 
-          {/* Card Layout for Mobile Screens */}
+          {/* Mobile Responsive Table */}
           <div className="grid grid-cols-1 gap-4 mt-6 lg:hidden">
             {users.length === 0 ? (
               <div className="text-center py-4 text-gray-600 col-span-full">
@@ -199,49 +184,66 @@ const AdminUsersTable = () => {
             )}
           </div>
 
-          {/* Edit Modal */}
+          {/* Edit User Modal */}
           {editUser && (
-            <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
-              <div className="bg-white p-6 rounded-md shadow-lg w-3/5 md:w-1/3">
-                {" "}
-                {/* Increase width for mobile */}
-                <h2 className="text-2xl font-semibold mb-4">Edit User</h2>
+            <div className="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50">
+              <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+                <h2 className="text-lg font-semibold mb-4">Edit User</h2>
                 <form onSubmit={handleUpdateUser}>
+                  <input
+                    type="text"
+                    placeholder="Name"
+                    value={formData.name}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
+                    }
+                    required
+                    className="border border-gray-300 p-2 mb-4 w-full"
+                  />
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    value={formData.email}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
+                    required
+                    className="border border-gray-300 p-2 mb-4 w-full"
+                  />
                   <div className="mb-4">
-                    <label className="block text-gray-700">Name</label>
-                    <input
-                      type="text"
-                      className="w-full p-2 border border-gray-300 rounded-md"
-                      value={formData.name}
-                      onChange={(e) =>
-                        setFormData({ ...formData, name: e.target.value })
-                      }
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <label className="block text-gray-700">Email</label>
-                    <input
-                      type="email"
-                      className="w-full p-2 border border-gray-300 rounded-md"
-                      value={formData.email}
-                      onChange={(e) =>
-                        setFormData({ ...formData, email: e.target.value })
-                      }
-                    />
+                    <h3 className="text-gray-700">Permissions</h3>
+                    {Object.keys(permissions).map((key) => (
+                      <div key={key} className="flex items-center">
+                        <input
+                          type="checkbox"
+                          id={key}
+                          checked={permissions[key]}
+                          onChange={(e) =>
+                            setPermissions({
+                              ...permissions,
+                              [key]: e.target.checked,
+                            })
+                          }
+                        />
+                        <label htmlFor={key} className="ml-2 text-gray-600">
+                          {key}
+                        </label>
+                      </div>
+                    ))}
                   </div>
                   <div className="flex justify-end">
                     <button
-                      type="button"
-                      className="bg-gray-300 text-black px-4 py-2 rounded-md mr-2"
-                      onClick={() => setEditUser(null)}
+                      type="submit"
+                      className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-all duration-200"
                     >
-                      Cancel
+                      Update User
                     </button>
                     <button
-                      type="submit"
-                      className="bg-blue-500 text-white px-4 py-2 rounded-md"
+                      type="button"
+                      onClick={() => setEditUser(null)}
+                      className="ml-2 bg-gray-300 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-400 transition-all duration-200"
                     >
-                      Update
+                      Cancel
                     </button>
                   </div>
                 </form>
@@ -255,4 +257,3 @@ const AdminUsersTable = () => {
 };
 
 export default AdminUsersTable;
-// Perfectly working fully responsive 

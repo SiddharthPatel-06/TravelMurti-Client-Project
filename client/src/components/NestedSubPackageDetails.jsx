@@ -244,12 +244,14 @@ const NestedSubPackageDetails = () => {
               type="date"
               name="arrival"
               required
+              placeholder="Arrival"
               className="w-full p-2 border border-gray-300 rounded"
             />
             <input
               type="date"
               name="departure"
               required
+              placeholder="Departure"
               className="w-full p-2 border border-gray-300 rounded"
             />
             <textarea

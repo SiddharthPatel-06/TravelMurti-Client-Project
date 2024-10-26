@@ -28,7 +28,7 @@ function ContactUs() {
 
           <div className="bg-white shadow-md rounded-lg p-6 flex flex-col items-center">
             <FaClock className="text-blue-500 w-8 h-8 mb-2" />
-            <h4 className="font-semibold text-gray-800">Open Time</h4>
+            <h4 className="font-semibold text-gray-800">Opening Time</h4>
             <p className="text-gray-600 text-center">10:00 am to 06:00 pm</p>
           </div>
 

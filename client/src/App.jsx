@@ -87,6 +87,7 @@ function MainApp() {
   const isSpecialRoute = [
     "/admin-dashboard",
     "/admin/login",
+    "/employee",
     "/create-employee",
   ].includes(location.pathname);
 
