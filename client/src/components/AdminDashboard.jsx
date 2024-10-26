@@ -309,9 +309,10 @@ const AdminDashboard = () => {
 
       {/* Main Content */}
       <div className="flex-1 p-5 w-full">
-        <h1 className="text-2xl text-gray-800 ml-8 text-center font-bold mb-5 mx-auto block sm:hidden">
+        {/* toggle bugg: */}
+        {/* <h1 className="text-2xl text-gray-800 ml- text-center font-bold mb-5 mx-auto block sm:hidden">
           Welcome to the Admin Dashboard!
-        </h1>
+        </h1> */}   
 
         {loading && <p>Loading...</p>}
         <>
