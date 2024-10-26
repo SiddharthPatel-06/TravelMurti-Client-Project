@@ -1,0 +1,287 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply font-poppins;
+}
+
+.spiritual-sub-packages .card {
+  margin-bottom: 20px; /* Space below each card */
+}
+
+.spiritual-sub-packages button {
+  cursor: pointer;
+  font-size: 24px; /* Size of the arrow icons */
+  width: 40px; /* Width of the buttons */
+  height: 40px; /* Height of the buttons */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: #e2e8f0; /* Background color for the buttons */
+  border-radius: 50%; /* Make buttons circular */
+  transition: background-color 0.3s;
+}
+
+.spiritual-sub-packages button:hover {
+  background-color: #d1d5db; /* Darker background on hover */
+}
+
+.spiritual-sub-packages button:disabled {
+  background-color: #cbd5e1; /* Disabled button color */
+}
+
+/* NestedSubPackageDetails */
+/* 
+.sub-package-details-page {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+.banner {
+  text-align: center;
+  margin-bottom: 20px;
+  height: 28vh; 
+}
+
+.banner-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.content-container {
+  display: flex;
+  margin-top: 20px;
+  padding: 0 150px;
+}
+
+.left-section,
+.right-section {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+.left-section {
+  flex: 2;
+  position: relative;
+}
+
+.right-section {
+  flex: 1;
+  max-width: 400px;
+}
+
+.section-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.section-buttons button {
+  padding: 10px 15px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.section-buttons button:hover {
+  background-color: #0056b3;
+}
+
+.section-content {
+  margin-bottom: 20px;
+}
+
+.cost-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.cost-table th,
+.cost-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+
+.right-section h3 {
+  margin-bottom: 15px;
+}
+
+.right-section input,
+.right-section textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.right-section button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.right-section button:hover {
+  background-color: #218838;
+}
+
+.contact-info {
+  margin-top: 20px;
+}
+
+.contact-info h4 {
+  margin-bottom: 10px;
+}
+
+.content-image {
+  width: 100%; 
+  height: auto; 
+  max-height: 300px;
+  object-fit: cover;
+} */
+
+/* Testimonial sectioin */
+
+/* Chatboat */
+/* Basic reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Chatbot container styles */
+.chatbot-container {
+  position: fixed;
+  bottom: 20px; /* Adjusted for your request */
+  right: 20px; /* Adjusted for your request */
+  z-index: 1000;
+}
+
+/* Chatbot toggle button (with smooth transitions and modern look) */
+.chatbot-toggle-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.chatbot-toggle-btn:hover {
+  transform: scale(1.05);
+}
+
+/* Chatbot box */
+.chatbot-box {
+  display: none;
+  position: fixed;
+  bottom: 0.4px; /* Make room for the toggle button */
+  right: 0.2px; /* Keep consistent with your requirement */
+  width: 350px;
+  height: 450px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+.chatbot-box.open {
+  display: block;
+  opacity: 1;
+}
+
+/* Chatbot iframe */
+.chatbot-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 10px;
+}
+
+/* Close button inside the chatbot box */
+.chatbot-close-btn {
+  position: absolute;
+  top: 22px;
+  right: 12px;
+  background-color: #ff4b4b;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.chatbot-close-btn:hover {
+  transform: scale(1.05);
+}
+
+/* Add responsiveness for smaller screens */
+@media (max-width: 768px) {
+  .chatbot-box {
+    width: 80vw;
+    height: 60vh;
+    bottom: 65px;
+    right: 0.2px;
+  }
+
+  .chatbot-toggle-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 22px;
+  }
+
+  .chatbot-close-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .chatbot-box {
+    width: 90vw;
+    height: 65vh;
+    bottom: 65px;
+    right: 0.2px;
+  }
+
+  .chatbot-toggle-btn {
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+  }
+
+  .chatbot-close-btn {
+    width: 25px;
+    height: 25px;
+    font-size: 14px;
+  }
+}
