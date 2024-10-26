@@ -12,7 +12,7 @@ const NestedSubPackageDetails = () => {
   useEffect(() => {
     if (nestedSubPackageId) {
       axios
-        .get(`http://localhost:4000/api/subPackages/${nestedSubPackageId}`)
+        .get(`${process.env.REACT_APP_BASE_URL}/subPackages/${nestedSubPackageId}`)
         .then((response) => {
           setSubPackage(response.data);
         })
@@ -90,7 +90,7 @@ const NestedSubPackageDetails = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/enquiry",
+        `${process.env.REACT_APP_BASE_URL}/enquiry`,
         enquiryData
       );
       if (response.status === 200) {
