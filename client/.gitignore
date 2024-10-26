@@ -26,9 +26,6 @@ yarn-error.log*
 # Ignore environment variables
 .env
 
-# Ignore node modules
-node_modules/
-
 # Build directory (in case of React or Vue)
 build/
 dist/
