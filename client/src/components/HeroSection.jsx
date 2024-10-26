@@ -51,7 +51,6 @@ const HeroSection = () => {
             src={slide.image}
             alt={slide.title}
             className="w-full h-full object-cover"
-            loading="lazy"
             style={{ objectPosition: "center" }}
           />
           {/* Centered Component for Info */}

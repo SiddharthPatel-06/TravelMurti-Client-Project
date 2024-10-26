@@ -102,13 +102,16 @@ const Navbar = () => {
       {/* Left section */}
       <div className="flex justify-between items-center gap-10">
         <div className="flex items-center">
-          <img
-            className="h-8 w-auto"
-            src="https://lh4.googleusercontent.com/-43TdC72iuWI/AAAAAAAAAAI/AAAAAAAAAAA/vLm5URYYrSY/s44-p-k-no-ns-nd/photo.jpg"
-            alt="Company Logo"
-            loading="lazy"
-          />
-          <p className="pl-4 text-base">Travel Murti</p>
+          <Link to="/">
+            <img
+              className="h-8 w-auto"
+              src="https://lh4.googleusercontent.com/-43TdC72iuWI/AAAAAAAAAAI/AAAAAAAAAAA/vLm5URYYrSY/s44-p-k-no-ns-nd/photo.jpg"
+              alt="Company Logo"
+            />
+          </Link>
+          <Link to="/">
+            <p className="pl-4 text-base">Travel Murti</p>
+          </Link>
         </div>
         {/* Mobile Menu Toggle */}
         <button

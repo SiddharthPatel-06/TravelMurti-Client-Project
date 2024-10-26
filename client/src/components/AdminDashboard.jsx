@@ -28,13 +28,11 @@ const AdminDashboard = () => {
   const [loading, setLoading] = useState(true);
   const [subPackages, setSubPackages] = useState([]);
   const [loadingSubPackages, setLoadingSubPackages] = useState(true);
-  const [showSubPackages, setShowSubPackages] = useState(false); // State to toggle subpackages view
-  const [showUsersTable, setShowUsersTable] = useState(false); // State for users table
-  // const [subPackages, setSubPackages] = useState([]); // Your state for subpackages
-  // const [loadingSubPackages, setLoadingSubPackages] = useState(false);
+  const [showSubPackages, setShowSubPackages] = useState(false);
+  const [showUsersTable, setShowUsersTable] = useState(false);
   const [selectedSubPackage, setSelectedSubPackage] = useState(null);
   const [showEnquiryTable, setShowEnquiryTable] = useState(false);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Add a state for sidebar toggle
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -220,7 +218,7 @@ const AdminDashboard = () => {
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         } fixed inset-0 bg-white w-64 sm:w-48 p-5 shadow-md md:relative md:translate-x-0 transition-transform duration-300 ease-in-out z-20`}
       >
-        <h2 className="text-xl font-bold mb-5">Admin Dashboard</h2>
+        <h2 className="text-xl font-bold mb-5 pl-4">Admin Dashboard</h2>
         <ul>
           <li className="mb-4">
             <button
@@ -301,7 +299,7 @@ const AdminDashboard = () => {
                 // Redirect user to login page
                 navigate("/admin/login");
               }}
-              className="flex items-center w-full text-left py-2 px-4 hover:bg-gray-200"
+              className="flex items-center w-full text-left py-2 px-4 hover:bg-gray-200 text-red-600"
             >
               <FiLogOut className="mr-2" /> Logout
             </button>
@@ -311,225 +309,224 @@ const AdminDashboard = () => {
 
       {/* Main Content */}
       <div className="flex-1 p-5 w-full">
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
-          <>
-            {showEnquiryTable ? (
-              <EnquiryTable />
-            ) : showUsersTable ? (
-              <AdminUsersTable />
-            ) : !showSubPackages ? (
-              <div>
-                <h2 className="text-2xl font-bold mb-5 ml-12 md:ml-0">
-                  Packages
-                </h2>
-                {/* Adjust grid for mobile to larger screens */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-5">
-                  {packages.map((pkg) => (
-                    <div
-                      key={pkg._id}
-                      className="bg-white p-5 rounded-lg shadow-md flex flex-col justify-between"
-                    >
-                      <div>
-                        <h3 className="text-lg font-bold">{pkg.category}</h3>
-                        <p className="text-gray-600">{pkg.description}</p>
+        <h1 className="text-2xl text-gray-800 ml-8 text-center font-bold mb-5 mx-auto block sm:hidden">
+          Welcome to the Admin Dashboard!
+        </h1>
+
+        {loading && <p>Loading...</p>}
+        <>
+          {showEnquiryTable ? (
+            <EnquiryTable />
+          ) : showUsersTable ? (
+            <AdminUsersTable />
+          ) : !showSubPackages ? (
+            <div>
+              <h2 className="text-2xl font-bold mb-5 ml-12 md:ml-0">
+                Packages
+              </h2>
+              {/* Adjust grid for mobile to larger screens */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-5">
+                {packages.map((pkg) => (
+                  <div
+                    key={pkg._id}
+                    className="bg-white p-5 rounded-lg shadow-md flex flex-col justify-between"
+                  >
+                    <div>
+                      <h3 className="text-lg font-bold">{pkg.category}</h3>
+                      <p className="text-gray-600">{pkg.description}</p>
+                    </div>
+                    <div className="flex justify-between mt-4">
+                      <div className="flex space-x-2">
+                        <button
+                          onClick={() => handleEditPackage(pkg)}
+                          className="bg-yellow-500 text-white px-3 py-1 rounded"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => handleDeletePackage(pkg._id)}
+                          className="bg-red-500 text-white px-3 py-1 rounded"
+                        >
+                          Delete
+                        </button>
+                        <button
+                          onClick={() => setSelectedPackage(pkg._id)} // Pass the current package's id
+                          className="bg-blue-500 text-white px-3 py-1 rounded"
+                        >
+                          Manage SubPackages
+                        </button>
                       </div>
-                      <div className="flex justify-between mt-4">
-                        <div className="flex space-x-2">
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <form
+                onSubmit={handleCreateOrUpdatePackage}
+                className="bg-white p-5 rounded-lg shadow-md mt-5"
+              >
+                <h3 className="text-lg font-bold mb-4">
+                  {isEditing ? "Edit Package" : "Create Package"}
+                </h3>
+                <input
+                  type="text"
+                  placeholder="Category"
+                  value={formData.category}
+                  onChange={(e) =>
+                    setFormData({ ...formData, category: e.target.value })
+                  }
+                  className="w-full mb-4 border border-gray-300 rounded px-3 py-2"
+                  required
+                />
+                <textarea
+                  placeholder="Description"
+                  value={formData.description}
+                  onChange={(e) =>
+                    setFormData({ ...formData, description: e.target.value })
+                  }
+                  className="w-full mb-4 border border-gray-300 rounded px-3 py-2"
+                  required
+                />
+                <button
+                  type="submit"
+                  className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                >
+                  {isEditing ? "Update Package" : "Create Package"}
+                </button>
+              </form>
+              {selectedPackage && (
+                <SubPackageManager packageId={selectedPackage} />
+              )}
+            </div>
+          ) : (
+            // Render SubPackages here
+            <div className="p-5 bg-gray-50 min-h-screen">
+              <h2 className="text-3xl font-bold mb-5 text-center text-gray-800">
+                All SubPackages
+              </h2>
+              {loadingSubPackages ? (
+                <p className="text-center text-gray-600">Loading...</p>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {subPackages.length > 0 ? (
+                    subPackages.map((subPkg) => (
+                      <div
+                        key={subPkg._id}
+                        className="bg-white p-6 rounded-lg shadow-lg transition-colors duration-200 hover:bg-gray-100 hover:shadow-md"
+                      >
+                        <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                          {subPkg.name}
+                        </h3>
+                        <p className="text-gray-600 mb-4">
+                          {subPkg.description}
+                        </p>
+                        <p className="font-medium text-gray-700">
+                          Price:{" "}
+                          <span className="text-green-500">
+                            ₹{subPkg.price}
+                          </span>
+                        </p>
+                        <p className="font-medium text-gray-700">
+                          Duration: {subPkg.duration}
+                        </p>
+                        <div className="font-medium text-gray-700">
+                          Introduction:
+                          <div
+                            dangerouslySetInnerHTML={{
+                              __html: DOMPurify.sanitize(subPkg.introduction),
+                            }}
+                          />
+                        </div>
+                        <div className="font-medium text-gray-700">
+                          Tour Plan:
+                          <div
+                            dangerouslySetInnerHTML={{
+                              __html: DOMPurify.sanitize(subPkg.tourPlan),
+                            }}
+                          />
+                        </div>
+                        <div className="font-medium text-gray-700">
+                          Includes/Excludes:
+                          <div
+                            dangerouslySetInnerHTML={{
+                              __html: DOMPurify.sanitize(subPkg.includeExclude),
+                            }}
+                          />
+                        </div>
+                        <div className="font-medium text-gray-700">
+                          Hotel Info:
+                          <div
+                            dangerouslySetInnerHTML={{
+                              __html: DOMPurify.sanitize(subPkg.hotelInfo),
+                            }}
+                          />
+                        </div>
+
+                        {subPkg.galleryImages.length > 0 && (
+                          <div className="mt-4">
+                            <h4 className="font-bold text-gray-800 mb-2">
+                              Gallery:
+                            </h4>
+                            <div className="flex space-x-2">
+                              {subPkg.galleryImages.map((image) => (
+                                <img
+                                  key={image._id}
+                                  src={image.url}
+                                  alt={subPkg.name}
+                                  className="w-32 h-20 object-cover rounded-md shadow-sm"
+                                />
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                        {subPkg.pricingDetails.length > 0 && (
+                          <div className="mt-4">
+                            <h4 className="font-bold text-gray-800 mb-2">
+                              Pricing Details:
+                            </h4>
+                            {subPkg.pricingDetails.map((pricing) => (
+                              <p key={pricing._id} className="text-gray-700">
+                                {pricing.noOfPax} Pax - {pricing.cab}:{" "}
+                                <span className="font-semibold">
+                                  ₹{pricing.costPerPax}
+                                </span>
+                              </p>
+                            ))}
+                          </div>
+                        )}
+                        <div className="mt-4 flex space-x-3">
                           <button
-                            onClick={() => handleEditPackage(pkg)}
-                            className="bg-yellow-500 text-white px-3 py-1 rounded"
+                            className="bg-yellow-500 text-white px-4 py-2 rounded"
+                            onClick={() => handleUpdateClick(subPkg)}
                           >
-                            Edit
+                            Update
                           </button>
                           <button
-                            onClick={() => handleDeletePackage(pkg._id)}
-                            className="bg-red-500 text-white px-3 py-1 rounded"
+                            className="bg-red-500 text-white px-4 py-2 rounded"
+                            onClick={() => handleDeleteSubPackage(subPkg._id)}
                           >
                             Delete
                           </button>
-                          <button
-                            onClick={() => setSelectedPackage(pkg._id)} // Pass the current package's id
-                            className="bg-blue-500 text-white px-3 py-1 rounded"
-                          >
-                            Manage SubPackages
-                          </button>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    ))
+                  ) : (
+                    <p className="text-center text-gray-600">
+                      No SubPackages found.
+                    </p>
+                  )}
                 </div>
-
-                <form
-                  onSubmit={handleCreateOrUpdatePackage}
-                  className="bg-white p-5 rounded-lg shadow-md mt-5"
-                >
-                  <h3 className="text-lg font-bold mb-4">
-                    {isEditing ? "Edit Package" : "Create Package"}
-                  </h3>
-                  <input
-                    type="text"
-                    placeholder="Category"
-                    value={formData.category}
-                    onChange={(e) =>
-                      setFormData({ ...formData, category: e.target.value })
-                    }
-                    className="w-full mb-4 border border-gray-300 rounded px-3 py-2"
-                    required
-                  />
-                  <textarea
-                    placeholder="Description"
-                    value={formData.description}
-                    onChange={(e) =>
-                      setFormData({ ...formData, description: e.target.value })
-                    }
-                    className="w-full mb-4 border border-gray-300 rounded px-3 py-2"
-                    required
-                  />
-                  <button
-                    type="submit"
-                    className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                  >
-                    {isEditing ? "Update Package" : "Create Package"}
-                  </button>
-                </form>
-                {selectedPackage && (
-                  <SubPackageManager packageId={selectedPackage} />
-                )}
-              </div>
-            ) : (
-              // Render SubPackages here
-              <div className="p-5 bg-gray-50 min-h-screen">
-                <h2 className="text-3xl font-bold mb-5 text-center text-gray-800">
-                  All SubPackages
-                </h2>
-                {loadingSubPackages ? (
-                  <p className="text-center text-gray-600">Loading...</p>
-                ) : (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {subPackages.length > 0 ? (
-                      subPackages.map((subPkg) => (
-                        <div
-                          key={subPkg._id}
-                          className="bg-white p-6 rounded-lg shadow-lg transition-colors duration-200 hover:bg-gray-100 hover:shadow-md"
-                        >
-                          <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                            {subPkg.name}
-                          </h3>
-                          <p className="text-gray-600 mb-4">
-                            {subPkg.description}
-                          </p>
-                          <p className="font-medium text-gray-700">
-                            Price:{" "}
-                            <span className="text-green-500">
-                              ₹{subPkg.price}
-                            </span>
-                          </p>
-                          <p className="font-medium text-gray-700">
-                            Duration: {subPkg.duration}
-                          </p>
-                          <div className="font-medium text-gray-700">
-                            Introduction:
-                            <div
-                              dangerouslySetInnerHTML={{
-                                __html: DOMPurify.sanitize(subPkg.introduction),
-                              }}
-                            />
-                          </div>
-                          <div className="font-medium text-gray-700">
-                            Tour Plan:
-                            <div
-                              dangerouslySetInnerHTML={{
-                                __html: DOMPurify.sanitize(subPkg.tourPlan),
-                              }}
-                            />
-                          </div>
-                          <div className="font-medium text-gray-700">
-                            Includes/Excludes:
-                            <div
-                              dangerouslySetInnerHTML={{
-                                __html: DOMPurify.sanitize(
-                                  subPkg.includeExclude
-                                ),
-                              }}
-                            />
-                          </div>
-                          <div className="font-medium text-gray-700">
-                            Hotel Info:
-                            <div
-                              dangerouslySetInnerHTML={{
-                                __html: DOMPurify.sanitize(subPkg.hotelInfo),
-                              }}
-                            />
-                          </div>
-
-                          {subPkg.galleryImages.length > 0 && (
-                            <div className="mt-4">
-                              <h4 className="font-bold text-gray-800 mb-2">
-                                Gallery:
-                              </h4>
-                              <div className="flex space-x-2">
-                                {subPkg.galleryImages.map((image) => (
-                                  <img
-                                    key={image._id}
-                                    src={image.url}
-                                    alt={subPkg.name}
-                                    className="w-32 h-20 object-cover rounded-md shadow-sm"
-                                  />
-                                ))}
-                              </div>
-                            </div>
-                          )}
-                          {subPkg.pricingDetails.length > 0 && (
-                            <div className="mt-4">
-                              <h4 className="font-bold text-gray-800 mb-2">
-                                Pricing Details:
-                              </h4>
-                              {subPkg.pricingDetails.map((pricing) => (
-                                <p key={pricing._id} className="text-gray-700">
-                                  {pricing.noOfPax} Pax - {pricing.cab}:{" "}
-                                  <span className="font-semibold">
-                                    ₹{pricing.costPerPax}
-                                  </span>
-                                </p>
-                              ))}
-                            </div>
-                          )}
-                          <div className="mt-4 flex space-x-3">
-                            <button
-                              className="bg-yellow-500 text-white px-4 py-2 rounded"
-                              onClick={() => handleUpdateClick(subPkg)}
-                            >
-                              Update
-                            </button>
-                            <button
-                              className="bg-red-500 text-white px-4 py-2 rounded"
-                              onClick={() => handleDeleteSubPackage(subPkg._id)}
-                            >
-                              Delete
-                            </button>
-                          </div>
-                        </div>
-                      ))
-                    ) : (
-                      <p className="text-center text-gray-600">
-                        No SubPackages found.
-                      </p>
-                    )}
-                  </div>
-                )}
-                {selectedSubPackage && (
-                  <UpdateSubPackageForm
-                    subPackage={selectedSubPackage}
-                    onUpdate={handleUpdateSubPackage}
-                    onCancel={handleCancelUpdate}
-                  />
-                )}
-              </div>
-            )}
-          </>
-        )}
+              )}
+              {selectedSubPackage && (
+                <UpdateSubPackageForm
+                  subPackage={selectedSubPackage}
+                  onUpdate={handleUpdateSubPackage}
+                  onCancel={handleCancelUpdate}
+                />
+              )}
+            </div>
+          )}
+        </>
       </div>
     </div>
   );
