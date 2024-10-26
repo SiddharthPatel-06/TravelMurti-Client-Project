@@ -27,13 +27,12 @@ const Navbar = () => {
 
     fetchPackages();
 
-    // Add a listener for screen size changes
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
 
     window.addEventListener("resize", handleResize);
-    handleResize(); // Check on initial load
+    handleResize();
 
     return () => {
       window.removeEventListener("resize", handleResize);
@@ -103,13 +102,13 @@ const Navbar = () => {
       {/* Left section */}
       <div className="flex justify-between items-center gap-10">
         <div className="flex items-center">
-        <img
-          className="h-8 w-auto"
-          src="https://lh4.googleusercontent.com/-43TdC72iuWI/AAAAAAAAAAI/AAAAAAAAAAA/vLm5URYYrSY/s44-p-k-no-ns-nd/photo.jpg"
-          alt="Company Logo"
-          loading="lazy"
-        />
-        <p className="pl-4 text-base">Travel Murti</p>
+          <img
+            className="h-8 w-auto"
+            src="https://lh4.googleusercontent.com/-43TdC72iuWI/AAAAAAAAAAI/AAAAAAAAAAA/vLm5URYYrSY/s44-p-k-no-ns-nd/photo.jpg"
+            alt="Company Logo"
+            loading="lazy"
+          />
+          <p className="pl-4 text-base">Travel Murti</p>
         </div>
         {/* Mobile Menu Toggle */}
         <button
@@ -127,7 +126,6 @@ const Navbar = () => {
         </Link>
         <Link to="/about">
           <p>About Us</p>
-          {/* <p className="pr-4">Home</p> */}
         </Link>
         {/* Dynamic Dropdown for Packages */}
         {packages.length > 0 &&
@@ -174,8 +172,12 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden flex flex-col gap-4 mt-4 pl-2">
-          <p>Home</p>
-          <p>About Us</p>
+          <Link to="/">
+            <p className="pr-4">Home</p>
+          </Link>
+          <Link to="/about">
+            <p>About Us</p>
+          </Link>
           {packages.length > 0 &&
             packages.map((pkg) => (
               <div key={pkg._id}>
@@ -209,7 +211,9 @@ const Navbar = () => {
                 )}
               </div>
             ))}
-          <p>Contact Us</p>
+          <Link to="/contact">
+            <p className="pr-4">Contact Us</p>
+          </Link>
         </div>
       )}
     </div>

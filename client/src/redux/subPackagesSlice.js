@@ -6,7 +6,7 @@ import axios from 'axios';
 export const fetchSubPackages = createAsyncThunk(
   'subPackages/fetchSubPackages',
   async (packageId) => {
-    const response = await axios.get(`http://localhost:4000/api/subPackages/package/${packageId}`);
+    const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/subPackages/package/${packageId}`);
     return response.data; // Return the fetched data
   }
 );
@@ -15,14 +15,14 @@ export const fetchSubPackages = createAsyncThunk(
 export const fetchSubPackageDetails = createAsyncThunk(
   'subPackages/fetchSubPackageDetails',
   async (subPackageId) => {
-    const response = await axios.get(`http://localhost:4000/api/subPackages/${subPackageId}`);
+    const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/subPackages/${subPackageId}`);
     const subPackageData = response.data;
 
     // Check if there are related sub-packages and fetch their details
     if (subPackageData.subPackages && subPackageData.subPackages.length > 0) {
       // Fetch details of each related sub-package
       const relatedSubPackagesPromises = subPackageData.subPackages.map(async (id) => {
-        const relatedResponse = await axios.get(`http://localhost:4000/api/subPackages/${id}`);
+        const relatedResponse = await axios.get(`${process.env.REACT_APP_BASE_URL}/subPackages/${id}`);
         return relatedResponse.data;
       });
 

@@ -5,7 +5,7 @@ import axios from 'axios';
 export const fetchPackages = createAsyncThunk(
   'packages/fetchPackages',
   async () => {
-    const response = await axios.get('http://localhost:4000/api/packages');
+    const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/packages`);
     return response.data;
   }
 );

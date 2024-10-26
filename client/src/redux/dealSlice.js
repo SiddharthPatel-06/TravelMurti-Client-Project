@@ -6,7 +6,7 @@ import axios from 'axios';
 export const fetchDealOfTheDay = createAsyncThunk(
   'deal/fetchDealOfTheDay',
   async () => {
-    const response = await axios.get('http://localhost:4000/api/deals-of-the-day');
+    const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/deals-of-the-day`);
     return response.data.deal;
   }
 );
