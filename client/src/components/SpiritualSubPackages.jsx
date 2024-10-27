@@ -75,7 +75,7 @@ const SpiritualSubPackages = () => {
       <p className="my-2 text-center font-medium text-gray-600">
         Check out these amazing devotional trips
       </p>
-      <hr className="border max-w-xs text-center mx-auto border-gray-300 mt-1 mb-6 sm:mb-8" />
+      <hr className="border-[3px] max-w-40 text-center mx-auto border-blue-500 mt-1 mb-6 sm:mb-8 rounded-sm" />
 
       {status === "loading" ? (
         <p>Loading...</p>

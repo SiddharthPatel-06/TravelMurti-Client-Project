@@ -138,7 +138,7 @@ const Footer = () => {
           <div className="p-4">
             <h2 className="text-xl font-bold mb-4">Follow Us</h2>
             <div className="border-b border-gray-300 mb-4"></div>
-            <div className="flex flex-col items-start space-y-2 ml-2 my-1">
+            <div className="flex flex-row items-center justify-start space-x-4 md:space-x-4 ml-2 my-6">
               {socialMediaLinks.map((link, index) => (
                 <a
                   key={index}

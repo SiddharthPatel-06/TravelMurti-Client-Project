@@ -27,7 +27,8 @@ const JaipurTempleTour = () => {
       <p className="mt-3 mb-1 font-medium text-gray-600">
         Check out these amazing devotional trips
       </p>
-      <hr className="border max-w-xs text-center mx-auto border-gray-300 my-4" />
+      <hr className="border-[3px] max-w-40 text-center mx-auto border-blue-500 mt-1 mb-6 sm:mb-8 rounded-sm" />
+
       <div className="flex flex-wrap justify-center p-2">
         {images.map((image) => (
           <div

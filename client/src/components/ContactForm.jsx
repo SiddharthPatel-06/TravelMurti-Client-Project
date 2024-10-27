@@ -73,7 +73,7 @@ export default function ContactForm() {
 
   return (
     <div className="container mx-auto p-8 pt-0 mb-12">
-      <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl mx-auto ">
+      <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl mx-auto border">
         <h1 className="text-4xl font-bold text-center mb-4 text-gray-700">Contact Form</h1>
         <p className="text-center mb-6">
           Send us a message and we'll get back to you as soon as we can!

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 
 const heroData = [
-  {
-    id: 1,
-    image:
-      "https://images.unsplash.com/photo-1555098811-6f5428a3d476?auto=format&fit=crop&q=100&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODF8fHRhaiUyMG1haGFsJTIwaG9yaXpvbnRhbCUyMGltYWdlfGVufDB8fDB8fHww",
-    title: "Holiday Tour",
-    description: "Explore the best holiday destinations around the world.",
-  },
+  // {
+  //   id: 1,
+  //   image:
+  //     "https://images.unsplash.com/photo-1555098811-6f5428a3d476?auto=format&fit=crop&q=100&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODF8fHRhaiUyMG1haGFsJTIwaG9yaXpvbnRhbCUyMGltYWdlfGVufDB8fDB8fHww",
+  //   title: "Holiday Tour",
+  //   description: "Explore the best holiday destinations around the world.",
+  // },
   {
     id: 2,
     image:
@@ -22,6 +22,13 @@ const heroData = [
     title: "Honeymoon Tour",
     description: "Experience the perfect honeymoon with our special packages.",
   },
+  {
+    id: 4,
+    image:
+      "https://akshardham.com/gujarat/wp-content/uploads/2017/04/slider1.jpg",
+    title: "Gujarat Tours Packages",
+    description: "Experience the perfect honeymoon with our special packages.",
+  },
 ];
 
 const HeroSection = () => {
@@ -33,7 +40,7 @@ const HeroSection = () => {
       setCurrentIndex((prevIndex) =>
         prevIndex === heroData.length - 1 ? 0 : prevIndex + 1
       );
-    }, 5000); // Change every 5 seconds
+    }, 2000); // Change every 5 seconds
     return () => clearInterval(slider);
   }, []);
 
@@ -55,11 +62,11 @@ const HeroSection = () => {
           />
           {/* Centered Component for Info */}
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="bg-white bg-opacity-70 p-6 sm:p-8 rounded-lg shadow-lg text-center max-w-xs sm:max-w-lg">
-              <h2 className="text-2xl sm:text-4xl font-bold text-gray-800">
+            <div className="bg-black bg-opacity-50 p-6 sm:p-8 rounded-lg shadow-lg text-center w-full lg:max-w-4xl md:max-w-2xl max-w-xs">
+              <h2 className="text-2xl sm:text-4xl font-bold text-white">
                 {slide.title}
               </h2>
-              <p className="mt-4 text-base sm:text-lg text-gray-600">
+              <p className="mt-4 text-base sm:text-lg text-gray-300">
                 {slide.description}
               </p>
               <button className="mt-6 px-4 sm:px-6 py-2 sm:py-3 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 transition">

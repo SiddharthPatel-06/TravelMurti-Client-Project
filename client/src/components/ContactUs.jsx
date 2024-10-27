@@ -15,14 +15,14 @@ function ContactUs() {
           <div className="bg-white shadow-md rounded-lg p-6 flex flex-col items-center">
             <FaPhone className="text-blue-500 w-8 h-8 mb-2" />
             <h4 className="font-semibold text-gray-800">Phone</h4>
-            <p className="text-gray-600 text-center">+91-120-4561644, 8744992244, 8745009300, 8745009400</p>
+            <p className="text-gray-600 text-center">+91-8527036496</p>
           </div>
 
           <div className="bg-white shadow-md rounded-lg p-6 flex flex-col items-center">
             <FaMapMarkerAlt className="text-blue-500 w-8 h-8 mb-2" />
             <h4 className="font-semibold text-gray-800">Address</h4>
             <p className="text-gray-600 text-center">
-              B-42, 2nd Floor, Sector-64, Noida-201301, Noida
+            4th Floor, Kamal Bhati Market, Sector-86, Yakubpur, Noida, Utter Pradesh, 201305
             </p>
           </div>
 
@@ -35,7 +35,7 @@ function ContactUs() {
           <div className="bg-white shadow-md rounded-lg p-6 flex flex-col items-center">
             <FaEnvelope className="text-blue-500 w-8 h-8 mb-2" />
             <h4 className="font-semibold text-gray-800">Email</h4>
-            <p className="text-gray-600 text-center">info@suvidhayatri.com</p>
+            <p className="text-gray-600 text-center">contact@travelmurti.com</p>
           </div>
         </div>
 

@@ -45,7 +45,7 @@ const LatestTourPackages = () => {
       <p className="text-center mx-auto my-2 text-gray-600">
         Check out these amazing devotional trips
       </p>
-      <hr className="border max-w-xs text-center mx-auto border-gray-300 mt-1 mb-6 sm:mb-8" />
+      <hr className="border-[3px] max-w-40 text-center mx-auto border-blue-500 mt-1 mb-6 sm:mb-8 rounded-sm" />
 
       {tourPackages.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-screen-xl mx-auto px-4">

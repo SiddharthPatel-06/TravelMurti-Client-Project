@@ -98,7 +98,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md mx-auto md:flex w-full max-w-8xl justify-between md:px-24 px-6 py-3 text-sm">
+    <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[#1E3A8A] to-[#1E40AF] shadow-md mx-auto md:flex w-full max-w-8xl justify-between md:px-24 px-6 py-4 text-sm text-white">
       {/* Left section */}
       <div className="flex justify-between items-center gap-10">
         <div className="flex items-center">
@@ -140,7 +140,7 @@ const Navbar = () => {
             >
               <p
                 onMouseEnter={() => handleMouseEnter(pkg.category, pkg._id)}
-                className="flex items-center gap-2 cursor-pointer text-black group-hover:text-neutral-400"
+                className="flex items-center gap-2 cursor-pointer text-white group-hover:text-neutral-400"
               >
                 <span>{pkg.category}</span>
                 <IoIosArrowDown className="rotate-180 transition-all group-hover:rotate-0" />
@@ -153,7 +153,7 @@ const Navbar = () => {
                       <Link
                         to={`/subpackages/${subPkg._id}`} // Dynamic routing
                         key={subPkg._id}
-                        className="block cursor-pointer items-center min-w-60 py-1 pl-8 pr-8 text-black hover:text-neutral-400"
+                        className="block cursor-pointer items-center min-w-60 py-1 pl-8 pr-8 text-black hover:text-blue-900"
                       >
                         {subPkg.name}
                       </Link>
@@ -196,13 +196,13 @@ const Navbar = () => {
                   />
                 </p>
                 {mobileDropdownOpen[pkg.category] && subPackages[pkg._id] && (
-                  <div className="flex flex-col mt-2 bg-gray-50 overflow-hidden transition-all duration-300 ease-in-out">
+                  <div className="flex flex-col mt-2 bg-gray-50 text-black overflow-hidden transition-all duration-300 ease-in-out border rounded-md">
                     {subPackages[pkg._id]?.length > 0 ? (
                       subPackages[pkg._id].map((subPkg) => (
                         <Link
                           to={`/subpackages/${subPkg._id}`}
                           key={subPkg._id}
-                          className="block px-4 py-2 hover:bg-gray-100"
+                          className="block px-4 py-2 hover:text-blue-900"
                         >
                           {subPkg.name}
                         </Link>

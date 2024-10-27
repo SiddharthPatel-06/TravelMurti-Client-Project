@@ -96,15 +96,7 @@ const Login = () => {
             </button>
           </div>
         </form>
-        <div className="mt-4 text-center">
-          {/* Use Link instead of <a> to navigate */}
-          <Link
-            to="/create-employee"
-            className="text-sm text-blue-500 hover:text-blue-800"
-          >
-            Don't have an account? Create Account
-          </Link>
-        </div>
+        <div className="mt-4 text-center"></div>
       </div>
     </div>
   );

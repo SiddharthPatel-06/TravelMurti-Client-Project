@@ -271,7 +271,7 @@ const SubPackageManager = ({ packageId }) => {
             })
           }
         />
-        <label className="ml-2">Deal of the Day</label>
+        <label className="ml-2">Trending of the Day</label>
         <textarea
           type="text"
           placeholder="Introduction"

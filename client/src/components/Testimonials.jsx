@@ -56,9 +56,10 @@ const TestimonialSlider = () => {
 
   return (
     <section className="relative w-full max-h-[90vh] bg-white overflow-hidden mt-24 lg:mt-48">
-      <h2 className="text-center text-2xl md:text-4xl font-semibold text-gray-700 mb-6">
+      <h2 className="text-center text-2xl md:text-4xl font-semibold text-gray-700 mb-2">
         Testimonials
       </h2>
+      <hr className="border max-w-28 text-center mx-auto border-gray-300 mt-1 mb-8 sm:mb-12 rounded-sm " />
 
       <div className="relative w-full h-[600px] flex items-center justify-center">
         {" "}
@@ -70,8 +71,8 @@ const TestimonialSlider = () => {
               index === currentIndex ? "opacity-100" : "opacity-0"
             }`}
           >
-            <div className="flex flex-col items-center justify-center h-full px-4">
-              <div className="bg-white p-4 md:p-10 rounded-lg shadow-lg max-w-2xl md:max-w-4xl w-full text-center">
+            <div className=" flex flex-col items-center justify-center h-full px-4">
+              <div className="bg-white p-4 md:p-10 rounded-lg shadow-lg max-w-2xl md:max-w-4xl w-full text-center border border-gray-200">
                 <p className="text-gray-600 mb-4 text-sm md:text-lg">
                   "{testimonial.quote}"
                 </p>
