@@ -45,7 +45,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative w-full h-[calc(100vh-120px)] md:h-[calc(100vh-80px)] bg-gray-800">
+    <section className="relative w-full h-[calc(100vh-250px)] md:h-[calc(100vh-80px)] bg-gray-800">
       {/* Image Slider */}
       {heroData.map((slide, index) => (
         <div
