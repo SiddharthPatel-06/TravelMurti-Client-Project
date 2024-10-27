@@ -11,17 +11,8 @@ const transporter = nodemailer.createTransport({
   tls: {
     rejectUnauthorized: false,
   },
-  logger: true,
-  debug: true,
+
 });
 
-// Verify connection configuration
-transporter.verify((error, success) => {
-  if (error) {
-    console.error("SMTP Connection Error:", error);
-  } else {
-    console.log("SMTP Server is ready to send emails");
-  }
-});
 
 module.exports = transporter;

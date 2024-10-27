@@ -1,11 +1,17 @@
-import React from 'react';
+import React from "react";
+import {
+  FaFacebookF,
+  FaTwitter,
+  FaInstagram,
+  FaLinkedinIn,
+} from "react-icons/fa";
 
 const Footer = () => {
   const contactInfo = [
     "4th Floor, Kamal Bhati Market, Sector-86, Yakubpur, Noida, Utter Pradesh, 201305, India",
     "Tel: +91 120 4561644",
-    "Mob: +91 8745009300/9400/9700",
-    "Email: info@suvidhayatri.com"
+    "Mob: +91 8527036496",
+    "Email: contact@travelmurti.com",
   ];
 
   const services = [
@@ -17,20 +23,26 @@ const Footer = () => {
     "Hotel Booking",
     "Pooja Booking",
     "Air Ticket Booking",
-    "Visa Services"
+    "Visa Services",
   ];
 
-  const quickLinks = [
-    "Home",
-    "Why us?",
-    "About Us",
-    "Travel Tips",
-    "Travel Insurance",
-    "Testimonial & Reviews",
-    "Blog",
-    "Bank Details/Make Payments",
-    "Contact Us",
-    "We are Hiring"
+  const socialMediaLinks = [
+    {
+      icon: <FaFacebookF />,
+      url: "https://www.facebook.com/people/Travel-murti/61566336124658/?mibextid=ZbWKwL",
+    },
+    {
+      icon: <FaTwitter />,
+      url: "https://twitter.com",
+    },
+    {
+      icon: <FaInstagram />,
+      url: "https://www.instagram.com/travelmurti/profilecard/?igsh=dWRrNTFsYzlrOGht",
+    },
+    {
+      icon: <FaLinkedinIn />,
+      url: "https://in.linkedin.com/in/travel-murti-54aa8b235",
+    },
   ];
 
   const additionalLinks = [
@@ -42,7 +54,7 @@ const Footer = () => {
     "Hotel Booking",
     "Pooja Booking",
     "Air Ticket Booking",
-    "Visa Services"
+    "Visa Services",
   ];
 
   return (
@@ -52,13 +64,41 @@ const Footer = () => {
           {/* Column 1: Contact Us */}
           <div className="p-4">
             <h2 className="text-xl font-bold mb-4">Contact Us</h2>
-            <div className="border-b border-gray-300 mb-4 "></div>
+            <div className="border-b border-gray-300 mb-4"></div>
             <ul className="space-y-2 text-gray-700">
-              {contactInfo.map((info, index) => (
-                <li key={index} className="cursor-pointer text-white hover:text-blue-600 transition duration-200">
-                  {info}
-                </li>
-              ))}
+              {contactInfo.map((info, index) => {
+                let contactLink;
+
+                // Check if the info contains "Tel", "Mob", or "Email"
+                if (info.startsWith("Tel:")) {
+                  contactLink = `tel:${info.replace("Tel: ", "")}`;
+                } else if (info.startsWith("Mob:")) {
+                  contactLink = `tel:${info.replace("Mob: ", "")}`;
+                } else if (info.startsWith("Email:")) {
+                  contactLink = `mailto:${info.replace("Email: ", "")}`;
+                } else {
+                  contactLink = "";
+                }
+
+                return (
+                  <li
+                    key={index}
+                    className={`cursor-pointer text-white hover:text-blue-600 transition duration-200`}
+                  >
+                    {contactLink ? (
+                      <a
+                        href={contactLink}
+                        rel="noopener noreferrer"
+                        className="no-underline hover:underline"
+                      >
+                        {info}
+                      </a>
+                    ) : (
+                      info
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
@@ -68,37 +108,49 @@ const Footer = () => {
             <div className="border-b border-gray-300 mb-4"></div>
             <ul className="space-y-2 text-gray-700">
               {services.map((service, index) => (
-                <li key={index} className="cursor-pointer text-white hover:text-blue-600 transition duration-200">
+                <li
+                  key={index}
+                  className="cursor-pointer text-white hover:text-blue-600 transition duration-200"
+                >
                   {service}
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Column 3: Quick Links */}
+          {/* Column 3: Additional Links */}
           <div className="p-4">
-            <h2 className="text-xl font-bold mb-4">Quick Links</h2>
+            <h2 className="text-xl font-bold mb-4">Additional Links</h2>
             <div className="border-b border-gray-300 mb-4"></div>
             <ul className="space-y-2 text-gray-700">
-              {quickLinks.map((link, index) => (
-                <li key={index} className="cursor-pointer text-white hover:text-blue-600 transition duration-200">
+              {additionalLinks.map((link, index) => (
+                <li
+                  key={index}
+                  className="cursor-pointer text-white hover:text-blue-600 transition duration-200"
+                >
                   {link}
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Column 4: Additional Links */}
+          {/* Column 4: Social Media Icons */}
           <div className="p-4">
-            <h2 className="text-xl font-bold mb-4">Additional Links</h2>
+            <h2 className="text-xl font-bold mb-4">Follow Us</h2>
             <div className="border-b border-gray-300 mb-4"></div>
-            <ul className="space-y-2 text-gray-700">
-              {additionalLinks.map((link, index) => (
-                <li key={index} className="cursor-pointer text-white hover:text-blue-600 transition duration-200">
-                  {link}
-                </li>
+            <div className="flex flex-col items-start space-y-2 ml-2 my-1">
+              {socialMediaLinks.map((link, index) => (
+                <a
+                  key={index}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white hover:text-blue-600 transition duration-200 text-3xl"
+                >
+                  {link.icon}
+                </a>
               ))}
-            </ul>
+            </div>
           </div>
         </div>
 
