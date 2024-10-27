@@ -299,6 +299,9 @@ const AdminDashboard = () => {
 
                 // Redirect user to login page
                 navigate("/admin/login");
+                toast.success("You have successfully logged out!", {
+                  position: "top-right",
+                });
               }}
               className="flex items-center w-full text-left py-2 px-4 hover:bg-gray-200 text-red-600"
             >
@@ -313,7 +316,7 @@ const AdminDashboard = () => {
         {/* toggle bugg: */}
         {/* <h1 className="text-2xl text-gray-800 ml- text-center font-bold mb-5 mx-auto block sm:hidden">
           Welcome to the Admin Dashboard!
-        </h1> */}   
+        </h1> */}
 
         {loading && <p>Loading...</p>}
         <>

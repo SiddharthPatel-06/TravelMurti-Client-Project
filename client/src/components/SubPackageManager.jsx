@@ -164,6 +164,9 @@ const SubPackageManager = ({ packageId }) => {
   // Add a handler for 'Create Relative Subpackage' button
   const handleCreateRelativeSubPackage = (subPkgId) => {
     // When the button is clicked, open the form and set the packageId in formData
+    toast.success(`ID ${subPkgId} copied for creating Relative Subpackage!`, {
+      position: "top-right",
+    });
     setFormData({
       ...formData,
       packageId: subPkgId, // Assign the current subpackage's packageId
