@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSubPackageDetails } from "../redux/subPackagesSlice";
 import { useParams } from "react-router-dom";
+import { FaChevronRight } from "react-icons/fa";
 import Card from "./Card";
 
 const SubPackageDetails = () => {
@@ -36,27 +37,39 @@ const SubPackageDetails = () => {
   }
 
   return (
-    <div className="container mx-auto p-4 mb-28 mt-12">
+    <div className="container mx-auto mb-28 mt-12">
       {subPackageDetails && (
         <>
-          <div className="relative w-full h-64 overflow-hidden">
+          <div className="relative w-full h-52 overflow-hidden ">
             <img
               src={subPackageDetails.imageUrl}
               alt={subPackageDetails.name}
-              className="w-full h-full object-cover"
+              className="w-full h-[30vh] md:h-full object-cover rounded-sm"
             />
-            <h1 className="absolute inset-0 flex justify-center items-center text-center text-white text-3xl font-bold">
-              {subPackageDetails.name}
-            </h1>
+            <div className="absolute inset-0 flex flex-col pb-4 md:pt-10 justify-center items-center text-center text-white">
+              <div className="bg-black bg-opacity-35 p-6 sm:p-8 rounded-lg shadow-lg w-full lg:max-w-4xl md:max-w-2xl max-w-xs">
+                <h1 className="text-2xl md:text-3xl font-bold mb-2">
+                  {subPackageDetails.name}
+                </h1>
+                <p className="text-base flex items-center justify-center">
+                  Home <FaChevronRight className="mx-2" size={16} />{" "}
+                  {subPackageDetails.name}
+                </p>
+              </div>
+            </div>
           </div>
-          <p className="mt-4 text-center text-2xl font-semibold text-black">
+          <p className="md:mt-6 text-center text-2xl font-semibold text-black">
             {subPackageDetails.name}
           </p>
+          
           <p className="mt-4 text-center px-4 sm:px-8 md:px-36 mb-10 text-gray-800">
             {subPackageDetails.description}
           </p>
 
-          <h2 className="mt-6 text-xl font-bold text-center mb-10">Related Sub-Packages</h2>
+          <h2 className="mt-6 text-xl font-bold text-center mb-2">
+            Related Sub-Packages
+          </h2>
+          <hr className="border-[2px] max-w-56 text-center mx-auto border-blue-500 mt-1 mb-8 sm:mb-8 rounded-sm" />
           {subPackageDetails.relatedSubPackages &&
           subPackageDetails.relatedSubPackages.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-screen-xl mx-auto px-4">

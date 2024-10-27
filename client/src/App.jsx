@@ -43,8 +43,8 @@ function App() {
 
   // Log token and role from Redux
   useEffect(() => {
-    console.log("User Token:", user.authToken);
-    console.log("User Role:", user.role);
+    // console.log("User Token:", user.authToken);
+    // console.log("User Role:", user.role);
   }, [user]);
 
   // Block shortcuts for opening developer tools

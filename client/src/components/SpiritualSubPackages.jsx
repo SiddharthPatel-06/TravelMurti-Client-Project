@@ -63,13 +63,13 @@ const SpiritualSubPackages = () => {
     (currentSlide + 1) * itemsPerPage
   );
 
-  const handleImageClick = (packageId, subPackageId) => {
-    navigate(`/subpackages/${packageId}/${subPackageId}`);
+  const handleImageClick = (subPackageId) => {
+    navigate(`/subpackages/${subPackageId}`);
   };
 
   return (
     <div className="max-w-6xl mx-auto px-4 my-10">
-      <h2 className="text-[28px] font-semibold mb-2 text-gray-700 text-center mx-auto">
+      <h2 className="text-[22px] md:text-2xl font-semibold mb-2 text-gray-700 text-center mx-auto">
         Spiritual Packages
       </h2>
       <p className="my-2 text-center font-medium text-gray-600">
@@ -99,12 +99,7 @@ const SpiritualSubPackages = () => {
                       src={subPackage.imageUrl}
                       alt={subPackage.name}
                       className="w-full h-full object-cover rounded-lg cursor-pointer"
-                      onClick={() =>
-                        handleImageClick(
-                          "6704c40b9c3b94c80c90748d",
-                          subPackage._id
-                        )
-                      }
+                      onClick={() => handleImageClick(subPackage._id)}
                     />
                     <div className="bg-black bg-opacity-50 text-white absolute bottom-0 left-0 w-full p-2 text-center">
                       {subPackage.name}
@@ -137,7 +132,6 @@ const SpiritualSubPackages = () => {
 };
 
 export default SpiritualSubPackages;
-
 // Perfectly working fully responsive
 
 // Old code

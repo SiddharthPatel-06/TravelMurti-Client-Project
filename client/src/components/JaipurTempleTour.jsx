@@ -23,7 +23,7 @@ const images = [
 const JaipurTempleTour = () => {
   return (
     <div className="my-8 text-center">
-      <h2 className="text-[28px] font-semibold mb-2 text-gray-700 text-center mx-auto">Jaipur Temple Tour</h2>
+      <h2 className="text-[22px] md:text-2xl font-semibold mb-2 text-gray-700 text-center mx-auto">Jaipur Temple Tour</h2>
       <p className="mt-3 mb-1 font-medium text-gray-600">
         Check out these amazing devotional trips
       </p>

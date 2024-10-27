@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axiosInstance from "../axiosInstance";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
@@ -10,6 +10,7 @@ import DOMPurify from "dompurify";
 import { useDispatch } from "react-redux"; // Import useDispatch
 import { logoutUser } from "../redux/userSlice"; // Import logoutUser action
 import { FiLogOut } from "react-icons/fi"; // Import FiLogOut icon
+import { FiSearch } from "react-icons/fi";
 
 import {
   FiPackage,
@@ -19,6 +20,7 @@ import {
   FiMenu,
   FiMessageSquare,
 } from "react-icons/fi";
+import { FaSearch } from "react-icons/fa";
 
 const AdminDashboard = () => {
   const [packages, setPackages] = useState([]);
@@ -33,6 +35,16 @@ const AdminDashboard = () => {
   const [selectedSubPackage, setSelectedSubPackage] = useState(null);
   const [showEnquiryTable, setShowEnquiryTable] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [showSearch, setShowSearch] = useState(true); // State to manage search bar visibility
+  const [scrolled, setScrolled] = useState(false);
+  const [searchTerm, setSearchTerm] = useState(""); // Step 1: Search state
+  const filteredSubPackages = subPackages.filter((subPkg) =>
+    subPkg.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  // const [searchTerm, setSearchTerm] = useState('');
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 480);
+  const [showInput, setShowInput] = useState(false);
+  const inputRef = useRef(null);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -50,6 +62,30 @@ const AdminDashboard = () => {
       }
     };
     fetchPackages();
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 480);
+    };
+
+    // Function to handle click outside
+    const handleClickOutside = (event) => {
+      // Close input if clicked outside of the input and icon
+      if (inputRef.current && !inputRef.current.contains(event.target)) {
+        setShowInput(false);
+      }
+    };
+
+    // Add event listeners for resize and click outside
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("mousedown", handleClickOutside);
+
+    // Cleanup event listeners on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
 
   const handleDeletePackage = async (id) => {
@@ -191,6 +227,10 @@ const AdminDashboard = () => {
   };
   const handleOverlayClick = () => {
     setIsSidebarOpen(false);
+  };
+
+  const handleSearchIconClick = () => {
+    setShowInput(true); // Show input field when the icon is clicked
   };
 
   return (
@@ -406,15 +446,52 @@ const AdminDashboard = () => {
           ) : (
             // Render SubPackages here
             <div className="p-5 bg-gray-50 min-h-screen">
-              <h2 className="text-3xl font-bold mb-5 text-center text-gray-800">
+              <h2 className="text-2xl md:text-3xl font-bold mb-5 text-center text-gray-800">
                 All SubPackages
               </h2>
+
+              <div className="relative mb-1" ref={inputRef}>
+                {" "}
+                {/* Set ref on the parent div */}
+                <div className="absolute -top-12 right-[2px] md:right-5 z-10 w-1/4">
+                  {isMobile ? (
+                    <>
+                      {showInput ? (
+                        <input
+                          type="text"
+                          placeholder="Search SubPackage by Name"
+                          value={searchTerm}
+                          onChange={(e) => setSearchTerm(e.target.value)}
+                          className="border border-gray-300 p-2 rounded-2xl w-full"
+                        />
+                      ) : (
+                        <div className="flex justify-end"> {/* Aligns the icon to the right */}
+                        <FaSearch 
+                          className="text-gray-500 cursor-pointer"
+                          size={24}
+                          onClick={handleSearchIconClick} // Show input on icon click
+                        />
+                      </div>
+                      )}
+                    </>
+                  ) : (
+                    <input
+                      type="text"
+                      placeholder="Search SubPackage by Name"
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      className="border border-gray-300 p-2 rounded-2xl w-full"
+                    />
+                  )}
+                </div>
+              </div>
+
               {loadingSubPackages ? (
                 <p className="text-center text-gray-600">Loading...</p>
               ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {subPackages.length > 0 ? (
-                    subPackages.map((subPkg) => (
+                  {filteredSubPackages.length > 0 ? (
+                    filteredSubPackages.map((subPkg) => (
                       <div
                         key={subPkg._id}
                         className="bg-white p-6 rounded-lg shadow-lg transition-colors duration-200 hover:bg-gray-100 hover:shadow-md"

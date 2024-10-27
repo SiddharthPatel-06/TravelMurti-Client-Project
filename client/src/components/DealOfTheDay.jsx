@@ -30,7 +30,6 @@ const DealOfTheDay = () => {
 
   // Handles the 'View Details' button logic
   const handleViewDetails = (dealId) => {
-    console.log(dealId);
     navigate(`/subPackages/${dealId}`);
   };
 
@@ -40,8 +39,8 @@ const DealOfTheDay = () => {
   };
 
   return (
-    <div className="container mx-auto my-10">
-      <h1 className="text-[28px] font-semibold mb-2 text-gray-700 text-center mx-auto">
+    <div className="container mx-auto my-6">
+      <h1 className="text-[22px] md:text-2xl font-semibold mb-2 text-gray-700 text-center mx-auto">
         Trending Tour Package
       </h1>
       <p className="text-center mx-auto my-2 text-gray-600">
