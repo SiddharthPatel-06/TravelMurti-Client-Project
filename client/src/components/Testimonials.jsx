@@ -56,7 +56,7 @@ const TestimonialSlider = () => {
 
   return (
     <section className="relative w-full max-h-[85vh] bg-white overflow-hidden mt-14 lg:mt-20">
-      <h2 className="text-center text-2xl md:text-4xl font-semibold text-gray-700 mb-2">
+      <h2 className="text-center text-2xl md:text-3xl font-semibold text-gray-700 mb-2">
         Testimonials
       </h2>
       <hr className="border max-w-28 text-center mx-auto border-gray-300 mt-1 mb-8 sm:mb-12 rounded-sm " />
