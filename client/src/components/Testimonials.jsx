@@ -13,20 +13,38 @@ const testimonials = [
   {
     id: 2,
     quote:
-      "Travel Murti has planned our three dham yatra meticulously as per our time & need. Mr. Amit has taken all his best efforts to provide good service. Journey was safe as the vehicle & driver provided by the tour operator were very good. We enjoyed the stay and food as well. Thank you, Travel Murti team!",
-    name: "Aditi Sharma",
-    role: "College Student",
+      "My first Chadham trip with Travel Murti and it was an amazing experience. All the service provided by the Travel Murti were excellent.They arranged everything in proper line with perfect hotel, rooms, car driver everything. I recommended them..",
+    name: "SANTHOSH KAVUPARAMBIL",
+    role: "Working Professional",
     image: "https://via.placeholder.com/150",
     rating: 4.5,
   },
   {
     id: 3,
     quote:
-      "I am running a travels in Trivandrum, Kerala. We had a very nice dealings with Travel Murti Tours & Travels. I got 5 days package from Murti Travels from trivandrum to kanyakumari, rameshwaram, madurai. All places in itenerary was accurate. And it was very good deal for us. All things have been nicely handled by Mr. Amit. Again i expecting future business with Murti Tours & Travels. Thanks for building a good relationship with us.",
-    name: "Rahul Verma",
-    role: "College Student",
+      "My first trip with Travel Murti and it was an amazing experience. All the service provided by the Travel Murti were excellent.They made sure that everything was on proper line with perfect hotel, rooms, car driver everything.",
+    name: "Saurav Chauhan",
+    role: "Working Professional",
     image: "https://via.placeholder.com/150",
-    rating: 4,
+    rating: 5,
+  },
+  {
+    id: 4,
+    quote:
+      "Travel Murti has planned our three dham yatra meticulously as per our time &need. Amitji has taken all his best efforts to provide good service. Journey was safe as the vehicle & driver provided by tour operator were very good.We enjoyed the stay and food as well.",
+    name: "Asha Chandrakar",
+    role: "Working Professional",
+    image: "https://via.placeholder.com/150",
+    rating: 5,
+  },
+  {
+    id: 5,
+    quote:
+      "Thanks to Travel Murti for making all the arrangements for our journey Manali. They are absolutely fantastic and they did better than we wanted. They make our honeymoon a very memorable one. I recommend this place very strongly for tourists.",
+    name: "Saurav Chauhan",
+    role: "Working Professional",
+    image: "https://via.placeholder.com/150",
+    rating: 3.5,
   },
 ];
 
