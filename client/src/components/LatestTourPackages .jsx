@@ -27,8 +27,8 @@ const LatestTourPackages = () => {
   }, []);
 
   // Handle "View Details" click event
-  const handleViewDetails = (subPackageId, packageId) => {
-    navigate(`/subpackages/${packageId}/${subPackageId}`);
+  const handleViewDetails = (packageId) => {
+    navigate(`/subpackages/${packageId}`);
   };
 
 
