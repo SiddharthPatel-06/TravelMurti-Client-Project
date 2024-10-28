@@ -4,7 +4,7 @@ const testimonials = [
   {
     id: 1,
     quote:
-      "We took a Chopta tour with Travel Murti. While the trip could have been planned a bit better, our trip leader, Amit, was really helpful and understanding. He did his best to assist us. He even arranged bonfires at nearly all the camps where we stayed. The hotels booked by the team were really nice, too. We got to see almost all the attractions on this trip. It was truly a memorable experience! 🙏",
+      "We went on a Chopta tour with Travel Murti. Despite some planning issues, our trip leader Amit was super helpful and arranged bonfires at most camps. The hotels were nice, and we saw nearly all the attractions. It was a memorable experience! 🙏",
     name: "Siddharth Patel",
     role: "Software Engineer",
     image: "https://via.placeholder.com/150",
@@ -46,6 +46,15 @@ const testimonials = [
     image: "https://via.placeholder.com/150",
     rating: 3.5,
   },
+  {
+    id: 6,
+    quote:
+      "We visited Vaishno Devi Dham and had an amazing experience! The journey was beautiful, and the atmosphere was serene. The temple was awe-inspiring, making it a truly memorable trip! Thank you, Mr. Amit, for arranging this! 🙏",
+    name: "Sandeep Kumar Mehta",
+    role: "Software Engineer",
+    image: "https://via.placeholder.com/150",
+    rating: 5,
+  },
 ];
 
 const TestimonialSlider = () => {
@@ -73,7 +82,7 @@ const TestimonialSlider = () => {
   };
 
   return (
-    <section className="relative w-full max-h-[64vh] bg-white overflow-hidden mt-14 lg:mt-20">
+    <section className="relative w-full max-h-[56vh] md:max-h-[78vh] bg-white overflow-hidden mt-14 lg:mt-20">
       <h2 className="text-center text-2xl md:text-3xl font-semibold text-gray-700 mb-2">
         Testimonials
       </h2>
