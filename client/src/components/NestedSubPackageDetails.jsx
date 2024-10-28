@@ -203,7 +203,7 @@ const NestedSubPackageDetails = () => {
             </button>
 
             <button
-              className={`flex-1 py-2 mx-1 rounded text-center text-sm ${
+              className={`flex-1 py-2 px-1 mx-1 rounded text-center text-sm ${
                 activeSection === "tourPlan"
                   ? "bg-white text-blue-600"
                   : "bg-blue-500 text-white"
