@@ -138,13 +138,13 @@ const TestimonialSlider = () => {
         {/* Navigation Arrows */}
         <button
           onClick={handlePrev}
-          className="absolute top-[40%] sm:top-[30%] left-5 transform -translate-y-1/2 bg-gray-800 text-white p-2 md:p-3 ml-4 rounded-full focus:outline-none z-10"
+          className="hidden md:block absolute top-[30%] sm:top-[30%] left-5 transform -translate-y-1/2 bg-gray-800 text-white p-2 md:p-3 ml-4 rounded-full focus:outline-none z-10"
         >
           &lt;
         </button>
         <button
           onClick={handleNext}
-          className="absolute top-[40%] sm:top-[30%] right-5 transform -translate-y-1/2 bg-gray-800 text-white p-2 md:p-3 mr-4 rounded-full focus:outline-none z-10"
+          className="hidden md:block absolute top-[30%] sm:top-[30%] right-5 transform -translate-y-1/2 bg-gray-800 text-white p-2 md:p-3 mr-4 rounded-full focus:outline-none z-10"
         >
           &gt;
         </button>
