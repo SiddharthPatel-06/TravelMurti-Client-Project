@@ -9,6 +9,8 @@ const NestedSubPackageDetails = () => {
   const [subPackage, setSubPackage] = useState(null);
   const [activeSection, setActiveSection] = useState("introduction");
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [arrivalType, setArrivalType] = useState("text");
+  const [departureType, setDepartureType] = useState("text");
 
   useEffect(() => {
     if (nestedSubPackageId) {
@@ -143,7 +145,7 @@ const NestedSubPackageDetails = () => {
           className="w-full h-64 object-cover rounded"
         />
         {/* Buttons below the image */}
-        <div className="flex justify-between mt-2">
+        <div className="flex justify-between items-center mt-2">
           <button
             onClick={goToPreviousImage}
             className="text-blue-500 flex items-center px-3 py-1 rounded hover:text-blue-600"
@@ -151,6 +153,17 @@ const NestedSubPackageDetails = () => {
             <span className="mr-1 text-xl">&#60;</span> {/* Left Arrow */}
             Back
           </button>
+          {/* Indicators */}
+          <div className="flex space-x-2">
+            {images.map((_, index) => (
+              <div
+                key={index}
+                className={`h-2 w-2 rounded-full transition-colors duration-300 ${
+                  index === currentImageIndex ? "bg-blue-600" : "bg-gray-300"
+                }`}
+              />
+            ))}
+          </div>
           <button
             onClick={goToNextImage}
             className="text-blue-500 flex items-center px-3 py-1 rounded hover:text-blue-600"
@@ -278,7 +291,7 @@ const NestedSubPackageDetails = () => {
         </div>
 
         {/* Right Section - Enquiry Form */}
-        <div className="right-section flex-1 bg-white p-4 rounded-lg mx-auto shadow-lg max-w-full lg:max-w-sm sm:max-w-md">
+        <div className="right-section flex-1 bg-white border p-4 rounded-lg mx-auto shadow-lg max-h-fit max-w-md lg:max-w-sm sm:max-w-md">
           <h3 className="text-lg font-semibold mb-4 text-center">
             Enquiry Form
           </h3>
@@ -324,20 +337,31 @@ const NestedSubPackageDetails = () => {
               placeholder="Children"
               className="w-full p-2 border border-gray-300 rounded"
             />
-            <input
-              type="date"
-              name="arrival"
-              required
-              placeholder="Arrival"
-              className="w-full p-2 border border-gray-300 rounded"
-            />
-            <input
-              type="date"
-              name="departure"
-              required
-              placeholder="Departure"
-              className="w-full p-2 border border-gray-300 rounded"
-            />
+            <div>
+      <div className="relative mb-4">
+        <input
+          type={arrivalType}
+          name="arrival"
+          placeholder="Arrival Date"
+          required
+          onFocus={() => setArrivalType("date")}
+          onBlur={() => setArrivalType("text")}
+          className="w-full p-2 border border-gray-300 rounded placeholder-gray-500"
+        />
+      </div>
+
+      <div className="relative mb-4">
+        <input
+          type={departureType}
+          name="departure"
+          placeholder="Departure Date"
+          required
+          onFocus={() => setDepartureType("date")}
+          onBlur={() => setDepartureType("text")}
+          className="w-full p-2 border border-gray-300 rounded placeholder-gray-500"
+        />
+      </div>
+    </div>
             <textarea
               name="travelRequirement"
               placeholder="Travel Requirement"
