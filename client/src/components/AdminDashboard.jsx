@@ -465,13 +465,15 @@ const AdminDashboard = () => {
                           className="border border-gray-300 p-2 rounded-2xl w-full"
                         />
                       ) : (
-                        <div className="flex justify-end"> {/* Aligns the icon to the right */}
-                        <FaSearch 
-                          className="text-gray-500 cursor-pointer"
-                          size={24}
-                          onClick={handleSearchIconClick} // Show input on icon click
-                        />
-                      </div>
+                        <div className="flex justify-end">
+                          {" "}
+                          {/* Aligns the icon to the right */}
+                          <FaSearch
+                            className="text-gray-500 cursor-pointer"
+                            size={24}
+                            onClick={handleSearchIconClick} // Show input on icon click
+                          />
+                        </div>
                       )}
                     </>
                   ) : (
@@ -511,6 +513,18 @@ const AdminDashboard = () => {
                         <p className="font-medium text-gray-700">
                           Duration: {subPkg.duration}
                         </p>
+
+                        <p
+                          className={`font-medium text-gray-700 ${
+                            subPkg.isDealOfTheDay
+                              ? "bg-yellow-100 text-yellow-800  py-1 rounded-md"
+                              : ""
+                          }`}
+                        >
+                          Trending Tour Package:{" "}
+                          {subPkg.isDealOfTheDay ? "Yes" : "No"}
+                        </p>
+
                         <div className="font-medium text-gray-700">
                           Introduction:
                           <div

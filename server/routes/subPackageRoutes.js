@@ -15,10 +15,10 @@ const { auth, checkPermissions } = require("../middleware/authMiddleware");
 const router = express.Router();
 
 // Route to get Deal of the Day
+router.get("/latest-tour-packages", getLatestTourPackages);
 router.get("/deal-of-the-day", getDealOfTheDay);
 
 // Route to fetch latest tour packages
-router.get("/latest-tour-packages", getLatestTourPackages);
 
 // Define routes for SubPackages
 router.get("/package/:packageId", getSubPackagesByPackageId);

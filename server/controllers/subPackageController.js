@@ -50,24 +50,24 @@ exports.createSubPackage = async (req, res) => {
       })
       .filter(Boolean);
 
-    if (galleryImageUrls.length === 0) {
-      return res.status(400).json({ message: "Invalid gallery images data" });
-    }
+    // if (galleryImageUrls.length === 0) {
+    //   return res.status(400).json({ message: "Invalid gallery images data" });
+    // }
 
     const subPackage = new SubPackage({
-      name,
-      description,
-      price,
-      duration,
+      name: name || "", // Fallback to empty string if missing
+      description: description || "",
+      price: price || 0, // Fallback to 0 if price is missing
+      duration: duration || "", // Fallback to 0 if duration is missing
       packageId: parentId,
       imageUrl,
       isDealOfTheDay: isDealOfTheDay !== undefined ? isDealOfTheDay : false,
-      introduction,
-      tourPlan,
-      includeExclude,
-      hotelInfo,
-      galleryImages: galleryImageUrls,
-      pricingDetails,
+      introduction: introduction || "",
+      tourPlan: tourPlan || "",
+      includeExclude: includeExclude || "",
+      hotelInfo: hotelInfo || "",
+      galleryImages: galleryImageUrls || [],
+      pricingDetails: pricingDetails || [],
       subPackages: subPackages || [],
     });
 
@@ -292,26 +292,26 @@ exports.getDealOfTheDay = async (req, res) => {
   }
 };
 
-// Controller to get the latest tour packages
+// Controller to get the latest tour packages with isDealOfTheDay set to true
 exports.getLatestTourPackages = async (req, res) => {
   try {
-    // Fetch the latest tour packages sorted by createdAt
+    // Fetch all sub-packages where isDealOfTheDay is true
     const latestSubPackages = await SubPackage.find({
-      subPackages: { $eq: [] },
-    }) // Fetch only packages without subPackages
-      .sort({ createdAt: -1 })
-      .limit(4); // Get the 4 latest tour packages
+      isDealOfTheDay: true, // Filter for packages marked as Deal of the Day
+    })
+      .sort({ createdAt: -1 }) // Sort by creation date (latest first)
+      .limit(4); // Limit to the 4 latest tour packages
 
     // Return the fetched data
     res.json({
       success: true,
-      message: "Latest tour packages retrieved successfully",
+      message: "Latest Deal of the Day tour packages retrieved successfully!",
       data: latestSubPackages,
     });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Error retrieving latest tour packages",
+      message: "Error retrieving latest Deal of the Day tour packages",
       error: error.message,
     });
   }

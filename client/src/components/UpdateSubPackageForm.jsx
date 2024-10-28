@@ -6,6 +6,7 @@ const UpdateSubPackageForm = ({ subPackage, onUpdate, onCancel }) => {
     description: "",
     price: "",
     duration: "",
+    isDealOfTheDay: false,
     introduction: "",
     tourPlan: "",
     includeExclude: "",
@@ -26,6 +27,7 @@ const UpdateSubPackageForm = ({ subPackage, onUpdate, onCancel }) => {
         description: subPackage.description,
         price: subPackage.price,
         duration: subPackage.duration,
+        isDealOfTheDay: subPackage.isDealOfTheDay || false, 
         introduction: subPackage.introduction,
         tourPlan: subPackage.tourPlan,
         includeExclude: subPackage.includeExclude,
@@ -107,6 +109,15 @@ const UpdateSubPackageForm = ({ subPackage, onUpdate, onCancel }) => {
     onUpdate(subPackage._id, updatedFormData);
   };
 
+  const handleChangeForDealsOfTheDay = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData({
+      ...formData,
+      [name]: type === "checkbox" ? checked : value,
+    });
+  };
+
+  
   return (
     <form onSubmit={handleSubmit} className="p-5 bg-white rounded shadow mt-10">
       <h2 className="text-2xl font-bold mb-4">Update SubPackage</h2>
@@ -157,6 +168,20 @@ const UpdateSubPackageForm = ({ subPackage, onUpdate, onCancel }) => {
           className="border p-2 w-full"
           required
         />
+      </div>
+
+      {/* Deal of the Day Toggle */}
+      <div className="mb-4">
+        <label className="flex items-center">
+          <input
+            type="checkbox"
+            name="isDealOfTheDay"
+            checked={formData.isDealOfTheDay}
+            onChange={handleChangeForDealsOfTheDay}
+            className="mr-2"
+          />
+          Deal of the Day
+        </label>
       </div>
 
       <div className="mb-4">

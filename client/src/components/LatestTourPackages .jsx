@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Card from './Card';
 import { useNavigate } from 'react-router-dom';
-import axiosInstance from '../axiosInstance';
 
 const LatestTourPackages = () => {
   const [tourPackages, setTourPackages] = useState([]);
@@ -12,7 +11,7 @@ const LatestTourPackages = () => {
   useEffect(() => {
     const fetchTourPackages = async () => {
       try {
-        const response = await axiosInstance.get('/subpackages/latest-tour-packages');
+        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/subpackages/latest-tour-packages`);
         if (Array.isArray(response.data.data)) {
           setTourPackages(response.data.data);
         } else {
@@ -32,10 +31,6 @@ const LatestTourPackages = () => {
     navigate(`/subpackages/${packageId}/${subPackageId}`);
   };
 
-  // Handle "Submit Query" click event
-  const handleSubmitQuery = (subPackageId) => {
-    console.log('Submit query for package:', subPackageId);
-  };
 
   return (
     <div className="container mx-auto my-10">
@@ -58,7 +53,6 @@ const LatestTourPackages = () => {
               price={pkg.price}
               duration={pkg.duration}
               onViewDetails={() => handleViewDetails(pkg._id, pkg.packageId)}
-              onSubmitQuery={() => handleSubmitQuery(pkg._id)}
             />
           ))}
         </div>
