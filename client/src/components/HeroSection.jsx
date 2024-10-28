@@ -4,14 +4,14 @@ const heroData = [
   // {
   //   id: 1,
   //   image:
-  //     "https://images.unsplash.com/photo-1555098811-6f5428a3d476?auto=format&fit=crop&q=100&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODF8fHRhaiUyMG1haGFsJTIwaG9yaXpvbnRhbCUyMGltYWdlfGVufDB8fDB8fHww",
+  //     "https://res.cloudinary.com/djrxcdfrr/image/upload/v1730076608/Jagannatha_Temple-transformed_oqwev2.jpg",
   //   title: "Holiday Tour",
   //   description: "Explore the best holiday destinations around the world.",
   // },
   {
     id: 2,
     image:
-      "https://plus.unsplash.com/premium_photo-1700954878958-30363bc9ec5c?auto=format&fit=crop&q=100&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODV8fGhpbmR1JTIwdGVtcGxlfGVufDB8fDB8fHww",
+      "https://res.cloudinary.com/djrxcdfrr/image/upload/v1730076611/kadarnath-transformed_n2uz2w.jpg",
     title: "Spiritual Tour",
     description: "Connect with your inner peace on our spiritual tours.",
   },

@@ -12,7 +12,9 @@ const NestedSubPackageDetails = () => {
   useEffect(() => {
     if (nestedSubPackageId) {
       axios
-        .get(`${process.env.REACT_APP_BASE_URL}/subPackages/${nestedSubPackageId}`)
+        .get(
+          `${process.env.REACT_APP_BASE_URL}/subPackages/${nestedSubPackageId}`
+        )
         .then((response) => {
           setSubPackage(response.data);
         })
@@ -110,14 +112,17 @@ const NestedSubPackageDetails = () => {
   };
 
   return (
-    <div className="sub-package-details-page p-4 md:mb-28 mb-16">
+    <div className="sub-package-details-page p- md:mb-28 mb-16">
       {/* Static Banner Image */}
-      <div className="banner w-full mb-8">
+      <div className="banner relative w-full mb-8">
         <img
-          src="https://plus.unsplash.com/premium_photo-1697730334768-6e65fa8fded0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8aW5kaWFuJTIwdG91cmlzdCUyMHBsYWNlfGVufDB8fDB8fHww"
+          src="https://images.pexels.com/photos/574313/pexels-photo-574313.jpeg?auto=compress&cs=tinysrgb&w=5000 "
           alt="Banner"
-          className="banner-image w-full h-20 md:h-48 object-cover"
+          className="banner-image w-full h-48 md:h-64 object-cover"
         />
+        <div className="absolute inset-0 flex items-center justify-center md:pt-24 pt-16 text-white text-2xl font-bold bg-black bg-opacity-50">
+          {subPackage.name}
+        </div>
       </div>
 
       <div className="content-container max-w-[1200px] mx-auto flex flex-col lg:flex-row gap-8">
@@ -197,7 +202,9 @@ const NestedSubPackageDetails = () => {
 
         {/* Right Section - Enquiry Form */}
         <div className="right-section flex-1 bg-white p-4 rounded-lg mx-auto shadow-lg max-w-full lg:max-w-sm sm:max-w-md">
-          <h3 className="text-lg font-semibold mb-4">Enquiry Form</h3>
+          <h3 className="text-lg font-semibold mb-4 text-center">
+            Enquiry Form
+          </h3>
           <form onSubmit={handleSubmit} className="space-y-4">
             <input
               type="text"
