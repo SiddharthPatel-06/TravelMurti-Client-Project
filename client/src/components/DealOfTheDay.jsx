@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import Card from "./Card";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../axiosInstance";
@@ -29,13 +28,9 @@ const DealOfTheDay = () => {
   }, []);
 
   // Handles the 'View Details' button logic
-  const handleViewDetails = (dealId) => {
-    navigate(`/subPackages/${dealId}`);
-  };
-
-  // Handles the 'Submit Query' button logic
-  const handleSubmitQuery = (dealName) => {
-    alert(`Query submitted for ${dealName}`);
+  const handleViewDetails = (packageId) => {
+    // Navigate to the parent package using the packageId
+    navigate(`/subPackages/${packageId}`);
   };
 
   return (
@@ -62,8 +57,7 @@ const DealOfTheDay = () => {
               description={deal.description}
               price={deal.price}
               duration={deal.duration}
-              onViewDetails={() => handleViewDetails(deal._id)}
-              onSubmitQuery={() => handleSubmitQuery(deal.name)}
+              onViewDetails={() => handleViewDetails(deal.packageId)}
             />
           ))}
         </div>
