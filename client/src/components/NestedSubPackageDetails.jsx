@@ -338,30 +338,30 @@ const NestedSubPackageDetails = () => {
               className="w-full p-2 border border-gray-300 rounded"
             />
             <div>
-      <div className="relative mb-4">
-        <input
-          type={arrivalType}
-          name="arrival"
-          placeholder="Arrival Date"
-          required
-          onFocus={() => setArrivalType("date")}
-          onBlur={() => setArrivalType("text")}
-          className="w-full p-2 border border-gray-300 rounded placeholder-gray-500"
-        />
-      </div>
+              <div className="relative mb-4">
+                <input
+                  type={arrivalType}
+                  name="arrival"
+                  placeholder="Arrival Date"
+                  required
+                  onFocus={() => setArrivalType("date")}
+                  onBlur={() => setArrivalType("text")}
+                  className="w-full p-2 border border-gray-300 rounded placeholder-gray-500"
+                />
+              </div>
 
-      <div className="relative mb-4">
-        <input
-          type={departureType}
-          name="departure"
-          placeholder="Departure Date"
-          required
-          onFocus={() => setDepartureType("date")}
-          onBlur={() => setDepartureType("text")}
-          className="w-full p-2 border border-gray-300 rounded placeholder-gray-500"
-        />
-      </div>
-    </div>
+              <div className="relative mb-4">
+                <input
+                  type={departureType}
+                  name="departure"
+                  placeholder="Departure Date"
+                  required
+                  onFocus={() => setDepartureType("date")}
+                  onBlur={() => setDepartureType("text")}
+                  className="w-full p-2 border border-gray-300 rounded placeholder-gray-500"
+                />
+              </div>
+            </div>
             <textarea
               name="travelRequirement"
               placeholder="Travel Requirement"
@@ -381,9 +381,17 @@ const NestedSubPackageDetails = () => {
             <h4 className="font-semibold">Looking for Help?</h4>
             <p>For Tour Packages, Vehicle Rental, and Customer Care Support</p>
             <div className="mt-4">
-              <p>Phone: +91 1234567890</p>
-              <p>Email: info@travelwebsite.com</p>
+              <p>Phone: +91 8527036496</p>
+              <p>Email: contact@travelmurti.com</p>
             </div>
+          </div>
+
+          <div className="mt-8 border-2 border-gray-300">
+            <img
+              src="https://images.unsplash.com/photo-1542560453-88e10bdc429f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fHRvdXJpc218ZW58MHx8MHx8fDA%3D"
+              alt=""
+              className="rounded-sm p-1"
+            />
           </div>
         </div>
       </div>
