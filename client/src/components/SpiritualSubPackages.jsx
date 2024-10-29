@@ -11,37 +11,27 @@ const SpiritualSubPackages = () => {
     error,
   } = useSelector((state) => state.subPackages);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(2); // Default to 2 for desktop
+  const [itemsPerPage, setItemsPerPage] = useState(2);
   const navigate = useNavigate();
 
+  // Fetch data
   useEffect(() => {
     dispatch(fetchSubPackages("6718db46c8039b655f222f5d"));
   }, [dispatch]);
 
+  // Update items per page based on screen size
   useEffect(() => {
-    // Function to update items per page based on screen size
     const updateItemsPerPage = () => {
-      if (window.innerWidth <= 796) {
-        setItemsPerPage(1); // Show 1 item for mobile view
-      } else {
-        setItemsPerPage(2); // Show 2 items for desktop view
-      }
+      setItemsPerPage(window.innerWidth <= 796 ? 1 : 2);
     };
 
-    // Set initial items per page
     updateItemsPerPage();
-
-    // Add event listener for window resize
     window.addEventListener("resize", updateItemsPerPage);
-
-    // Clean up event listener on component unmount
-    return () => {
-      window.removeEventListener("resize", updateItemsPerPage);
-    };
+    return () => window.removeEventListener("resize", updateItemsPerPage);
   }, []);
 
+  // Slide change functions
   const nextSlide = () => {
-    // Move to the next slide or loop back to the first slide
     setCurrentSlide(
       (prevIndex) =>
         (prevIndex + 1) % Math.ceil(subPackages.length / itemsPerPage)
@@ -49,7 +39,6 @@ const SpiritualSubPackages = () => {
   };
 
   const prevSlide = () => {
-    // Move to the previous slide or loop back to the last slide
     setCurrentSlide((prevIndex) =>
       prevIndex === 0
         ? Math.ceil(subPackages.length / itemsPerPage) - 1
@@ -57,7 +46,14 @@ const SpiritualSubPackages = () => {
     );
   };
 
-  // Get the current items to display
+  // Automatic sliding
+  useEffect(() => {
+    const slideInterval = setInterval(nextSlide, 3000);
+
+    return () => clearInterval(slideInterval);
+  }, [subPackages, itemsPerPage]);
+
+  // Displayed items for current slide
   const currentItems = subPackages.slice(
     currentSlide * itemsPerPage,
     (currentSlide + 1) * itemsPerPage
@@ -69,7 +65,7 @@ const SpiritualSubPackages = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-4 my-10">
-      <h2 className="text-[22px] md:text-2xl font-semibold mb-2 text-gray-700 text-center mx-auto">
+      <h2 className="text-[22px] md:text-2xl font-semibold mb-2 text-gray-700 text-center">
         Spiritual Packages
       </h2>
       <p className="my-2 text-center font-medium text-gray-600">
@@ -132,6 +128,7 @@ const SpiritualSubPackages = () => {
 };
 
 export default SpiritualSubPackages;
+
 // Perfectly working fully responsive
 
 // Old code

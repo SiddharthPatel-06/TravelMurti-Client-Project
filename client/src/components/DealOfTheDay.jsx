@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Card from "./Card";
-import { useNavigate } from "react-router-dom"; // For routing
+import { useNavigate } from "react-router-dom";
 import axiosInstance from "../axiosInstance";
 
 const DealOfTheDay = () => {
   const [deals, setDeals] = useState([]);
   const [status, setStatus] = useState("loading");
   const [error, setError] = useState(null);
-  const navigate = useNavigate(); // Use for navigation
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchDeals = async () => {
@@ -56,14 +56,14 @@ const DealOfTheDay = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-screen-xl mx-auto px-4">
           {deals.map((deal) => (
             <Card
-              key={deal._id} // Pass a unique key for each card
+              key={deal._id}
               imageUrl={deal.imageUrl}
               title={deal.name}
               description={deal.description}
               price={deal.price}
               duration={deal.duration}
-              onViewDetails={() => handleViewDetails(deal._id)} // Pass deal ID
-              onSubmitQuery={() => handleSubmitQuery(deal.name)} // Handle query submission
+              onViewDetails={() => handleViewDetails(deal._id)}
+              onSubmitQuery={() => handleSubmitQuery(deal.name)}
             />
           ))}
         </div>
