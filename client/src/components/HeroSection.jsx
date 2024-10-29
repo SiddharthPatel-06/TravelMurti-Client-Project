@@ -22,7 +22,7 @@ const heroData = [
   {
     id: 3,
     image:
-      "https://plus.unsplash.com/premium_photo-1697729444936-8c6a6f643312?&auto=format&fit=crop&q=100&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8c291dGglMjBpbmRpYW4lMjB0ZW1wbGVzfGVufDB8fDB8fHww",
+      "https://res.cloudinary.com/djrxcdfrr/image/upload/v1730189561/southindiasliderimage_pkvwqf.avif",
     title: "South Indian Temple Tour",
     description:
       "Experience the spiritual essence of South India, known for its ancient and revered temples",
@@ -31,7 +31,7 @@ const heroData = [
   {
     id: 4,
     image:
-      "https://plus.unsplash.com/premium_photo-1697730481640-114d8546ef3d?&auto=format&fit=crop&q=100&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODl8fGhpbWFjaGFsJTIwdGVtcGxlfGVufDB8fDB8fHww",
+      "https://res.cloudinary.com/djrxcdfrr/image/upload/v1730189415/slideimage_zy8wiq.avif",
     title: "Himachal Tours Packages",
     description:
       "Explore Himachal's majestic landscapes, from lush valleys to snow-capped peaks.",
@@ -40,7 +40,7 @@ const heroData = [
   {
     id: 5,
     image:
-      "https://plus.unsplash.com/premium_photo-1697730277839-440df1a4415f?&auto=format&fit=crop&q=100&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8a2FzaG1pcnxlbnwwfHwwfHx8MA%3D%3D",
+      "https://res.cloudinary.com/djrxcdfrr/image/upload/v1730189507/sliderimage2_x3vi6a.avif",
     title: "Kashmir Tours Packages",
     description:
       "Discover the beauty of Kashmir, with its serene lakes, gardens, and breathtaking views.",
@@ -57,7 +57,7 @@ const HeroSection = () => {
       setCurrentIndex((prevIndex) =>
         prevIndex === heroData.length - 1 ? 0 : prevIndex + 1
       );
-    }, 2000); // Change every 2 seconds
+    }, 3000); // Change every 2 seconds
     return () => clearInterval(slider);
   }, []);
 
