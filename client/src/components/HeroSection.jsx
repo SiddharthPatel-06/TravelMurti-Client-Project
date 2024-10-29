@@ -57,7 +57,7 @@ const HeroSection = () => {
       setCurrentIndex((prevIndex) =>
         prevIndex === heroData.length - 1 ? 0 : prevIndex + 1
       );
-    }, 3000); // Change every 2 seconds
+    }, 4000); // Change every 2 seconds
     return () => clearInterval(slider);
   }, []);
 

@@ -44,7 +44,7 @@ const DealOfTheDay = () => {
         Trending Tour Package
       </h1>
       <p className="text-center mx-auto my-2 text-gray-600">
-        Check out these amazing devotional trips
+        Check out these amazing trips
       </p>
       <hr className="border-[3px] max-w-40 text-center mx-auto border-blue-500 mt-1 mb-6 sm:mb-8 rounded-sm" />
 
