@@ -17,6 +17,7 @@ import { toast } from "react-hot-toast";
 import SubNavbar from "./components/SubNavbar";
 import WeAreHiring from "./components/WeAreHiring";
 import UpdateJobForm from "./components/UpdateJobForm";
+import ScrollToTop from "./ScrollToTop";
 
 // Lazy load your components
 const Home = lazy(() => import("./components/Home"));
@@ -32,7 +33,6 @@ const AdminUsersTable = lazy(() => import("./components/AdminUsersTable"));
 const ProtectedRoute = lazy(() => import("./components/ProtectedRoute"));
 const AboutUs = lazy(() => import("./components/AboutUs"));
 const ContactUs = lazy(() => import("./components/ContactUs"));
-// const JobForm = lazy(() => import("./components/JobForm"));
 
 function App() {
   const dispatch = useDispatch();
@@ -51,32 +51,32 @@ function App() {
   }, [user]);
 
   // Block shortcuts for opening developer tools
-  // useEffect(() => {
-  //   const blockDevTools = (event) => {
-  //     if (
-  //       (event.ctrlKey &&
-  //         event.shiftKey &&
-  //         (event.key === "I" || event.key === "J")) ||
-  //       (event.ctrlKey && event.key === "U") ||
-  //       event.key === "F12" ||
-  //       (event.metaKey &&
-  //         event.shiftKey &&
-  //         (event.key === "I" || event.key === "J")) ||
-  //       (event.metaKey && event.key === "U")
-  //     ) {
-  //       event.preventDefault();
-  //       toast.error("Developer tools are disabled on this site.", {
-  //         position: "top-right",
-  //       });
-  //     }
-  //   };
+  useEffect(() => {
+    const blockDevTools = (event) => {
+      if (
+        (event.ctrlKey &&
+          event.shiftKey &&
+          (event.key === "I" || event.key === "J")) ||
+        (event.ctrlKey && event.key === "U") ||
+        event.key === "F12" ||
+        (event.metaKey &&
+          event.shiftKey &&
+          (event.key === "I" || event.key === "J")) ||
+        (event.metaKey && event.key === "U")
+      ) {
+        event.preventDefault();
+        toast.error("Developer tools are disabled on this site.", {
+          position: "top-right",
+        });
+      }
+    };
 
-  //   window.addEventListener("keydown", blockDevTools);
+    window.addEventListener("keydown", blockDevTools);
 
-  //   return () => {
-  //     window.removeEventListener("keydown", blockDevTools);
-  //   };
-  // }, []);
+    return () => {
+      window.removeEventListener("keydown", blockDevTools);
+    };
+  }, []);
 
   // Admin dashboard path check is moved into a child component
   return (
@@ -98,6 +98,8 @@ function MainApp() {
 
   return (
     <>
+      {/* Add ScrollToTop here to monitor route changes */}
+      <ScrollToTop />
       {/* Conditionally render Navbar, ContactForm, and Footer based on the current route */}
       {!isSpecialRoute && <Navbar />}
       {!isSpecialRoute && <SubNavbar />}
