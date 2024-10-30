@@ -13,11 +13,7 @@ const app = express();
 require("dotenv").config();
 
 // Middleware to parse JSON
-app.use(cors({
-  origin: 'https://travelmurti-client-project-2.onrender.com',
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true
-}));
+app.use(cors());
 app.use(express.json());
 
 // Connect to MongoDB
