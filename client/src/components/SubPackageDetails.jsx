@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSubPackageDetails } from "../redux/subPackagesSlice";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { FaChevronRight } from "react-icons/fa";
 import Card from "./Card";
 
@@ -52,7 +52,7 @@ const SubPackageDetails = () => {
                   {subPackageDetails.name}
                 </h1>
                 <p className="text-base flex items-center justify-center">
-                  Home <FaChevronRight className="mx-2" size={16} />{" "}
+                  <Link to="/">Home </Link><FaChevronRight className="mx-2" size={16} />{" "}
                   {subPackageDetails.name}
                 </p>
               </div>

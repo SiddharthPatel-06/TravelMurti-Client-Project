@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import DOMPurify from "dompurify";
+import { FaChevronRight } from "react-icons/fa";
 
 const NestedSubPackageDetails = () => {
   const { nestedSubPackageId } = useParams();
@@ -185,9 +186,11 @@ const NestedSubPackageDetails = () => {
           alt="Banner"
           className="banner-image w-full h-48 md:h-64 object-cover"
         />
-        <div className="absolute inset-0 flex items-center justify-center md:pt-24 pt-16 text-white text-2xl font-bold bg-black bg-opacity-50">
-          {subPackage.name}
+        <div className="absolute inset-0 flex flex-col items-center justify-center md:pt-24 pt-20 text-white text-2xl  bg-black bg-opacity-50">
+          <p className="font-bold">{subPackage.name}</p>
+          {/* <p className="text-base flex items-center pt-2"><Link to="/">Home </Link> <FaChevronRight className="mx-2" size={14} />{subPackage.name}</p> */}
         </div>
+        
       </div>
 
       <div className="content-container max-w-[1200px] mx-auto flex flex-col lg:flex-row gap-8">
