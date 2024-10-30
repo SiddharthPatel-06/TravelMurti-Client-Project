@@ -107,7 +107,6 @@ const UpdateSubPackageForm = ({ subPackage, onUpdate, onCancel }) => {
   
 
     try {
-      console.log("SubPackage ID:", subPackage._id);
       const response = await axiosInstance.put(
         `/subpackages/${subPackage._id}`,
         data,
