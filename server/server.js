@@ -31,6 +31,7 @@ const contactRoutes = require("./routes/contactRoutes");
 const userRoutes = require("./routes/userRoutes");
 const errorHandlingMiddleware = require("./middleware/errorHandlingMiddleware");
 const enquiryRoutes = require('./routes/enquiryRoutes');
+const jobRoute = require('./routes/jobRoute');
 
 // Use routes
 app.use("/api/packages", packageRoutes);
@@ -39,6 +40,7 @@ app.use("/api/contact", contactRoutes);
 app.use("/api/users", userRoutes);
 // app.use("/api", enquiryRouter);
 app.use('/api', enquiryRoutes);
+app.use('/api/jobs', jobRoute);
 
 // Error handling middleware must be last
 app.use(errorHandlingMiddleware);

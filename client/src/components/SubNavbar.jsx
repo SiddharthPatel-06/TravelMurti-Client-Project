@@ -14,11 +14,11 @@ const SubNavbar = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-[#1E3A8A] to-[#1E40AF] text-white py-1 fixed top-0 left-0 right-0 z-50">
+    <div className="bg-gradient-to-r from-[#293c6b] to-[#1a399c] text-white py-1 fixed top-0 left-0 right-0 z-50">
       {/* Change to flex-col for smaller screens */}
-      <div className="flex flex-col sm:flex-row justify-start items-center">
+      <div className="flex flex-row sm:flex-row justify-start items-center md:pl-28 pl-4">
         <span
-          className="text-white cursor-pointer hover:underline mx-4 flex items-center"
+          className="text-white text-sm cursor-pointer hover:underline mx- flex items-center"
           onClick={handlePhoneClick}
         >
           <FaPhoneAlt className="mr-1" />
@@ -26,7 +26,7 @@ const SubNavbar = () => {
         </span>
 
         <span
-          className="text-white cursor-pointer hover:underline mx-4 flex items-center"
+          className="text-white text-sm cursor-pointer hover:underline mx-4 flex items-center"
           onClick={handleEmailClick}
         >
           <FaEnvelope className="mr-1" />

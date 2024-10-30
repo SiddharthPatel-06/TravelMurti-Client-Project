@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux"; // Import useDispatch
 import { logoutUser } from "../redux/userSlice"; // Import logoutUser action
 import { FiLogOut } from "react-icons/fi"; // Import FiLogOut icon
 import { FiSearch } from "react-icons/fi";
+import { FiEdit } from 'react-icons/fi';
 
 import {
   FiPackage,
@@ -325,6 +326,17 @@ const AdminDashboard = () => {
               className="flex items-center w-full text-left py-2 px-4 hover:bg-gray-200"
             >
               <FiUserPlus className="mr-2" /> Create Employee
+            </button>
+          </li>
+          <li className="mb-4">
+            <button
+              onClick={() => {
+                navigate("/update-we-are-hiring");
+                setIsSidebarOpen(false); // Close sidebar on selection
+              }}
+              className="flex items-center w-full text-left py-2 px-4 hover:bg-gray-200"
+            >
+              <FiEdit className="mr-2" /> Update We Are Hiring
             </button>
           </li>
           <li className="mb-4">

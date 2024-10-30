@@ -15,6 +15,8 @@ import ContactForm from "./components/ContactForm";
 import PageNotFound from "./components/PageNotFound";
 import { toast } from "react-hot-toast";
 import SubNavbar from "./components/SubNavbar";
+import WeAreHiring from "./components/WeAreHiring";
+import UpdateJobForm from "./components/UpdateJobForm";
 
 // Lazy load your components
 const Home = lazy(() => import("./components/Home"));
@@ -30,6 +32,7 @@ const AdminUsersTable = lazy(() => import("./components/AdminUsersTable"));
 const ProtectedRoute = lazy(() => import("./components/ProtectedRoute"));
 const AboutUs = lazy(() => import("./components/AboutUs"));
 const ContactUs = lazy(() => import("./components/ContactUs"));
+// const JobForm = lazy(() => import("./components/JobForm"));
 
 function App() {
   const dispatch = useDispatch();
@@ -90,20 +93,22 @@ function MainApp() {
     "/admin/login",
     "/employee",
     "/create-employee",
+    "/update-we-are-hiring",
   ].includes(location.pathname);
 
   return (
     <>
       {/* Conditionally render Navbar, ContactForm, and Footer based on the current route */}
       {!isSpecialRoute && <Navbar />}
-      {/* {!isSpecialRoute && <SubNavbar/>} */}
-      
+      {!isSpecialRoute && <SubNavbar />}
 
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/contact" element={<ContactUs />} />
+          <Route path="/we-are-hiring" element={<WeAreHiring />} />
+          <Route path="/update-we-are-hiring" element={<UpdateJobForm />} />
           <Route
             path="/subpackages/:subPackageId"
             element={<SubPackageDetails />}
@@ -146,6 +151,7 @@ function MainApp() {
       {!isSpecialRoute && <Chatbot />}
       {!isSpecialRoute && <ContactForm />}
       {!isSpecialRoute && <Footer />}
+      {/* {!isSpecialRoute && <UpdateJobForm />} */}
     </>
   );
 }

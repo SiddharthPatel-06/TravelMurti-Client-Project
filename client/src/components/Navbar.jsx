@@ -98,7 +98,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[#1E3A8A] to-[#1E40AF] shadow-md mx-auto md:flex w-full max-w-8xl justify-between md:px-24 px-6 py-4 text-sm text-white">
+    <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[#1E3A8A] to-[#1E40AF] shadow-md mx-auto md:flex w-full max-w-8xl justify-between md:px-24 px-6 py-4 text-sm text-white md:pt-8 pt-10">
       {/* Left section */}
       <div className="flex justify-between items-center gap-10">
         <div className="flex items-center">

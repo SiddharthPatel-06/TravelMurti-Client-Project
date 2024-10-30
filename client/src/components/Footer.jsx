@@ -19,11 +19,7 @@ const Footer = () => {
     "Holiday Tours",
     "Honeymoon Tours",
     "Weekend Tours",
-    "Cab Booking",
-    "Hotel Booking",
-    "Pooja Booking",
-    "Air Ticket Booking",
-    "Visa Services",
+    // "Pooja Booking",
   ];
 
   const socialMediaLinks = [
@@ -52,7 +48,7 @@ const Footer = () => {
     { name: "Travel Tips", path: "/" },
     { name: "Travel Insurance", path: "/" },
     { name: "Contact Us", path: "/contact" },
-    { name: "We are Hiring", path: "/" },
+    { name: "We are Hiring", path: "/we-are-hiring" },
   ];
 
   const legalLinks = [
