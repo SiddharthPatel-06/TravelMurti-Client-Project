@@ -143,7 +143,7 @@ const Navbar = () => {
                 className="flex items-center gap-2 cursor-pointer text-white group-hover:text-neutral-400"
               >
                 <span>{pkg.category}</span>
-                <IoIosArrowDown className="rotate-180 transition-all group-hover:rotate-0" />
+                <IoIosArrowDown className="rotate transition-all group-hover:rotate-0" />
               </p>
               {/* Sub-package dropdown */}
               {isDropdownOpen[pkg.category] && subPackages[pkg._id] && (

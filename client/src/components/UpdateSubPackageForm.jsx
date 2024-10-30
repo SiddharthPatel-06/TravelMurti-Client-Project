@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axiosInstance from "../axiosInstance";
 
 const UpdateSubPackageForm = ({ subPackage, onUpdate, onCancel }) => {
   const [formData, setFormData] = useState({
@@ -13,6 +14,7 @@ const UpdateSubPackageForm = ({ subPackage, onUpdate, onCancel }) => {
     hotelInfo: "",
     galleryImages: [],
     pricingDetails: [],
+    imageUrl: null,
   });
 
   // State to control visibility of previous data
@@ -27,13 +29,14 @@ const UpdateSubPackageForm = ({ subPackage, onUpdate, onCancel }) => {
         description: subPackage.description,
         price: subPackage.price,
         duration: subPackage.duration,
-        isDealOfTheDay: subPackage.isDealOfTheDay || false, 
+        isDealOfTheDay: subPackage.isDealOfTheDay || false,
         introduction: subPackage.introduction,
         tourPlan: subPackage.tourPlan,
         includeExclude: subPackage.includeExclude,
         hotelInfo: subPackage.hotelInfo,
         galleryImages: [], // Reset to empty array for new images
         pricingDetails: [], // Reset to empty array for new pricing details
+        imageUrl: null,
       });
     }
   }, [subPackage]);
@@ -91,14 +94,52 @@ const UpdateSubPackageForm = ({ subPackage, onUpdate, onCancel }) => {
     setFormData({ ...formData, pricingDetails: updatedPricing });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Prepare form data for submission
+    const data = new FormData();
+
+    // Append the updated fields
+    if (formData.imageUrl instanceof File) {
+      data.append("imageUrl", formData.imageUrl);
+  }
+  
+
+    try {
+      console.log("SubPackage ID:", subPackage._id);
+      const response = await axiosInstance.put(
+        `/subpackages/${subPackage._id}`,
+        data,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      onUpdate(response.data);
+    } catch (error) {
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        console.error("Response data:", error.response.data);
+        console.error("Response status:", error.response.status);
+        console.error("Response headers:", error.response.headers);
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.error("Request data:", error.request);
+      } else {
+        // Something happened in setting up the request
+        console.error("Error message:", error.message);
+      }
+      alert("An error occurred while updating the sub-package.");
+    }
 
     // Prepare updated form data for submission
     const updatedFormData = {
       ...formData,
       // Only include gallery images that are not null
-      galleryImages: formData.galleryImages.filter(Boolean), 
+      galleryImages: formData.galleryImages.filter(Boolean),
       // Filter out empty pricing details
       pricingDetails: formData.pricingDetails.filter(
         (detail) => detail.noOfPax || detail.cab || detail.costPerPax
@@ -117,13 +158,17 @@ const UpdateSubPackageForm = ({ subPackage, onUpdate, onCancel }) => {
     });
   };
 
-  
+  // Handle image upload
+  const handleImageChange = (e) => {
+    setFormData({ ...formData, imageUrl: e.target.files[0] });
+  };
+
   return (
     <form onSubmit={handleSubmit} className="p-5 bg-white rounded shadow mt-10">
       <h2 className="text-2xl font-bold mb-4">Update SubPackage</h2>
 
-       {/* Existing fields */}
-       <div className="mb-4">
+      {/* Existing fields */}
+      <div className="mb-4">
         <label className="block mb-1">Name</label>
         <input
           type="text"
@@ -182,6 +227,11 @@ const UpdateSubPackageForm = ({ subPackage, onUpdate, onCancel }) => {
           />
           Deal of the Day
         </label>
+      </div>
+
+      <div>
+        <label>Upload New Image:</label>
+        <input type="file" onChange={handleImageChange} />
       </div>
 
       <div className="mb-4">
@@ -334,7 +384,10 @@ const UpdateSubPackageForm = ({ subPackage, onUpdate, onCancel }) => {
         >
           Cancel
         </button>
-        <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded">
+        <button
+          type="submit"
+          className="bg-green-500 text-white px-4 py-2 rounded"
+        >
           Update
         </button>
       </div>

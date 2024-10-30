@@ -34,7 +34,7 @@ router.post(
   ]),
   createSubPackage
 );
-router.put("/:id", auth, checkPermissions('canUpdateSubPackages'), updateSubPackage);
+router.put("/:id", auth, checkPermissions('canUpdateSubPackages'), upload.single("imageUrl"), updateSubPackage);
 router.delete("/:id", auth, checkPermissions('canDeleteSubPackages'), deleteSubPackage);
 
 module.exports = router;

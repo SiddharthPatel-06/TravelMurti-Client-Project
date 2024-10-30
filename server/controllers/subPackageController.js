@@ -18,7 +18,7 @@ exports.createSubPackage = async (req, res) => {
       introduction,
       tourPlan,
       includeExclude,
-      hotelInfo,
+      // hotelInfo,
       pricingDetails,
       subPackages,
     } = req.body;
@@ -65,7 +65,7 @@ exports.createSubPackage = async (req, res) => {
       introduction: introduction || "",
       tourPlan: tourPlan || "",
       includeExclude: includeExclude || "",
-      hotelInfo: hotelInfo || "",
+      // hotelInfo: hotelInfo || "",
       galleryImages: galleryImageUrls || [],
       pricingDetails: pricingDetails || [],
       subPackages: subPackages || [],
@@ -195,6 +195,7 @@ exports.getAllSubPackages = async (req, res) => {
 //   }
 // };
 
+
 // Update a sub-package
 exports.updateSubPackage = async (req, res) => {
   try {
@@ -224,7 +225,7 @@ exports.updateSubPackage = async (req, res) => {
     if (req.body.tourPlan) updates.tourPlan = req.body.tourPlan;
     if (req.body.includeExclude)
       updates.includeExclude = req.body.includeExclude;
-    if (req.body.hotelInfo) updates.hotelInfo = req.body.hotelInfo;
+    // if (req.body.hotelInfo) updates.hotelInfo = req.body.hotelInfo;
 
     // Handle galleryImages update (merge with existing if needed)
     if (req.body.galleryImages && req.body.galleryImages.length > 0) {

@@ -4,16 +4,20 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
 const fs = require("fs");
-const { cloudinaryConnect } = require("./config/cloudinaryConfig");
+const { cloudinary } = require("./config/cloudinaryConfig");
 const multer = require("multer");
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
-const cloudinary = require("cloudinary").v2;
+// const cloudinary = require("cloudinary").v2;
 
 const app = express();
 require("dotenv").config();
 
 // Middleware to parse JSON
-app.use(cors());
+app.use(cors({
+  origin: 'https://travelmurti-client-project-2.onrender.com',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
 app.use(express.json());
 
 // Connect to MongoDB
@@ -30,8 +34,8 @@ const contactRoutes = require("./routes/contactRoutes");
 // const enquiryRouter = require("./routes/enquiry");
 const userRoutes = require("./routes/userRoutes");
 const errorHandlingMiddleware = require("./middleware/errorHandlingMiddleware");
-const enquiryRoutes = require('./routes/enquiryRoutes');
-const jobRoute = require('./routes/jobRoute');
+const enquiryRoutes = require("./routes/enquiryRoutes");
+const jobRoute = require("./routes/jobRoute");
 
 // Use routes
 app.use("/api/packages", packageRoutes);
@@ -39,8 +43,8 @@ app.use("/api/subpackages", subPackageRoutes);
 app.use("/api/contact", contactRoutes);
 app.use("/api/users", userRoutes);
 // app.use("/api", enquiryRouter);
-app.use('/api', enquiryRoutes);
-app.use('/api/jobs', jobRoute);
+app.use("/api", enquiryRoutes);
+app.use("/api/jobs", jobRoute);
 
 // Error handling middleware must be last
 app.use(errorHandlingMiddleware);
@@ -49,7 +53,7 @@ app.use(errorHandlingMiddleware);
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret:  process.env.CLOUDINARY_API_SECRET,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
 // Set up Cloudinary storage using multer-storage-cloudinary
@@ -79,8 +83,40 @@ app.post("/upload", upload.array("galleryImages", maxCount), (req, res) => {
     .json({ message: "Files uploaded successfully!", files: req.files });
 });
 
+// app.post("/update-image", upload.single("imageUrl"), (req, res) => {
+//   // Check if the file is uploaded
+//   if (!req.file) {
+//     return res.status(400).send("No file was uploaded.");
+//   }
+
+//   // The uploaded file is available in req.file
+//   const fileURL = req.file.path; // Cloudinary URL
+
+//   // Send the URL back as the response
+//   res.status(200).json({ message: "Image updated successfully!", fileURL });
+// });
+
+app.post("/update-image", upload.single("imageUrl"), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).send("No file uploaded.");
+    }
+
+    // The upload is already handled by Multer + CloudinaryStorage
+    const result = await cloudinary.uploader.upload(req.file.path, {
+      resource_type: "image",
+    });
+
+    // Send the response with the image URL
+    res.json({ url: result.secure_url });
+  } catch (error) {
+    console.error("Upload error:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
 // Starting the server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server running on port http://0.0.0.0:${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server running on port ${PORT}`);
 });
