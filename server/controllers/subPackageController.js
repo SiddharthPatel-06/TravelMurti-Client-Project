@@ -278,14 +278,35 @@ exports.deleteSubPackage = async (req, res) => {
 // Fetch Deal of the Day
 exports.getDealOfTheDay = async (req, res) => {
   try {
-    // Fetch all SubPackages that are marked as Deal of the Day
-    const dealOfTheDay = await SubPackage.find({ isDealOfTheDay: true });
+    const dealsOfTheDay = await SubPackage.find({
+      isDealOfTheDay: true,
+    }).populate("subPackages");
 
-    if (dealOfTheDay.length === 0) {
+    if (dealsOfTheDay.length === 0) {
       return res.status(404).json({ message: "No Deal of the Day found" });
     }
 
-    res.status(200).json(dealOfTheDay);
+    const firstSubPackages = [];
+
+    for (const deal of dealsOfTheDay) {
+      const firstSubPackageId = deal.subPackages[0];
+
+      if (firstSubPackageId) {
+        const firstSubPackage = await SubPackage.findById(firstSubPackageId);
+
+        if (firstSubPackage) {
+          firstSubPackages.push(firstSubPackage);
+        }
+      }
+    }
+
+    if (firstSubPackages.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No subpackages found for the Deals of the Day" });
+    }
+
+    res.status(200).json(firstSubPackages);
   } catch (error) {
     console.error("Error in getDealOfTheDay:", error);
     res.status(500).json({ message: "Server error", error: error.message });
