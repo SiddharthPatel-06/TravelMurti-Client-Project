@@ -52,7 +52,7 @@ const LatestTourPackages = () => {
               description={pkg.description}
               price={pkg.price}
               duration={pkg.duration}
-              onViewDetails={() => handleViewDetails(pkg._id, pkg.packageId)}
+              onViewDetails={() => handleViewDetails(pkg.packageId)}
             />
           ))}
         </div>
