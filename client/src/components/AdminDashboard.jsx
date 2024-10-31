@@ -198,9 +198,9 @@ const AdminDashboard = () => {
       });
     } catch (error) {
       console.error("Network error:", error);
-      toast.error("You are not authorized!!", {
-        position: "top-right",
-      });
+      // toast.error("You are not authorized!!", {
+      //   position: "top-right",
+      // });
     }
   };
 

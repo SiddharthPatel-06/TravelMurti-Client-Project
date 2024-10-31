@@ -11,7 +11,7 @@ const UpdateSubPackageForm = ({ subPackage, onUpdate, onCancel }) => {
     introduction: "",
     tourPlan: "",
     includeExclude: "",
-    hotelInfo: "",
+    // hotelInfo: "",
     galleryImages: [],
     pricingDetails: [],
     imageUrl: null,
@@ -33,7 +33,7 @@ const UpdateSubPackageForm = ({ subPackage, onUpdate, onCancel }) => {
         introduction: subPackage.introduction,
         tourPlan: subPackage.tourPlan,
         includeExclude: subPackage.includeExclude,
-        hotelInfo: subPackage.hotelInfo,
+        // hotelInfo: subPackage.hotelInfo,
         galleryImages: [], // Reset to empty array for new images
         pricingDetails: [], // Reset to empty array for new pricing details
         imageUrl: null,
@@ -266,7 +266,7 @@ const UpdateSubPackageForm = ({ subPackage, onUpdate, onCancel }) => {
         />
       </div>
 
-      <div className="mb-4">
+      {/* <div className="mb-4">
         <label className="block mb-1">Hotel Info</label>
         <textarea
           name="hotelInfo"
@@ -275,7 +275,7 @@ const UpdateSubPackageForm = ({ subPackage, onUpdate, onCancel }) => {
           className="border p-2 w-full"
           required
         />
-      </div>
+      </div> */}
 
       {/* ... (Other fields remain unchanged) ... */}
 
