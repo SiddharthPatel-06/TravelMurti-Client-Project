@@ -124,7 +124,7 @@ const AdminDashboard = () => {
         });
       } catch (error) {
         console.error("Error updating package:", error);
-        toast.error("You are not authorized!", {
+        toast.error("You are not Authorized!!", {
           position: "top-right",
         });
       }
