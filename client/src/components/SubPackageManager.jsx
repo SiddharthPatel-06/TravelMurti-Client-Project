@@ -24,7 +24,7 @@ const SubPackageManager = ({ packageId }) => {
     introduction: "",
     tourPlan: "",
     includeExclude: "",
-    hotelInfo: "",
+    // hotelInfo: "",
   });
 
   const [isEditing, setIsEditing] = useState(false);
@@ -120,7 +120,7 @@ const SubPackageManager = ({ packageId }) => {
       introduction: "",
       tourPlan: "",
       includeExclude: "",
-      hotelInfo: "",
+      // hotelInfo: "",
     });
     setGalleryImages([]);
     setPricingDetails([]);
@@ -297,14 +297,14 @@ const SubPackageManager = ({ packageId }) => {
           }
           className="w-full mb-4 border border-gray-300 rounded px-3 py-2"
         />
-        <textarea
+        {/* <textarea
           placeholder="Hotel Info"
           value={formData.hotelInfo}
           onChange={(e) =>
             setFormData({ ...formData, hotelInfo: e.target.value })
           }
           className="w-full mb-4 border border-gray-300 rounded px-3 py-2"
-        />
+        /> */}
 
         <div className="mb-4">
           <h4 className="font-bold mb-2">Pricing Details</h4>

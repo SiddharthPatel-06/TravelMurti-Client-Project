@@ -561,14 +561,14 @@ const AdminDashboard = () => {
                             }}
                           />
                         </div>
-                        <div className="font-medium text-gray-700">
+                        {/* <div className="font-medium text-gray-700">
                           Hotel Info:
                           <div
                             dangerouslySetInnerHTML={{
                               __html: DOMPurify.sanitize(subPkg.hotelInfo),
                             }}
                           />
-                        </div>
+                        </div> */}
 
                         {subPkg.galleryImages.length > 0 && (
                           <div className="mt-4">
