@@ -240,7 +240,7 @@ const UpdateSubPackageForm = ({ subPackage, onUpdate, onCancel }) => {
           value={formData.introduction}
           onChange={handleChange}
           className="border p-2 w-full"
-          required
+          // required
         />
       </div>
 
@@ -251,7 +251,7 @@ const UpdateSubPackageForm = ({ subPackage, onUpdate, onCancel }) => {
           value={formData.tourPlan}
           onChange={handleChange}
           className="border p-2 w-full"
-          required
+          // required
         />
       </div>
 
@@ -262,7 +262,7 @@ const UpdateSubPackageForm = ({ subPackage, onUpdate, onCancel }) => {
           value={formData.includeExclude}
           onChange={handleChange}
           className="border p-2 w-full"
-          required
+          // required
         />
       </div>
 
