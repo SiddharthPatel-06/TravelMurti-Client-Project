@@ -58,7 +58,7 @@ const SubPackageDetails = () => {
               </div>
             </div>
           </div>
-          <p className="md:mt-6 text-center text-2xl font-semibold text-black">
+          <p className="md:mt-6 text-center  text-2xl font-semibold text-black">
             {subPackageDetails.name}
           </p>
           

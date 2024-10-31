@@ -186,7 +186,7 @@ const NestedSubPackageDetails = () => {
           alt="Banner"
           className="banner-image w-full h-48 md:h-64 object-cover"
         />
-        <div className="absolute inset-0 flex flex-col items-center justify-center md:pt-24 pt-20 text-white text-2xl  bg-black bg-opacity-50">
+        <div className="absolute inset-0 flex flex-row items-center justify-center md:pt-24 pt-20 text-white text-2xl  bg-black bg-opacity-50">
           <p className="font-bold">{subPackage.name}</p>
           {/* <p className="text-base flex items-center pt-2"><Link to="/">Home </Link> <FaChevronRight className="mx-2" size={14} />{subPackage.name}</p> */}
         </div>
