@@ -176,7 +176,7 @@ const Footer = () => {
 
         {/* Copyright Section */}
         <div className="text-center text-white py-4">
-          <p className="text-sm">Copyright © Travel Murti 2024</p>
+          <p className="text-sm">Copyright © Travel Murti {new Date().getFullYear()}</p>
         </div>
       </div>
     </footer>

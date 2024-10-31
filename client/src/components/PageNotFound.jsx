@@ -1,13 +1,17 @@
 // 404NotFound.jsx
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const PageNotFound = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-blue-300 to-blue-600 text-white p-6 pt-36">
       <div className="text-center max-w-md mx-auto">
-        <h1 className="text-8xl sm:text-9xl font-extrabold animate-bounce">404</h1>
-        <h2 className="mt-4 text-2xl sm:text-3xl font-semibold">Oops! Page Not Found</h2>
+        <h1 className="text-8xl sm:text-9xl font-extrabold animate-bounce">
+          404
+        </h1>
+        <h2 className="mt-4 text-2xl sm:text-3xl font-semibold">
+          Oops! Page Not Found
+        </h2>
         <p className="mt-2 text-base sm:text-lg">
           The page you are looking for does not exist.
         </p>
@@ -27,9 +31,6 @@ const PageNotFound = () => {
           alt="404 Not Found"
           className="w-48 h-48 object-contain sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96"
         />
-      </div>
-      <div className="mt-8 text-sm text-white opacity-70">
-        <p>&copy; {new Date().getFullYear()} Your Company Name. All rights reserved.</p>
       </div>
     </div>
   );
