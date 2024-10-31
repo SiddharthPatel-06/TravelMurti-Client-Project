@@ -298,7 +298,7 @@ exports.getLatestTourPackages = async (req, res) => {
   try {
     // Fetch all sub-packages where isDealOfTheDay is true
     const latestSubPackages = await SubPackage.find({
-      isDealOfTheDay: true, // Filter for packages marked as Deal of the Day
+      // isDealOfTheDay: true, // Filter for packages marked as Deal of the Day
     })
       .sort({ createdAt: -1 }) // Sort by creation date (latest first)
       .limit(4); // Limit to the 4 latest tour packages

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { FaChevronRight } from "react-icons/fa";
 
 const WeAreHiring = () => {
     const [job, setJob] = useState(null);
@@ -22,10 +24,26 @@ const WeAreHiring = () => {
     };
 
     return (
-        <div className="flex flex-col lg:flex-row min-h-screen bg-gray-50 p-8 pt-20 md:pt-28">
+        <div className=" min-h-screen min-w-fit bg-gray-50 p- pt-20 md:pt-24">
+            {/* Static Banner Image */}
+      <div className="banner relative min-w-full mb-">
+        <img
+          src="https://images.pexels.com/photos/574313/pexels-photo-574313.jpeg?auto=compress&cs=tinysrgb&w=5000 "
+          alt="Banner"
+          className="banner-image w-full h-48 md:h-64 object-cover"
+        />
+        <div className="absolute inset-0 flex flex-col items-center md:pt-24 pt-16 text-white text-2xl  bg-black bg-opacity-50">
+          <p className="font-bold text- text-5xl">We are Hiring</p>
+          <p className="text-md flex items-center pt-2"><Link to="/">Home </Link> <FaChevronRight className="mx-2" size={14} />We are Hiring</p>
+        </div>
+        
+      </div>
+
+      <div className="flex flex-col lg:flex-row min-h-screen bg-gray-50 py-10 pt-4 md:pt-10">
+
             {job ? (
                 <>
-                    <div className="flex-1 flex items-center justify-center p-5">
+                    <div className="flex-1 flex items-start justify-center p-5">
                         <img
                             src={job.imageUrl}
                             alt={job.title}
@@ -76,6 +94,8 @@ const WeAreHiring = () => {
                 <p className="text-center text-gray-500">No job openings at the moment.</p>
             )}
         </div>
+      </div>
+
     );
 };
 
