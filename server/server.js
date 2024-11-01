@@ -40,6 +40,7 @@ app.use("/api/users", userRoutes);
 app.use("/api", enquiryRoutes);
 app.use("/api/jobs", jobRoute);
 
+
 // Error handling middleware must be last
 app.use(errorHandlingMiddleware);
 

@@ -110,6 +110,30 @@ exports.resetPassword = async (req, res) => {
   }
 };
 
+// Handle Reset Password Token
+exports.handleResetPasswordToken = async (req, res) => {
+  const { token } = req.params;
+
+  try {
+    const user = await User.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpires: { $gt: Date.now() },
+    });
+
+    if (!user) {
+      return res.status(400).json({ message: "Invalid or expired token." });
+    }
+
+    res.status(200).json({
+      message: "Token is valid. You can now reset your password.",
+      userId: user._id,
+    });
+  } catch (error) {
+    console.error("Error in handleResetPasswordToken:", error);
+    res.status(500).json({ message: "Internal server error." });
+  }
+};
+
 // Assign permissions to an employee
 exports.assignPermissions = async (req, res) => {
   const { id } = req.params;

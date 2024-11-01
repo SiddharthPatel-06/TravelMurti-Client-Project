@@ -11,6 +11,7 @@ router.put('/users/:id/permissions', auth, checkPermissions('canAssignPermission
 // Forgot Password & Reset Password
 router.post('/forgot-password', userController.forgotPassword);
 router.post('/reset-password', userController.resetPassword);
+router.get('/reset-password/:token', userController.handleResetPasswordToken);
 
 // Get all users (Admin Only)
 router.get('/', auth, checkPermissions('admin'), userController.getAllUsers);

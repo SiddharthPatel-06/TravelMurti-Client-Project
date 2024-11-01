@@ -4,9 +4,10 @@ import { toast } from "react-hot-toast";
 import { useParams } from "react-router-dom";
 
 const ResetPassword = () => {
-  const { token } = useParams(); // Get token from the URL
+  const { token } = useParams();
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [loading, setLoading] = useState(false); 
 
   const handleResetPassword = async (e) => {
     e.preventDefault();
@@ -16,15 +17,20 @@ const ResetPassword = () => {
       return;
     }
 
+    setLoading(true); // Set loading to true when starting the request
+
     try {
       await axios.post(`${process.env.REACT_APP_BASE_URL}/users/reset-password`, {
         token,
-        newPassword,
+        password: newPassword, // Ensure this matches your API's expected field
       });
       toast.success("Your password has been reset successfully.", { position: "top-right" });
     } catch (error) {
+      const errorMessage = error.response?.data?.message || "Failed to reset password. Please try again.";
       console.error("Reset Password Error:", error); // Logging the error
-      toast.error("Failed to reset password. Please try again.", { position: "top-right" });
+      toast.error(errorMessage, { position: "top-right" });
+    } finally {
+      setLoading(false); // Reset loading state regardless of success or failure
     }
   };
 
@@ -39,6 +45,7 @@ const ResetPassword = () => {
             </label>
             <input
               type="password"
+              id="newPassword" // Added id for accessibility
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
               placeholder="Enter new password"
@@ -52,6 +59,7 @@ const ResetPassword = () => {
             </label>
             <input
               type="password"
+              id="confirmPassword" // Added id for accessibility
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="Confirm new password"
@@ -62,9 +70,10 @@ const ResetPassword = () => {
           <div className="flex items-center justify-between">
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline"
+              disabled={loading} // Disable button while loading
+              className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded focus:outline-none focus:shadow-outline ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
             >
-              Reset Password
+              {loading ? "Resetting..." : "Reset Password"} {/* Change button text based on loading */}
             </button>
           </div>
         </form>
