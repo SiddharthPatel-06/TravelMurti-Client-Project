@@ -27,7 +27,6 @@ connect.connectDB();
 const packageRoutes = require("./routes/packageRoutes");
 const subPackageRoutes = require("./routes/subPackageRoutes");
 const contactRoutes = require("./routes/contactRoutes");
-// const enquiryRouter = require("./routes/enquiry");
 const userRoutes = require("./routes/userRoutes");
 const errorHandlingMiddleware = require("./middleware/errorHandlingMiddleware");
 const enquiryRoutes = require("./routes/enquiryRoutes");
@@ -38,7 +37,6 @@ app.use("/api/packages", packageRoutes);
 app.use("/api/subpackages", subPackageRoutes);
 app.use("/api/contact", contactRoutes);
 app.use("/api/users", userRoutes);
-// app.use("/api", enquiryRouter);
 app.use("/api", enquiryRoutes);
 app.use("/api/jobs", jobRoute);
 
@@ -78,19 +76,6 @@ app.post("/upload", upload.array("galleryImages", maxCount), (req, res) => {
     .status(200)
     .json({ message: "Files uploaded successfully!", files: req.files });
 });
-
-// app.post("/update-image", upload.single("imageUrl"), (req, res) => {
-//   // Check if the file is uploaded
-//   if (!req.file) {
-//     return res.status(400).send("No file was uploaded.");
-//   }
-
-//   // The uploaded file is available in req.file
-//   const fileURL = req.file.path; // Cloudinary URL
-
-//   // Send the URL back as the response
-//   res.status(200).json({ message: "Image updated successfully!", fileURL });
-// });
 
 app.post("/update-image", upload.single("imageUrl"), async (req, res) => {
   try {

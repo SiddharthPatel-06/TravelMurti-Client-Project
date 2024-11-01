@@ -18,6 +18,8 @@ import SubNavbar from "./components/SubNavbar";
 import WeAreHiring from "./components/WeAreHiring";
 import UpdateJobForm from "./components/UpdateJobForm";
 import ScrollToTop from "./ScrollToTop";
+import ForgotPassword from "./components/ForgotPassword";
+import ResetPassword from "./components/ResetPassword";
 
 // Lazy load your components
 const Home = lazy(() => import("./components/Home"));
@@ -94,6 +96,8 @@ function MainApp() {
     "/employee",
     "/create-employee",
     "/update-we-are-hiring",
+    "/forgot-password",
+    "/reset-password",
   ].includes(location.pathname);
 
   return (
@@ -125,6 +129,8 @@ function MainApp() {
           <Route path="/admin/sub-packages" element={<SubPackageManager />} />
           <Route path="/admin/users" element={<AdminUsersTable />} />
           <Route path="/admin/login" element={<Login />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
 
           {/* Protected Routes */}
           <Route

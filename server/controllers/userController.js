@@ -1,6 +1,8 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const crypto = require("crypto");
+const transporter = require("../config/nodemailerConfig");
 
 // Register a new user (admin or employee)
 exports.register = async (req, res) => {
@@ -41,6 +43,68 @@ exports.login = async (req, res) => {
     );
 
     res.json({ token, role: user.role });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Request password reset
+exports.forgotPassword = async (req, res) => {
+  const { email } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Generate token
+    const token = crypto.randomBytes(32).toString("hex");
+    user.resetPasswordToken = token;
+    user.resetPasswordExpires = Date.now() + 3600000; // 1 hour expiration
+    await user.save();
+
+    // Send reset link via email
+    const resetUrl = `${process.env.CLIENT_URL}/reset-password/${token}`;
+    const mailOptions = {
+      to: user.email,
+      from: process.env.MAIL_USER,
+      subject: "Password Reset",
+      html: `<p>Please click on the following link to reset your password:</p>
+      <a href="${resetUrl}">${resetUrl}</a>`,
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        return res.status(500).json({ message: "Error sending email", error });
+      }
+      res.json({ message: "Password reset link sent to email." });
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Reset password
+exports.resetPassword = async (req, res) => {
+  const { token, password } = req.body;
+  try {
+    // Find the user by the token and ensure it's not expired
+    const user = await User.findOne({
+      resetPasswordToken: token,
+      resetPasswordExpires: { $gt: Date.now() },
+    });
+
+    if (!user) {
+      return res.status(400).json({ message: "Invalid or expired token" });
+    }
+
+    // Update password and clear reset token fields
+    user.password = password;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
+    await user.save();
+
+    res.json({ message: "Password has been reset successfully." });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
