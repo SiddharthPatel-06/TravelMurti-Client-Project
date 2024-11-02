@@ -9,7 +9,8 @@ const Card = ({
   onViewDetails,
 }) => {
   return (
-    <div className="relative mx-auto p-1 rounded-xl overflow-hidden transform transition-transform duration-500 hover:scale-105 hover:shadow-xl">
+    <div className="relative mx-auto max-w-xs min-w-[300px] sm:min-w-[300px] md:min-w-[260px] lg:min-w-[280px]  p-1 rounded-xl overflow-hidden transform transition-transform duration-500 hover:shadow-2xl">
+      {/* <div className="relative mx-auto max-w-xs min-w-[300px] sm:min-w-[300px] md:min-w-[260px] lg:min-w-[280px]  p-1 rounded-xl overflow-hidden transform transition-transform duration-500 hover:scale-105 hover:shadow-xl"> */}
       {/* Gradient Border */}
       <div className="absolute inset-0 bg-gradient-to-r from-blue-800 via-red-600 to-purple-600 animate-gradient-x rounded-xl blur-sm -z-10"></div>
       
