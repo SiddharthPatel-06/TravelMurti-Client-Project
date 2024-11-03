@@ -14,15 +14,15 @@ const { auth, checkPermissions } = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
-// Route to get Deal of the Day
+// Route to fetch latest tour packages
 router.get("/latest-tour-packages", getLatestTourPackages);
+
+// Route to get Deal of the Day
 router.get("/deal-of-the-day", getDealOfTheDay);
 
-// Route to fetch latest tour packages
 
 // Define routes for SubPackages
-router.get("/package/:packageId", getSubPackagesByPackageId);
-router.get("/:subPackageId", getSubPackageDetails);
+
 router.get("/", getAllSubPackages);
 router.post(
   "/create",
@@ -34,6 +34,9 @@ router.post(
   ]),
   createSubPackage
 );
+
+router.get("/package/:packageId", getSubPackagesByPackageId);
+router.get("/:subPackageId", getSubPackageDetails);
 router.put("/:id", auth, checkPermissions('canUpdateSubPackages'), upload.single("imageUrl"), updateSubPackage);
 router.delete("/:id", auth, checkPermissions('canDeleteSubPackages'), deleteSubPackage);
 
