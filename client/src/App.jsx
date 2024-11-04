@@ -20,6 +20,8 @@ import UpdateJobForm from "./components/UpdateJobForm";
 import ScrollToTop from "./ScrollToTop";
 import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
+import RequestOtp from "./components/RequestOtp";
+import VerifyOtp from "./components/VerifyOtp";
 
 // Lazy load your components
 const Home = lazy(() => import("./components/Home"));
@@ -129,8 +131,9 @@ function MainApp() {
           <Route path="/admin/sub-packages" element={<SubPackageManager />} />
           <Route path="/admin/users" element={<AdminUsersTable />} />
           <Route path="/admin/login" element={<Login />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password/:token" element={<ResetPassword />} />
+          <Route path="/request-otp" element={<RequestOtp />} />
+          <Route path="/verify-otp" element={<VerifyOtp />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
 
           {/* Protected Routes */}
           <Route

@@ -48,37 +48,55 @@ exports.login = async (req, res) => {
   }
 };
 
-// Request password reset
-exports.forgotPassword = async (req, res) => {
+// Generate OTP and send it via email
+exports.requestPasswordReset = async (req, res) => {
   const { email } = req.body;
   try {
     const user = await User.findOne({ email });
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
+    if (!user) return res.status(404).json({ message: "User not found" });
 
-    // Generate token
-    const token = crypto.randomBytes(32).toString("hex");
-    user.resetPasswordToken = token;
-    user.resetPasswordExpires = Date.now() + 3600000; // 1 hour expiration
+    // Generate OTP
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    user.otp = otp;
+    user.otpExpires = Date.now() + 15 * 60 * 1000;
     await user.save();
 
-    // Send reset link via email
-    const resetUrl = `${process.env.CLIENT_URL}/reset-password/${token}`;
-    const mailOptions = {
-      to: user.email,
-      from: process.env.MAIL_USER,
-      subject: "Password Reset",
-      html: `<p>Please click on the following link to reset your password:</p>
-      <a href="${resetUrl}">${resetUrl}</a>`,
-    };
-
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        return res.status(500).json({ message: "Error sending email", error });
-      }
-      res.json({ message: "Password reset link sent to email." });
+    // Send OTP via email
+    await transporter.sendMail({
+      to: email,
+      subject: "Password Reset OTP",
+      html: `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; background-color: #f9f9f9;">
+      <h2 style="color: #333; text-align: center;">Password Reset OTP</h2>
+      <p style="font-size: 16px; color: #555;">Your OTP for password reset is:</p>
+      <h1 style="color: #6c757d; text-align: center; font-size: 36px; margin: 20px 0;"><strong>${otp}</strong></h1>
+      <p style="font-size: 14px; color: #777; text-align: center;"><strong>Note:</strong> This OTP is valid for <strong>15 minutes</strong>.</p>
+      <hr style="border: none; border-top: 1px solid #e0e0e0; margin: 20px 0;">
+      <p style="font-size: 14px; color: #777; text-align: center;">If you did not request this, please ignore this email.</p>
+      <p style="font-size: 14px; color: #777; text-align: center;">Thank you!</p>
+    </div>
+  `,
     });
+
+    res.status(200).json({ message: "OTP sent to your email." });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Verify OTP
+exports.verifyOtp = async (req, res) => {
+  const { email, otp } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    // Check if OTP matches and is not expired
+    if (user.otp !== otp || Date.now() > user.otpExpires) {
+      return res.status(400).json({ message: "Invalid or expired OTP." });
+    }
+
+    res.status(200).json({ message: "OTP verified successfully." });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -86,51 +104,20 @@ exports.forgotPassword = async (req, res) => {
 
 // Reset password
 exports.resetPassword = async (req, res) => {
-  const { token, password } = req.body;
+  const { email, newPassword } = req.body;
   try {
-    // Find the user by the token and ensure it's not expired
-    const user = await User.findOne({
-      resetPasswordToken: token,
-      resetPasswordExpires: { $gt: Date.now() },
-    });
+    const user = await User.findOne({ email });
+    if (!user) return res.status(404).json({ message: "User not found" });
 
-    if (!user) {
-      return res.status(400).json({ message: "Invalid or expired token" });
-    }
-
-    // Update password and clear reset token fields
-    user.password = password;
-    user.resetPasswordToken = undefined;
-    user.resetPasswordExpires = undefined;
+    // Hash new password and save
+    user.password = newPassword;
+    user.otp = undefined; // Clear OTP
+    user.otpExpires = undefined; // Clear OTP expiry
     await user.save();
 
-    res.json({ message: "Password has been reset successfully." });
+    res.status(200).json({ message: "Password reset successfully." });
   } catch (error) {
     res.status(500).json({ message: error.message });
-  }
-};
-
-// Handle Reset Password Token
-exports.handleResetPasswordToken = async (req, res) => {
-  const { token } = req.params;
-
-  try {
-    const user = await User.findOne({
-      resetPasswordToken: token,
-      resetPasswordExpires: { $gt: Date.now() },
-    });
-
-    if (!user) {
-      return res.status(400).json({ message: "Invalid or expired token." });
-    }
-
-    res.status(200).json({
-      message: "Token is valid. You can now reset your password.",
-      userId: user._id,
-    });
-  } catch (error) {
-    console.error("Error in handleResetPasswordToken:", error);
-    res.status(500).json({ message: "Internal server error." });
   }
 };
 

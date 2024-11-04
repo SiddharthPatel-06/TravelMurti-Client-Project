@@ -8,10 +8,10 @@ router.post('/register', userController.register);
 router.post('/login', userController.login);
 router.put('/users/:id/permissions', auth, checkPermissions('canAssignPermissions'), userController.assignPermissions);
 
-// Forgot Password & Reset Password
-router.post('/forgot-password', userController.forgotPassword);
+// OTP-based password reset routes
+router.post('/request-password-reset', userController.requestPasswordReset);
+router.post('/verify-otp', userController.verifyOtp);
 router.post('/reset-password', userController.resetPassword);
-router.get('/reset-password/:token', userController.handleResetPasswordToken);
 
 // Get all users (Admin Only)
 router.get('/', auth, checkPermissions('admin'), userController.getAllUsers);
