@@ -2,8 +2,8 @@ import React from 'react';
 import Navbar from './Navbar';
 import HeroSection from './HeroSection';
 import DealOfTheDay from './DealOfTheDay';
-import JaipurTempleTour from './JaipurTempleTour';
 import SpiritualSubPackages from './SpiritualSubPackages';
+import UnescoWorldHeritageSites from './UnescoWorldHeritageSites';
 import ContactForm from './ContactUs';
 import Footer from './Footer';
 import LatestTourPackages from './LatestTourPackages ';
@@ -14,9 +14,9 @@ const Home = () => {
     <div>
       <HeroSection />
       <DealOfTheDay />
-      <JaipurTempleTour />
-      <LatestTourPackages/>
       <SpiritualSubPackages />
+      <LatestTourPackages/>
+      <UnescoWorldHeritageSites />
       <Testimonials/> 
       {/* <ContactForm /> */}
     </div>

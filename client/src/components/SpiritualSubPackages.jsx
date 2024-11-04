@@ -2,16 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSubPackages } from "../redux/subPackagesSlice";
 import { useNavigate } from "react-router-dom";
+import Card from "./Card"; // Import the Card component
 
 const SpiritualSubPackages = () => {
   const dispatch = useDispatch();
-  const {
-    data: subPackages,
-    status,
-    error,
-  } = useSelector((state) => state.subPackages);
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(2);
+  const { data: subPackages, status, error } = useSelector(
+    (state) => state.subPackages
+  );
   const navigate = useNavigate();
 
   // Fetch data
@@ -19,56 +16,20 @@ const SpiritualSubPackages = () => {
     dispatch(fetchSubPackages("6718db46c8039b655f222f5d"));
   }, [dispatch]);
 
-  // Update items per page based on screen size
-  useEffect(() => {
-    const updateItemsPerPage = () => {
-      setItemsPerPage(window.innerWidth <= 796 ? 1 : 2);
-    };
-
-    updateItemsPerPage();
-    window.addEventListener("resize", updateItemsPerPage);
-    return () => window.removeEventListener("resize", updateItemsPerPage);
-  }, []);
-
-  // Slide change functions
-  const nextSlide = () => {
-    setCurrentSlide(
-      (prevIndex) =>
-        (prevIndex + 1) % Math.ceil(subPackages.length / itemsPerPage)
-    );
+  // Handles 'View Details' button logic
+  const handleViewDetails = (subPackageId) => {
+    navigate(`/subPackages/${subPackageId}`);
   };
 
-  const prevSlide = () => {
-    setCurrentSlide((prevIndex) =>
-      prevIndex === 0
-        ? Math.ceil(subPackages.length / itemsPerPage) - 1
-        : prevIndex - 1
-    );
-  };
-
-  // Automatic sliding
-  useEffect(() => {
-    const slideInterval = setInterval(nextSlide, 3000);
-
-    return () => clearInterval(slideInterval);
-  }, [subPackages, itemsPerPage]);
-
-  // Displayed items for current slide
-  const currentItems = subPackages.slice(
-    currentSlide * itemsPerPage,
-    (currentSlide + 1) * itemsPerPage
-  );
-
-  const handleImageClick = (subPackageId) => {
-    navigate(`/subpackages/${subPackageId}`);
-  };
+  // Get the last 4 items
+  const lastFourSubPackages = subPackages.slice(-4);
 
   return (
-    <div className="max-w-6xl mx-auto px-4 my-10">
-      <h2 className="text-[22px] md:text-2xl font-semibold mb-2 text-gray-700 text-center">
+    <div className="container mx-auto my-6">
+      <h1 className="text-[22px] md:text-2xl font-semibold mb-2 text-gray-700 text-center mx-auto">
         Spiritual Packages
-      </h2>
-      <p className="my-2 text-center font-medium text-gray-600">
+      </h1>
+      <p className="text-center mx-auto my-2 text-gray-600">
         Check out these amazing devotional trips
       </p>
       <hr className="border-[3px] max-w-40 text-center mx-auto border-blue-500 mt-1 mb-6 sm:mb-8 rounded-sm" />
@@ -77,51 +38,21 @@ const SpiritualSubPackages = () => {
         <p>Loading...</p>
       ) : status === "failed" ? (
         <p>Error fetching data: {error}</p>
-      ) : (
-        <div className="relative">
-          <div className="overflow-hidden h-auto">
-            <div
-              className={`grid ${
-                itemsPerPage === 1 ? "grid-cols-1" : "grid-cols-2"
-              } gap-4 transition-transform duration-500`}
-            >
-              {currentItems.length > 0 ? (
-                currentItems.map((subPackage) => (
-                  <div
-                    key={subPackage._id}
-                    className="w-full h-64 sm:h-96 relative"
-                  >
-                    <img
-                      src={subPackage.imageUrl}
-                      alt={subPackage.name}
-                      className="w-full h-full object-cover rounded-lg cursor-pointer"
-                      onClick={() => handleImageClick(subPackage._id)}
-                    />
-                    <div className="bg-black bg-opacity-50 text-white absolute bottom-0 left-0 w-full p-2 text-center">
-                      {subPackage.name}
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <p>No subpackages available.</p>
-              )}
-            </div>
-          </div>
-
-          {/* Previous and Next buttons */}
-          <button
-            className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
-            onClick={prevSlide}
-          >
-            ❮
-          </button>
-          <button
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
-            onClick={nextSlide}
-          >
-            ❯
-          </button>
+      ) : lastFourSubPackages.length > 0 ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-screen-xl mx-auto px-4">
+          {lastFourSubPackages.map((subPackage) => (
+            <Card
+              key={subPackage._id}
+              imageUrl={subPackage.imageUrl}
+              title={subPackage.name}
+              price={subPackage.price}
+              duration={subPackage.duration}
+              onViewDetails={() => handleViewDetails(subPackage._id)}
+            />
+          ))}
         </div>
+      ) : (
+        <p>No subpackages available at the moment.</p>
       )}
     </div>
   );
@@ -129,111 +60,98 @@ const SpiritualSubPackages = () => {
 
 export default SpiritualSubPackages;
 
-// Perfectly working fully responsive
 
-// Old code
 
-// import React, { useEffect, useState } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { fetchSubPackages } from "../redux/subPackagesSlice";
 
-// const SpiritualSubPackages = () => {
-//   const dispatch = useDispatch();
-//   const {
-//     data: subPackages,
-//     status,
-//     error,
-//   } = useSelector((state) => state.subPackages);
 
-//   const [currentIndex, setCurrentIndex] = useState(0);
-//   const itemsPerPage = 4; // Number of cards to show at once
 
-//   useEffect(() => {
-//     // Fetch the subpackages related to the Spiritual Tour Package
-//     dispatch(fetchSubPackages("6704c40b9c3b94c80c90748d")); // Package ID for Spiritual Tour
-//   }, [dispatch]);
 
-//   const nextSlide = () => {
-//     if (currentIndex < Math.ceil(subPackages.length / itemsPerPage) - 1) {
-//       setCurrentIndex((prevIndex) => prevIndex + 1);
-//     }
-//   };
 
-//   const prevSlide = () => {
-//     if (currentIndex > 0) {
-//       setCurrentIndex((prevIndex) => prevIndex - 1);
-//     }
-//   };
 
-//   // Get the current items to display
-//   const currentItems = subPackages.slice(
-//     currentIndex * itemsPerPage,
-//     (currentIndex + 1) * itemsPerPage
-//   );
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React from 'react';
+
+// // Sample data for images
+// const images = [
+//   {
+//     title: "Hawa Mehal",
+//     url: "https://images.unsplash.com/photo-1650530777057-3a7dbc24bf6c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aGF3YSUyMG1laGFsfGVufDB8fDB8fHww",
+//     width: "400px",
+//   },
+//   {
+//     title: "Nepal",
+//     url: "https://images.unsplash.com/photo-1542955001-ff91d5369658?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODh8fHRlbXBsZXxlbnwwfHwwfHx8MA%3D%3D",
+//     width: "400px",
+//   },
+//   {
+//     title: "Birla Temple",
+//     url: "https://plus.unsplash.com/premium_photo-1691031429084-894ffad104ac?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDV8fGJpcmxhJTIwdGVtcGxlfGVufDB8fDB8fHww",
+//     width: "400px",
+//   },
+//   // Add more images as needed
+// ];
+
+// const JaipurTempleTour = () => {
 //   return (
-//     <div className="container mx-auto my-10  spiritual-sub-packages">
-//       <h1 className="text-[28px] font-semibold mb-2 text-gray-700 text-center mx-auto">
-//         Spiritual Tour Packages
-//       </h1>
-//       <p className="text-center mx-auto my-2 text-gray-500 ">
+//     <div className="my-8 text-center">
+//       <h2 className="text-[22px] md:text-2xl font-semibold mb-2 text-gray-700 text-center mx-auto">Jaipur Temple Tour</h2>
+//       <p className="mt-3 mb-1 font-medium text-gray-600">
 //         Check out these amazing devotional trips
 //       </p>
+//       <hr className="border-[3px] max-w-40 text-center mx-auto border-blue-500 mt-1 mb-6 sm:mb-8 rounded-sm" />
 
-//       {status === "loading" ? (
-//         <p>Loading...</p>
-//       ) : status === "failed" ? (
-//         <p>Error fetching data: {error}</p> // Show the error message
-//       ) : (
-//         <div className="flex items-center justify-between">
-//           <button
-//             onClick={prevSlide}
-//             disabled={currentIndex === 0}
-//             className="p-2 bg-gray-300 rounded-full disabled:opacity-50 ml-4 hidden md:block" // Hide on mobile
+//       <div className="flex flex-wrap justify-center p-2">
+//         {images.map((image) => (
+//           <div
+//             key={image.title}
+//             className="relative m-[4px] group"
+//             style={{
+//               width: image.width,
+//               height: '300px',
+//             }}
 //           >
-//             &lt; {/* Left Arrow Icon */}
-//           </button>
-
-//           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mx-10">
-//             {currentItems.length > 0 ? ( // Check if there are any subPackages
-//               currentItems.map((subPackage) => (
-//                 <div
-//                   key={subPackage._id}
-//                   className="card bg-white shadow-lg p-4 rounded-lg"
-//                 >
-//                   <img
-//                     src={subPackage.imageUrl}
-//                     alt={subPackage.name}
-//                     className="h-48 w-full object-cover rounded"
-//                   />
-//                   <h2 className="text-lg font-semibold mt-4">
-//                     {subPackage.name}
-//                   </h2>
-//                   <p className="text-gray-600 mt-2">{subPackage.description}</p>
-//                   <p className="text-blue-600 mt-2 font-bold">
-//                     ₹{subPackage.price}/Person
-//                   </p>
-//                   <p className="text-gray-500">{subPackage.duration}</p>
-//                 </div>
-//               ))
-//             ) : (
-//               <p>No subpackages available.</p> // Handle the case with no subPackages
-//             )}
+//             {/* Background Image */}
+//             <div
+//               className="absolute inset-0 bg-cover bg-center transition-opacity duration-300 opacity-90 group-hover:opacity-100"
+//               style={{ backgroundImage: `url(${image.url})` }}
+//             />
+            
+//             {/* Dark Overlay (initially dark) */}
+//             <div className="absolute inset-0 bg-black opacity-50 transition-opacity duration-300 group-hover:opacity-20" />
+            
+//             {/* Title and hover effect */}
+//             <div className="absolute inset-0 flex items-center justify-center">
+//               <span className="text-white text-lg font-semibold p-4 relative group-hover:border group-hover:border-white group-hover:py-3 group-hover:px-5 transition-all duration-300">
+//                 {image.title}
+//               </span>
+//             </div>
 //           </div>
-
-//           <button
-//             onClick={nextSlide}
-//             disabled={
-//               currentIndex >= Math.ceil(subPackages.length / itemsPerPage) - 1
-//             }
-//             className="p-2 bg-gray-300 rounded-full disabled:opacity-50 mr-4 hidden md:block" // Hide on mobile
-//           >
-//             &gt; {/* Right Arrow Icon */}
-//           </button>
-//         </div>
-//       )}
+//         ))}
+//       </div>
 //     </div>
 //   );
 // };
 
-// export default SpiritualSubPackages;
+// export default JaipurTempleTour;
