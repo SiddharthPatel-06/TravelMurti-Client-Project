@@ -98,7 +98,8 @@ function MainApp() {
     "/employee",
     "/create-employee",
     "/update-we-are-hiring",
-    "/forgot-password",
+    "/request-otp",
+    "/verify-otp",
     "/reset-password",
   ].includes(location.pathname);
 
