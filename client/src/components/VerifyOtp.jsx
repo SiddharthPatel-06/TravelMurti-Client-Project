@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 const VerifyOtp = () => {
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleVerifyOtp = async (e) => {
     e.preventDefault();
@@ -14,7 +16,7 @@ const VerifyOtp = () => {
     try {
       const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/users/verify-otp`, { email, otp });
       toast.success(response.data.message);
-      // Navigate to reset password component or show reset password form
+      navigate('/reset-password'); // Navigate to reset password component after successful verification
     } catch (error) {
       toast.error(error.response?.data?.message || 'Invalid or expired OTP');
     } finally {
@@ -23,27 +25,31 @@ const VerifyOtp = () => {
   };
 
   return (
-    <div className="verify-otp">
-      <h2>Verify OTP</h2>
-      <form onSubmit={handleVerifyOtp}>
-        <input 
-          type="email" 
-          value={email} 
-          onChange={(e) => setEmail(e.target.value)} 
-          placeholder="Enter your email" 
-          required 
-        />
-        <input 
-          type="text" 
-          value={otp} 
-          onChange={(e) => setOtp(e.target.value)} 
-          placeholder="Enter OTP" 
-          required 
-        />
-        <button type="submit" disabled={loading}>
-          {loading ? 'Verifying...' : 'Verify OTP'}
-        </button>
-      </form>
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 px-6">
+      <div className="bg-white shadow-lg rounded-lg p-8 max-w-sm w-full">
+        <h2 className="text-2xl font-bold mb-6 text-center">Verify OTP</h2>
+        <form onSubmit={handleVerifyOtp}>
+          <input 
+            type="email" 
+            value={email} 
+            onChange={(e) => setEmail(e.target.value)} 
+            placeholder="Enter your email" 
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
+            required 
+          />
+          <input 
+            type="text" 
+            value={otp} 
+            onChange={(e) => setOtp(e.target.value)} 
+            placeholder="Enter OTP" 
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
+            required 
+          />
+          <button type="submit" disabled={loading} className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${loading ? 'cursor-not-allowed' : ''}`}>
+            {loading ? 'Verifying...' : 'Verify OTP'}
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
