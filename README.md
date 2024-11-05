@@ -6,7 +6,7 @@ Users can submit inquiries and contact forms, receiving immediate email confirma
 
 All user interactions, including inquiries and feedback, are automatically logged into a Google Sheet for easy tracking. Our beautifully designed "About Us" and "Contact Us" pages enhance user engagement. TravelMurti is committed to providing the tools you need for confident and efficient travel planning.
 
-# Live Project Url: https://travel-murti-client-project.vercel.app
+Live Project Url: https://travel-murti-client-project.vercel.app
 
 # Key Features:
 
