@@ -1,5 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const heroData = [
   {
@@ -49,57 +54,46 @@ const heroData = [
 ];
 
 const HeroSection = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  // Slider logic to auto change images
-  useEffect(() => {
-    const slider = setInterval(() => {
-      setCurrentIndex((prevIndex) =>
-        prevIndex === heroData.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 4000); // Change every 2 seconds
-    return () => clearInterval(slider);
-  }, []);
-
-  const currentSlide = heroData[currentIndex];
-
   return (
     <section className="relative w-full h-[calc(100vh-250px)] md:h-[calc(100vh-80px)] bg-gray-800">
-      {/* Render only the current slide */}
-      <div className="absolute top-0 left-0 w-full h-full transition-opacity duration-1000 opacity-100">
-        <img
-          src={currentSlide.image}
-          alt={currentSlide.title}
-          className="w-full h-full object-cover"
-          style={{ objectPosition: "center" }}
-        />
-        <div className="absolute inset-0 flex items-center justify-center md:pt-24 pt-16">
-          <div className="bg-black bg-opacity-50 p-6 sm:p-8 rounded-lg shadow-lg text-center w-full lg:max-w-4xl md:max-w-2xl max-w-64">
-            <h2 className="text-2xl sm:text-[28px] font-bold text-white">
-              {currentSlide.title}
-            </h2>
-            <p className="mt-4 text-sm sm:text-base text-gray-200">
-              {currentSlide.description}
-            </p>
-            <Link to={currentSlide.link}>
-              <button className="mt-6 px-4 sm:px-6 py-2 sm:py-3 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 transition">
-                Know More
-              </button>
-            </Link>
-          </div>
-        </div>
-      </div>
-      {/* Dots indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
-        {heroData.map((_, index) => (
-          <div
-            key={index}
-            className={`h-2 w-2 rounded-full transition-colors duration-300 ${
-              index === currentIndex ? "bg-blue-600" : "bg-gray-300"
-            }`}
-          />
+      <Swiper
+        modules={[Navigation, Pagination, Autoplay]}
+        navigation
+        pagination={{ clickable: true }}
+        loop
+        autoplay={{ delay: 4000, disableOnInteraction: false }}
+        spaceBetween={30}
+        slidesPerView={1}
+        className="w-full h-full"
+      >
+        {heroData.map((slide) => (
+          <SwiperSlide key={slide.id}>
+            <div className="relative w-full h-full">
+              <img
+                src={slide.image}
+                alt={slide.title}
+                className="w-full h-full object-cover"
+                style={{ objectPosition: "center" }}
+              />
+              <div className="absolute inset-0 flex items-center justify-center md:pt-24 pt-16">
+                <div className="bg-black bg-opacity-50 p-6 sm:p-8 rounded-lg shadow-lg text-center w-full lg:max-w-4xl md:max-w-2xl max-w-64">
+                  <h2 className="text-2xl sm:text-[28px] font-bold text-white">
+                    {slide.title}
+                  </h2>
+                  <p className="mt-4 text-sm sm:text-base text-gray-200">
+                    {slide.description}
+                  </p>
+                  <Link to={slide.link}>
+                    <button className="mt-6 px-4 sm:px-6 py-2 sm:py-3 bg-blue-600 text-white font-medium rounded hover:bg-blue-700 transition">
+                      Know More
+                    </button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </SwiperSlide>
         ))}
-      </div>
+      </Swiper>
     </section>
   );
 };

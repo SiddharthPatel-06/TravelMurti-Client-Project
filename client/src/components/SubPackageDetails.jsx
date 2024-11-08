@@ -4,6 +4,7 @@ import { fetchSubPackageDetails } from "../redux/subPackagesSlice";
 import { Link, useParams } from "react-router-dom";
 import { FaChevronRight } from "react-icons/fa";
 import Card from "./Card";
+import CardShimmer from "../CardShimmer";
 
 const SubPackageDetails = () => {
   const dispatch = useDispatch();
@@ -24,7 +25,15 @@ const SubPackageDetails = () => {
   }, [dispatch, subPackageId]);
 
   if (status === "loading") {
-    return <div>Loading...</div>;
+    return (
+      <div className="container mx-auto mb-28 mt-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-screen-xl mx-auto px-4">
+          {[1, 2, 3, 4].map((index) => (
+            <CardShimmer key={index} />
+          ))}
+        </div>
+      </div>
+    );
   }
 
   if (status === "failed") {

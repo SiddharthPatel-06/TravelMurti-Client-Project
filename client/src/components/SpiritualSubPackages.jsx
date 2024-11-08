@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSubPackages } from "../redux/subPackagesSlice";
 import { useNavigate } from "react-router-dom";
-import Card from "./Card"; // Import the Card component
+import Card from "./Card";
+import CardShimmer from "../CardShimmer";
 
 const SpiritualSubPackages = () => {
   const dispatch = useDispatch();
@@ -35,7 +36,11 @@ const SpiritualSubPackages = () => {
       <hr className="border-[3px] max-w-40 text-center mx-auto border-blue-500 mt-1 mb-6 sm:mb-8 rounded-sm" />
 
       {status === "loading" ? (
-        <p>Loading...</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-screen-xl mx-auto px-4">
+          {[1, 2, 3, 4].map((_, index) => (
+            <CardShimmer key={index} />
+          ))}
+        </div>
       ) : status === "failed" ? (
         <p>Error fetching data: {error}</p>
       ) : lastFourSubPackages.length > 0 ? (

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
+import CardShimmer from "../CardShimmer";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../axiosInstance";
 
@@ -12,9 +13,7 @@ const DealOfTheDay = () => {
   useEffect(() => {
     const fetchDeals = async () => {
       try {
-        const response = await axiosInstance.get(
-          "/subpackages/deal-of-the-day"
-        );
+        const response = await axiosInstance.get("/subpackages/deal-of-the-day");
         setDeals(response.data);
         setStatus("success");
       } catch (err) {
@@ -27,7 +26,6 @@ const DealOfTheDay = () => {
     fetchDeals();
   }, []);
 
-  // Handles the 'View Details' button logic
   const handleViewDetails = (packageId) => {
     navigate(`/subPackages/${packageId}`);
   };
@@ -43,7 +41,11 @@ const DealOfTheDay = () => {
       <hr className="border-[3px] max-w-40 text-center mx-auto border-blue-500 mt-1 mb-6 sm:mb-8 rounded-sm" />
 
       {status === "loading" ? (
-        <p>Loading...</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-screen-xl mx-auto px-4">
+          {[1, 2, 3, 4].map((_, index) => (
+            <CardShimmer key={index} />
+          ))}
+        </div>
       ) : status === "failed" ? (
         <p>Error fetching data: {error}</p>
       ) : deals.length > 0 ? (

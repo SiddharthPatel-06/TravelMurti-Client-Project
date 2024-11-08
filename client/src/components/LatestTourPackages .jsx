@@ -1,25 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import Card from './Card';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Card from "./Card";
+import { useNavigate } from "react-router-dom";
+import CardShimmer from "../CardShimmer";
 
 const LatestTourPackages = () => {
   const [tourPackages, setTourPackages] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   // Fetch latest tour packages from the backend
   useEffect(() => {
     const fetchTourPackages = async () => {
+      setLoading(true);
       try {
-        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/subpackages/latest-tour-packages`);
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/subpackages/latest-tour-packages`
+        );
         if (Array.isArray(response.data.data)) {
           setTourPackages(response.data.data);
         } else {
-          console.error('Received data is not an array');
+          console.error("Received data is not an array");
           setTourPackages([]);
         }
-      } catch (error) {
+      }catch (error) {
         console.error('Error fetching tour packages:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -31,7 +38,6 @@ const LatestTourPackages = () => {
     navigate(`/subpackages/${packageId}`);
   };
 
-
   return (
     <div className="container mx-auto my-10">
       <h2 className="text-[22px] md:text-2xl font-semibold mb-2 text-gray-700 text-center mx-auto">
@@ -42,7 +48,13 @@ const LatestTourPackages = () => {
       </p>
       <hr className="border-[3px] max-w-40 text-center mx-auto border-blue-500 mt-1 mb-6 sm:mb-8 rounded-sm" />
 
-      {tourPackages.length > 0 ? (
+      {loading ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-screen-xl mx-auto px-4">
+          {[1, 2, 3, 4].map((index) => (
+            <CardShimmer key={index} />
+          ))}
+        </div>
+      ) : tourPackages.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-screen-xl mx-auto px-4">
           {tourPackages.map((pkg) => (
             <Card
