@@ -286,7 +286,6 @@ body {
   }
 }
 
-
 /*Reuseable Card css */
 .gradient-border {
   --borderWidth: 4px;
@@ -295,29 +294,38 @@ body {
   border-radius: var(--borderWidth);
 }
 .gradient-border:after {
-  content: '';
+  content: "";
   position: absolute;
   top: calc(-1 * var(--borderWidth));
   left: calc(-1 * var(--borderWidth));
   height: calc(100% + var(--borderWidth) * 2);
   width: calc(100% + var(--borderWidth) * 2);
-  background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82);
+  background: linear-gradient(
+    60deg,
+    #f79533,
+    #f37055,
+    #ef4e7b,
+    #a166ab,
+    #5073b8,
+    #1098ad,
+    #07b39b,
+    #6fba82
+  );
   border-radius: calc(2 * var(--borderWidth));
   z-index: -1;
   animation: animatedgradient 3s ease alternate infinite;
   background-size: 300% 300%;
 }
 
-
 @keyframes gradient-x {
   0% {
-      background-position: 0% 50%;
+    background-position: 0% 50%;
   }
   50% {
-      background-position: 100% 50%;
+    background-position: 100% 50%;
   }
   100% {
-      background-position: 0% 50%;
+    background-position: 0% 50%;
   }
 }
 
@@ -326,12 +334,16 @@ body {
   background-size: 300% 300%;
 }
 
-
 /* shimmer effect */
 
 .shimmer {
   background: #f0f0f0;
-  background-image: linear-gradient(90deg, #f0f0f0 0px, #e0e0e0 40px, #f0f0f0 80px);
+  background-image: linear-gradient(
+    90deg,
+    #f0f0f0 0px,
+    #e0e0e0 40px,
+    #f0f0f0 80px
+  );
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }
@@ -346,9 +358,15 @@ body {
 }
 
 /* slider in herosection */
+
 .swiper-button-next,
 .swiper-button-prev {
   color: rgb(238, 238, 238) !important;
 }
 
-
+@media (max-width: 480px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: none !important;
+  }
+}
