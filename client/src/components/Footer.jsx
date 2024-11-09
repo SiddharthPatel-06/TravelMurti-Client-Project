@@ -15,11 +15,10 @@ const Footer = () => {
   ];
 
   const services = [
-    "Spiritual Tours",
-    "Holiday Tours",
-    "Honeymoon Tours",
-    "Weekend Tours",
-    // "Pooja Booking",
+    { name: "Spiritual Tours", path: "/" },
+    { name: "Holiday Tours", path: "/" },
+    { name: "Honeymoon Tours", path: "/" },
+    { name: "Weekend Tours", path: "/weekend-tours" },
   ];
 
   const socialMediaLinks = [
@@ -86,11 +85,13 @@ const Footer = () => {
             <div className="border-b border-gray-300 mb-4"></div>
             <ul className="space-y-2 text-gray-700">
               {services.map((service, index) => (
-                <li
-                  key={index}
-                  className="cursor-pointer text-white hover:text-blue-600 transition duration-200"
-                >
-                  {service}
+                <li key={index}>
+                  <Link
+                    to={service.path}
+                    className="cursor-pointer text-white hover:text-blue-600 transition duration-200"
+                  >
+                    {service.name}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -176,7 +177,9 @@ const Footer = () => {
 
         {/* Copyright Section */}
         <div className="text-center text-white py-4">
-          <p className="text-sm">Copyright © Travel Murti {new Date().getFullYear()}</p>
+          <p className="text-sm">
+            Copyright © Travel Murti {new Date().getFullYear()}
+          </p>
         </div>
       </div>
     </footer>
