@@ -97,6 +97,10 @@ const Navbar = () => {
     }
   };
 
+  const handleLinkClick = () => {
+    setMobileMenuOpen(false);
+  };
+
   return (
     <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[#1E3A8A] to-[#1E40AF] shadow-md mx-auto md:flex w-full max-w-8xl justify-between md:px-24 px-6 py-4 text-sm text-white md:pt-10 pt-10">
       {/* Left section */}
@@ -175,10 +179,10 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden flex flex-col gap-4 mt-4 pl-2">
-          <Link to="/">
+          <Link to="/" onClick={handleLinkClick}>
             <p className="pr-4">Home</p>
           </Link>
-          <Link to="/about">
+          <Link to="/about" onClick={handleLinkClick}>
             <p>About Us</p>
           </Link>
           {packages.length > 0 &&
@@ -202,6 +206,7 @@ const Navbar = () => {
                         <Link
                           to={`/subpackages/${subPkg._id}`}
                           key={subPkg._id}
+                          onClick={handleLinkClick}
                           className="block px-4 py-2 hover:text-blue-900"
                         >
                           {subPkg.name}
@@ -214,7 +219,7 @@ const Navbar = () => {
                 )}
               </div>
             ))}
-          <Link to="/contact">
+          <Link to="/contact" onClick={handleLinkClick}>
             <p className="pr-4">Contact Us</p>
           </Link>
         </div>

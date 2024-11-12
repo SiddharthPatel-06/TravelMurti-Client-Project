@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 
 function AboutUs() {
   return (
-    <div className="bg-gray-50 mb-20">
-      {/* Banner Section */}
+    <div className="bg-gray-50 mb-20 mt-16">
       {/* Banner Section */}
       <section
         className="relative h-52 md:h-72 bg-cover bg-center flex items-center justify-center"
