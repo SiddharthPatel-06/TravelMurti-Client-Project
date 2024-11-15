@@ -51,10 +51,10 @@ const Footer = () => {
   ];
 
   const legalLinks = [
-    { name: "Privacy Policy", path: "/" },
-    { name: "Terms & Conditions", path: "/" },
-    { name: "Cancellation & Refund Policy", path: "/" },
-    { name: "Tour Package Booking T&C", path: "/" },
+    { name: "Privacy Policy", path: "/privacy-policy" },
+    { name: "Terms & Conditions", path: "/terms-conditions" },
+    { name: "Cancellation & Refund Policy", path: "/cancellation-refund-policy" },
+    { name: "Tour Package Booking T&C", path: "/tour-booking-t-c" },
   ];
 
   return (

@@ -28,7 +28,7 @@ const WeAreHiring = () => {
             {/* Static Banner Image */}
       <div className="banner relative min-w-full mb-">
         <img
-          src="https://images.pexels.com/photos/574313/pexels-photo-574313.jpeg?auto=compress&cs=tinysrgb&w=5000 "
+          src="https://res.cloudinary.com/djrxcdfrr/image/upload/v1731676840/premium_photo-1683140513388-4344c8fc2778_kbd6ff.jpg"
           alt="Banner"
           className="banner-image w-full h-48 md:h-64 object-cover"
         />

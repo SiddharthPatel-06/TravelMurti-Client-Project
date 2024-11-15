@@ -8,7 +8,7 @@ const WeekendTours = () => {
       {/* Static Banner Image */}
       <div className="banner relative min-w-full mb-8">
         <img
-          src="https://plus.unsplash.com/premium_photo-1683140513388-4344c8fc2778?&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTM4fHxzb2ZhfGVufDB8fDB8fHww"
+          src="https://res.cloudinary.com/djrxcdfrr/image/upload/v1731676840/premium_photo-1683140513388-4344c8fc2778_kbd6ff.jpg"
           alt="Banner"
           className="banner-image w-full h-48 md:h-64 object-cover"
         />

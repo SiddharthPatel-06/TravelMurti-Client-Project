@@ -23,6 +23,10 @@ import ResetPassword from "./components/ResetPassword";
 import RequestOtp from "./components/RequestOtp";
 import VerifyOtp from "./components/VerifyOtp";
 import WeekendTours from "./components/WeekendTours";
+import PrivacyPolicy from "./components/PrivacyPolicy";
+import TermsAndConditions from "./components/TermsAndConditions";
+import CancellationRefundPolicy from "./components/CancellationRefundPolicy";
+import TourPackageBookingTerms from "./components/TourPackageBookingTerms";
 
 // Lazy load your components
 const Home = lazy(() => import("./components/Home"));
@@ -56,32 +60,32 @@ function App() {
   }, [user]);
 
   // Block shortcuts for opening developer tools
-  useEffect(() => {
-    const blockDevTools = (event) => {
-      if (
-        (event.ctrlKey &&
-          event.shiftKey &&
-          (event.key === "I" || event.key === "J")) ||
-        (event.ctrlKey && event.key === "U") ||
-        event.key === "F12" ||
-        (event.metaKey &&
-          event.shiftKey &&
-          (event.key === "I" || event.key === "J")) ||
-        (event.metaKey && event.key === "U")
-      ) {
-        event.preventDefault();
-        toast.error("Developer tools are disabled on this site.", {
-          position: "top-right",
-        });
-      }
-    };
+  // useEffect(() => {
+  //   const blockDevTools = (event) => {
+  //     if (
+  //       (event.ctrlKey &&
+  //         event.shiftKey &&
+  //         (event.key === "I" || event.key === "J")) ||
+  //       (event.ctrlKey && event.key === "U") ||
+  //       event.key === "F12" ||
+  //       (event.metaKey &&
+  //         event.shiftKey &&
+  //         (event.key === "I" || event.key === "J")) ||
+  //       (event.metaKey && event.key === "U")
+  //     ) {
+  //       event.preventDefault();
+  //       toast.error("Developer tools are disabled on this site.", {
+  //         position: "top-right",
+  //       });
+  //     }
+  //   };
 
-    window.addEventListener("keydown", blockDevTools);
+  //   window.addEventListener("keydown", blockDevTools);
 
-    return () => {
-      window.removeEventListener("keydown", blockDevTools);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("keydown", blockDevTools);
+  //   };
+  // }, []);
 
   // Admin dashboard path check is moved into a child component
   return (
@@ -120,6 +124,10 @@ function MainApp() {
           <Route path="/we-are-hiring" element={<WeAreHiring />} />
           <Route path="/update-we-are-hiring" element={<UpdateJobForm />} />
           <Route path="/weekend-tours" element={<WeekendTours />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-conditions" element={<TermsAndConditions />} />
+          <Route path="/cancellation-refund-policy" element={<CancellationRefundPolicy />} />
+          <Route path="/tour-booking-t-c" element={<TourPackageBookingTerms />} />
           <Route
             path="/subpackages/:subPackageId"
             element={<SubPackageDetails />}
