@@ -16,7 +16,7 @@ const subPackageSchema = new mongoose.Schema({
   price: { type: Number, required: true },
   duration: { type: String, required: true },
   packageId: { type: mongoose.Schema.Types.ObjectId, ref: 'Package', required: true },
-  imageUrl: { type: String, required: true },
+  imageUrl: { type: String, required: false },
   isDealOfTheDay: { type: Boolean, default: false },
   introduction: { type: String }, 
   tourPlan: { type: String },

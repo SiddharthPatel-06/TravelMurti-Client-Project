@@ -56,7 +56,7 @@ exports.createSubPackage = async (req, res) => {
       price: price || 0, // Fallback to 0 if price is missing
       duration: duration || "", // Fallback to 0 if duration is missing
       packageId: parentId,
-      imageUrl,
+      imageUrl: mainImage ? mainImage.path : null,
       isDealOfTheDay: isDealOfTheDay !== undefined ? isDealOfTheDay : false,
       introduction: introduction || "",
       tourPlan: tourPlan || "",

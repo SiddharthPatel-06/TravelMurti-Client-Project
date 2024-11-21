@@ -52,7 +52,7 @@ const SubPackageManager = ({ packageId }) => {
 
     // Append basic fields to FormData
     Object.entries(formData).forEach(([key, value]) => {
-      formDataToSubmit.append(key, value);
+      formDataToSubmit.append(key, value || "");
     });
 
     // Append gallery images
