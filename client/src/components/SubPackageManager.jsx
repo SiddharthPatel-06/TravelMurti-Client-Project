@@ -259,7 +259,7 @@ const SubPackageManager = ({ packageId }) => {
             setFormData({ ...formData, mainImage: e.target.files[0] })
           }
           className="w-full mb-4"
-          required
+          // required
         />
         <input
           type="checkbox"
