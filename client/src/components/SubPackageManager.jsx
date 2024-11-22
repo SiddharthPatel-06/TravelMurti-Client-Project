@@ -52,7 +52,7 @@ const SubPackageManager = ({ packageId }) => {
 
     // Append basic fields to FormData
     Object.entries(formData).forEach(([key, value]) => {
-      formDataToSubmit.append(key, value || "");
+      formDataToSubmit.append(key, value);
     });
 
     // Append gallery images
@@ -259,7 +259,7 @@ const SubPackageManager = ({ packageId }) => {
             setFormData({ ...formData, mainImage: e.target.files[0] })
           }
           className="w-full mb-4"
-          // required
+          required
         />
         <input
           type="checkbox"

@@ -39,7 +39,11 @@ exports.createSubPackage = async (req, res) => {
     const parentId = parentPackage ? parentPackage._id : parentSubPackage._id;
     console.log("Parent ID found:", parentId);
 
-    const imageUrl = mainImage ? mainImage.path : null;
+    if (!mainImage) {
+      return res.status(400).json({ message: "No main image uploaded" });
+    }
+
+    const imageUrl = mainImage.path;
     const galleryImageUrls = galleryImages
       .map((file) => {
         return { url: file.path };
@@ -56,7 +60,7 @@ exports.createSubPackage = async (req, res) => {
       price: price || 0, // Fallback to 0 if price is missing
       duration: duration || "", // Fallback to 0 if duration is missing
       packageId: parentId,
-      imageUrl: mainImage ? mainImage.path : null,
+      imageUrl,
       isDealOfTheDay: isDealOfTheDay !== undefined ? isDealOfTheDay : false,
       introduction: introduction || "",
       tourPlan: tourPlan || "",
@@ -190,6 +194,7 @@ exports.getAllSubPackages = async (req, res) => {
 //     res.status(500).json({ message: "Server error", error: error.message });
 //   }
 // };
+
 
 // Update a sub-package
 exports.updateSubPackage = async (req, res) => {
