@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const RequestOtp = () => {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleRequestOtp = async (e) => {
     e.preventDefault();
@@ -17,6 +18,7 @@ const RequestOtp = () => {
         { email }
       );
       toast.success(response.data.message);
+      navigate("/verify-otp", { state: { email } });
     } catch (error) {
       toast.error(error.response?.data?.message || "Error requesting OTP");
     } finally {
