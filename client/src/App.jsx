@@ -65,12 +65,12 @@ function App() {
       if (
         (event.ctrlKey &&
           event.shiftKey &&
-          (event.key === "I" || event.key === "J")) ||
+          (event.key === "I" || event.key === "J" || event.key === "C")) ||
         (event.ctrlKey && event.key === "U") ||
         event.key === "F12" ||
         (event.metaKey &&
           event.shiftKey &&
-          (event.key === "I" || event.key === "J")) ||
+          (event.key === "I" || event.key === "J" || event.key === "C")) ||
         (event.metaKey && event.key === "U")
       ) {
         event.preventDefault();
@@ -80,10 +80,14 @@ function App() {
       }
     };
 
+    const blockContextMenu = (event) => event.preventDefault();
+
     window.addEventListener("keydown", blockDevTools);
+    window.addEventListener("contextmenu", blockContextMenu);
 
     return () => {
       window.removeEventListener("keydown", blockDevTools);
+      window.removeEventListener("contextmenu", blockContextMenu);
     };
   }, []);
 
@@ -126,8 +130,14 @@ function MainApp() {
           <Route path="/weekend-tours" element={<WeekendTours />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-conditions" element={<TermsAndConditions />} />
-          <Route path="/cancellation-refund-policy" element={<CancellationRefundPolicy />} />
-          <Route path="/tour-booking-t-c" element={<TourPackageBookingTerms />} />
+          <Route
+            path="/cancellation-refund-policy"
+            element={<CancellationRefundPolicy />}
+          />
+          <Route
+            path="/tour-booking-t-c"
+            element={<TourPackageBookingTerms />}
+          />
           <Route
             path="/subpackages/:subPackageId"
             element={<SubPackageDetails />}
