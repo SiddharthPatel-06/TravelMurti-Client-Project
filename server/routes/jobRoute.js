@@ -1,6 +1,6 @@
 // routes/jobRoutes.js
 const express = require('express');
-const { upload } = require('../config/cloudinaryConfig'); // Adjust path as necessary
+const { upload } = require('../config/cloudinaryConfig');
 const { createJob, getAllJobs, getJobById, updateJob, deleteJob } = require('../controllers/jobController');
 
 const router = express.Router();
@@ -15,7 +15,7 @@ router.get('/', getAllJobs);
 router.get('/:id', getJobById);
 
 // Route for updating a job
-router.put('/:id', upload.single('image'), updateJob);
+router.put('/:id', upload.single('imageUrl'), updateJob);
 
 // Route for deleting a job
 router.delete('/:id', deleteJob);

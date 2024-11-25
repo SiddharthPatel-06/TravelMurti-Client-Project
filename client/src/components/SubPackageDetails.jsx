@@ -55,7 +55,7 @@ const SubPackageDetails = () => {
               alt={subPackageDetails.name}
               className="w-full h-[30vh] md:h-full object-cover rounded-sm"
             />
-            <div className="absolute inset-0 flex flex-col pb-4 md:pt-10 justify-center items-center text-center text-white">
+            <div className="absolute inset-0 flex flex-col pt-10 md:pt-12 justify-center items-center text-center text-white">
               <div className="bg-black bg-opacity-35 p-6 sm:p-8 rounded-lg shadow-lg w-full lg:max-w-4xl md:max-w-2xl max-w-xs">
                 <h1 className="text-2xl md:text-3xl font-bold mb-2">
                   {subPackageDetails.name}
@@ -67,11 +67,11 @@ const SubPackageDetails = () => {
               </div>
             </div>
           </div>
-          <p className="md:mt-6 text-center  text-2xl font-semibold text-black">
+          <p className="md:mt-6 mt-6 text-center text-2xl font-semibold text-black">
             {subPackageDetails.name}
           </p>
           
-          <p className="mt-4 text-center px-4 sm:px-8 md:px-36 mb-10 text-gray-800">
+          <p className="mt-4 md:text-center text-start px-6 sm:px-8 md:px-36 mb-10 text-gray-800">
             {subPackageDetails.description}
           </p>
 
