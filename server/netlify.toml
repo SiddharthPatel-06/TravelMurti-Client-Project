@@ -1,8 +1,0 @@
-[build]
-  functions = "functions" # Where the serverless functions are stored
-  publish = "public"      # Where your static files are stored
-
-[[redirects]]
-  from = "/*"
-  to = "/.netlify/functions/server"
-  status = 200
