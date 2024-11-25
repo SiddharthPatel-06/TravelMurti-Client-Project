@@ -10,14 +10,13 @@ const Card = ({
 }) => {
   const formatTitle = (title) => {
     return title
-      .split(" ")
-      .map((word, index) => {
-        return index === 0
-          ? word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-          : word.toLowerCase();
+      .split(' ')
+      .map((word) => {
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
       })
-      .join(" ");
+      .join(' ');
   };
+  
 
   return (
     <div className="relative mx-auto max-w-xs min-w-[300px] sm:min-w-[300px] md:min-w-[260px] lg:min-w-[280px]  p-1 rounded-xl overflow-hidden transform transition-transform duration-500 hover:shadow-2xl">
