@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import DOMPurify from "dompurify"; // Import DOMPurify
 
 export default function ContactForm() {
   const initialUserService = {
@@ -16,7 +17,10 @@ export default function ContactForm() {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setUser({ ...user, [name]: value });
+
+    // Sanitize the input value to prevent XSS
+    const sanitizedValue = DOMPurify.sanitize(value.replace(/[<>;]/g, ""));
+    setUser({ ...user, [name]: sanitizedValue });
   };
 
   const validateForm = () => {
@@ -72,7 +76,7 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="container mx-auto p-8 pt-0 mb-12">
+    <div className="container mx-auto p-4 pt-0 mb-12">
       <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl mx-auto border">
         <h1 className="text-2xl md:text-3xl font-bold text-center mb-4 text-gray-700">Contact Form</h1>
         <p className="text-center mb-6">

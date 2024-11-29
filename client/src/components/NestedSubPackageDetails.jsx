@@ -92,6 +92,12 @@ const NestedSubPackageDetails = () => {
     const formData = new FormData(e.target);
     const enquiryData = Object.fromEntries(formData.entries());
 
+    for (const key in enquiryData) {
+      if (Object.hasOwnProperty.call(enquiryData, key)) {
+        enquiryData[key] = DOMPurify.sanitize(enquiryData[key]);
+      }
+    }
+
     const loadingToastId = toast.loading("Submitting your enquiry...");
 
     try {
@@ -187,13 +193,16 @@ const NestedSubPackageDetails = () => {
           className="banner-image w-full h-48 md:h-64 object-cover"
         />
         <div className="absolute inset-0 flex flex-row items-center justify-center md:pt-24 pt-20 text-white text-2xl  bg-black bg-opacity-50">
-          <p className="font-bold text-center">{subPackage.name}</p>
+          <p className="font-bold text-center">
+            {subPackage.name
+              .toLowerCase()
+              .replace(/\b\w/g, (char) => char.toUpperCase())}
+          </p>
           {/* <p className="text-base flex items-center pt-2"><Link to="/">Home </Link> <FaChevronRight className="mx-2" size={14} />{subPackage.name}</p> */}
         </div>
-        
       </div>
 
-      <div className="content-container max-w-[1200px] mx-auto flex flex-col lg:flex-row gap-8">
+      <div className="content-container px-4 max-w-[1200px] mx-auto flex flex-col lg:flex-row gap-8">
         {/* Left Section */}
         <div className="left-section flex-1 bg-white p-4 rounded-lg shadow-lg">
           {subPackage.galleryImages && subPackage.galleryImages.length > 0 ? (
