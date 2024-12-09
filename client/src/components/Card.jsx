@@ -39,7 +39,7 @@ const Card = ({
             ? `₹${price}/Person`
             : "Price: Coming soon"}
         </p> */}
-        <p className="text-blue-600 mt-2 font-bold text-lg px-4">
+        <p className="text-blue-600 mt-2 font-semibold text-lg px-4">
           {price === 0
             ? "Coming soon"
             : `₹${price}/Person` }

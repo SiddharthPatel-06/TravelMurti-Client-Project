@@ -49,7 +49,7 @@ const SpiritualSubPackages = () => {
           <Swiper
             modules={[Navigation]}
             navigation
-            spaceBetween={20}
+            spaceBetween={16}
             slidesPerView={1}
             breakpoints={{
               640: { slidesPerView: 2 },
