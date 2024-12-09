@@ -57,7 +57,7 @@ exports.createSubPackage = async (req, res) => {
     const subPackage = new SubPackage({
       name: name || "", // Fallback to empty string if missing
       description: description || "",
-      price: price || 0, // Fallback to 0 if price is missing
+      price: price !== null && price !== undefined ? price : null,
       duration: duration || "", // Fallback to 0 if duration is missing
       packageId: parentId,
       imageUrl,
@@ -86,7 +86,10 @@ exports.createSubPackage = async (req, res) => {
       console.log("Parent subpackage updated successfully");
     }
 
-    res.status(201).json(subPackage);
+    res.status(201).json({
+      ...subPackage.toObject(),
+      price: subPackage.price !== null ? subPackage.price : null,
+    });
   } catch (error) {
     console.error("Error in createSubPackage:", error);
     res.status(500).json({
@@ -132,69 +135,6 @@ exports.getAllSubPackages = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
-// // Create 100 SubPackage at a time
-// exports.createSubPackage = async (req, res) => {
-//   try {
-//     const { baseName, description, price, duration, packageId, isDealOfTheDay } = req.body;
-
-//     // Check if we are creating a sub-package or sub-package of a sub-package
-//     const parentPackage = await Package.findById(packageId); // Check if it's a parent package
-//     const parentSubPackage = await SubPackage.findById(packageId); // Check if it's a sub-package
-
-//     if (!parentPackage && !parentSubPackage) {
-//       return res.status(404).json({ message: "Package or SubPackage not found" });
-//     }
-
-//     // Determine which ID we are using for the new sub-packages
-//     const parentId = parentPackage ? parentPackage._id : parentSubPackage._id;
-
-//     // Check if file is uploaded
-//     if (!req.file) {
-//       return res.status(400).json({ message: "No image uploaded" });
-//     }
-
-//     const imageUrl = req.file.path; // URL from file upload
-
-//     // Create an array to hold promises for all sub-packages
-//     const subPackagePromises = [];
-
-//     for (let i = 0; i < 100; i++) {
-//       // Create the sub-package data
-//       const subPackageData = {
-//         name: `${baseName} ${i + 1}`, // Generate unique name for each sub-package
-//         description,
-//         price,
-//         duration,
-//         packageId: parentId, // Set the packageId to the correct parent
-//         imageUrl,
-//         isDealOfTheDay: isDealOfTheDay !== undefined ? isDealOfTheDay : false,
-//       };
-
-//       // Create a new sub-package instance and save it
-//       const subPackage = new SubPackage(subPackageData);
-//       subPackagePromises.push(subPackage.save());
-//     }
-
-//     // Execute all save promises in parallel
-//     const subPackages = await Promise.all(subPackagePromises);
-
-//     // Update the parent package or sub-package to include these new sub-packages
-//     if (parentPackage) {
-//       parentPackage.subPackages.push(...subPackages.map(sp => sp._id));
-//       await parentPackage.save();
-//     } else if (parentSubPackage) {
-//       parentSubPackage.subPackages.push(...subPackages.map(sp => sp._id));
-//       await parentSubPackage.save();
-//     }
-
-//     res.status(201).json(subPackages);
-//   } catch (error) {
-//     console.error("Error in createSubPackage:", error);
-//     res.status(500).json({ message: "Server error", error: error.message });
-//   }
-// };
-
 
 // Update a sub-package
 exports.updateSubPackage = async (req, res) => {

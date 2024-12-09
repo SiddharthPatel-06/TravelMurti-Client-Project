@@ -4,8 +4,48 @@ import CardShimmer from "../CardShimmer";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../axiosInstance";
 
+// Static placeholder data
+const staticDeals = [
+  {
+    _id: "1",
+    imageUrl: "placeholder-image1.jpg",
+    name: "Kashmir Trip With Gulmarg",
+    description: "Explore the beauty of nature",
+    price: "₹8599",
+    duration: "3NIGHT / 4DAYS",
+    packageId: "1",
+  },
+  {
+    _id: "2",
+    imageUrl: "placeholder-image2.jpg",
+    name: "Baidyanath Tour Package",
+    description: "Spiritual journey experience",
+    price: "₹5599",
+    duration: "2NIGHT / 3DAYS",
+    packageId: "2",
+  },
+  {
+    _id: "3",
+    imageUrl: "placeholder-image3.jpg",
+    name: "Bangalore Mysore & Ooty Tour Package",
+    description: "Explore cities and hills",
+    price: "₹17599",
+    duration: "3NIGHT / 4DAY",
+    packageId: "3",
+  },
+  {
+    _id: "4",
+    imageUrl: "placeholder-image4.jpg",
+    name: "Manali Tour Package Ex Delhi",
+    description: "Adventure in the hills",
+    price: "₹9599",
+    duration: "3NIGHT / 4DAY",
+    packageId: "4",
+  },
+];
+
 const DealOfTheDay = () => {
-  const [deals, setDeals] = useState([]);
+  const [deals, setDeals] = useState(staticDeals);
   const [status, setStatus] = useState("loading");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -42,13 +82,13 @@ const DealOfTheDay = () => {
 
       {status === "loading" ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-screen-xl mx-auto px-4">
-          {[1, 2, 3, 4].map((_, index) => (
+          {[...Array(4)].map((_, index) => (
             <CardShimmer key={index} />
           ))}
         </div>
       ) : status === "failed" ? (
-        <p>Error fetching data: {error}</p>
-      ) : deals.length > 0 ? (
+        <p className="text-center text-gray-500">Error fetching data: {error}</p>
+      ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-screen-xl mx-auto px-4">
           {deals.map((deal) => (
             <Card
@@ -62,8 +102,6 @@ const DealOfTheDay = () => {
             />
           ))}
         </div>
-      ) : (
-        <p>No deals available at the moment.</p>
       )}
     </div>
   );

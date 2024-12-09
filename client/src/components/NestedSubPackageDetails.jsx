@@ -4,6 +4,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import DOMPurify from "dompurify";
 import { FaChevronRight } from "react-icons/fa";
+import CardShimmer from "../CardShimmer";
 
 const NestedSubPackageDetails = () => {
   const { nestedSubPackageId } = useParams();
@@ -12,24 +13,57 @@ const NestedSubPackageDetails = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [arrivalType, setArrivalType] = useState("text");
   const [departureType, setDepartureType] = useState("text");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (nestedSubPackageId) {
+      setLoading(true);
       axios
         .get(
           `${process.env.REACT_APP_BASE_URL}/subPackages/${nestedSubPackageId}`
         )
         .then((response) => {
           setSubPackage(response.data);
+          setLoading(false);
         })
         .catch((error) => {
           console.error("Error fetching sub-package:", error);
           toast.error("Error fetching sub-package. Please try again.");
+          setLoading(false);
         });
     }
   }, [nestedSubPackageId]);
 
-  if (!subPackage) return <div>Loading...</div>;
+  const renderShimmer = () => {
+    return (
+      <div className="shimmer-container">
+        <div className="shimmer-block w-full h-40 mb-4 mt-28 rounded shimmer"></div>
+
+        <div className="shimmer-block flex gap-2 w-full mb-4">
+          <div className="w-1/3 h-6 shimmer rounded"></div>
+          <div className="w-1/3 h-6 shimmer rounded"></div>
+          <div className="w-1/3 h-6 shimmer rounded"></div>
+        </div>
+
+        <div className="shimmer-block w-full h-6 mb-4 shimmer rounded"></div>
+        <div className="shimmer-block w-full h-6 mb-4 shimmer rounded"></div>
+
+        <div className="shimmer-block w-full h-32 shimmer rounded mb-16"></div>
+      </div>
+    );
+  };
+
+  if (loading) {
+    return (
+      <div className="flex flex-col gap-4 px-4 max-w-[1200px] mx-auto">
+        {renderShimmer()}
+      </div>
+    );
+  }
+
+  if (!subPackage) {
+    return <div className="text-center">Sub-package details not found.</div>;
+  }
 
   const handleSectionChange = (section) => {
     setActiveSection(section);
@@ -61,27 +95,7 @@ const NestedSubPackageDetails = () => {
             }}
           />
         );
-      // case "hotelInfo":
-      //   return (
-      //     <div
-      //       dangerouslySetInnerHTML={{
-      //         __html: DOMPurify.sanitize(subPackage.hotelInfo), // Sanitize HTML
-      //       }}
-      //     />
-      //   );
-      // case "gallery":
-      //   return (
-      //     <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-      //       {subPackage.galleryImages.map((imageObj, index) => (
-      //         <img
-      //           key={index}
-      //           src={imageObj.url}
-      //           alt={`Gallery Image ${index + 1}`}
-      //           className="w-full h-auto object-cover"
-      //         />
-      //       ))}
-      //     </div>
-      //   );
+
       default:
         return null;
     }
@@ -121,18 +135,15 @@ const NestedSubPackageDetails = () => {
     }
   };
 
-  // Updated GallerySlider Component
   const GallerySlider = ({ images }) => {
     const totalImages = images.length;
 
-    // Move to the next image
     const goToNextImage = () => {
       setCurrentImageIndex((prevIndex) =>
         prevIndex === totalImages - 1 ? 0 : prevIndex + 1
       );
     };
 
-    // Move to the previous image
     const goToPreviousImage = () => {
       setCurrentImageIndex((prevIndex) =>
         prevIndex === 0 ? totalImages - 1 : prevIndex - 1
@@ -142,7 +153,7 @@ const NestedSubPackageDetails = () => {
     // Auto-slide images every 3 seconds
     useEffect(() => {
       const autoSlide = setInterval(goToNextImage, 3000);
-      return () => clearInterval(autoSlide); // Clean up on unmount
+      return () => clearInterval(autoSlide);
     }, []);
     return (
       <div className="relative mb-4">
@@ -204,76 +215,61 @@ const NestedSubPackageDetails = () => {
 
       <div className="content-container px-4 max-w-[1200px] mx-auto flex flex-col lg:flex-row gap-8">
         {/* Left Section */}
-        <div className="left-section flex-1 bg-white p-4 rounded-lg shadow-lg">
-          {subPackage.galleryImages && subPackage.galleryImages.length > 0 ? (
-            <GallerySlider images={subPackage.galleryImages} />
+        <div className="left-section flex-1 bg-white md:p-4 px-2 rounded-lg shadow-lg">
+          {loading ? (
+            renderShimmer()
           ) : (
-            <img
-              src={subPackage.imageUrl || "default-image-url.jpg"}
-              alt={subPackage.name}
-              className="w-full h-64 object-cover mb-4 rounded"
-            />
+            <>
+              {subPackage.galleryImages &&
+              subPackage.galleryImages.length > 0 ? (
+                <GallerySlider images={subPackage.galleryImages} />
+              ) : (
+                <img
+                  src={subPackage.imageUrl || "default-image-url.jpg"}
+                  alt={subPackage.name}
+                  className="w-full h-64 object-cover mb-4 rounded"
+                />
+              )}
+
+              <div className="section-buttons flex flex-row w-full gap-[1px] mb-4 bg-blue-500 rounded-lg md:py-2 py-2">
+                <button
+                  className={`flex-1 py-2 px-2 mx-1 rounded-lg text-center text-sm ${
+                    activeSection === "introduction"
+                      ? "bg-white text-blue-600"
+                      : "bg-blue-500 text-white"
+                  } font-semibold transition duration-200`}
+                  onClick={() => handleSectionChange("introduction")}
+                >
+                  INTRODUCTION
+                </button>
+
+                <button
+                  className={`flex-1 py-2 px- mx- rounded text-center text-sm ${
+                    activeSection === "tourPlan"
+                      ? "bg-white text-blue-600"
+                      : "bg-blue-500 text-white"
+                  } font-semibold transition duration-200`}
+                  onClick={() => handleSectionChange("tourPlan")}
+                >
+                  ITINERARY
+                </button>
+
+                <button
+                  className={`flex-1 py-2 px-2 mx-1 text-sm rounded text-center ${
+                    activeSection === "includeExclude"
+                      ? "bg-white text-blue-600"
+                      : "bg-blue-500 text-white"
+                  } font-semibold transition duration-200`}
+                  onClick={() => handleSectionChange("includeExclude")}
+                >
+                  INCLUDE/EXCLUDE
+                </button>
+              </div>
+
+              <div className="section-content mb-4">{renderSection()}</div>
+            </>
           )}
 
-          <div className="section-buttons flex flex-row w-full gap-[1px] mb-4 bg-blue-500 rounded-lg md:py-2 py-2">
-            <button
-              className={`flex-1 py-2 px-2 mx-1 rounded-lg text-center text-sm ${
-                activeSection === "introduction"
-                  ? "bg-white text-blue-600"
-                  : "bg-blue-500 text-white"
-              } font-semibold transition duration-200`}
-              onClick={() => handleSectionChange("introduction")}
-            >
-              INTRODUCTION
-            </button>
-
-            <button
-              className={`flex-1 py-2 px- mx- rounded text-center text-sm ${
-                activeSection === "tourPlan"
-                  ? "bg-white text-blue-600"
-                  : "bg-blue-500 text-white"
-              } font-semibold transition duration-200`}
-              onClick={() => handleSectionChange("tourPlan")}
-            >
-              ITINERARY
-            </button>
-
-            <button
-              className={`flex-1 py-2 px-2 mx-1 text-sm rounded text-center ${
-                activeSection === "includeExclude"
-                  ? "bg-white text-blue-600"
-                  : "bg-blue-500 text-white"
-              } font-semibold transition duration-200`}
-              onClick={() => handleSectionChange("includeExclude")}
-            >
-              INCLUDE/EXCLUDE
-            </button>
-
-            {/* Uncomment for additional sections */}
-            {/*
-  <button
-    className={`flex-1 py-2 px-4 rounded text-center ${
-      activeSection === "hotelInfo" ? "bg-white text-blue-600" : "bg-blue-500 text-white"
-    } font-semibold transition duration-200`}
-    onClick={() => handleSectionChange("hotelInfo")}
-  >
-    Hotel Info
-  </button>
-  
-  <button
-    className={`flex-1 py-2 px-4 rounded text-center ${
-      activeSection === "gallery" ? "bg-white text-blue-600" : "bg-blue-500 text-white"
-    } font-semibold transition duration-200`}
-    onClick={() => handleSectionChange("gallery")}
-  >
-    Gallery
-  </button>
-  */}
-          </div>
-
-          <div className="section-content mb-4">{renderSection()}</div>
-
-          {/* Pricing Table */}
           {subPackage.pricingDetails && subPackage.pricingDetails.length > 0 ? (
             <div className="table-container">
               <table className="cost-table w-full border-collapse text-center mt-4">

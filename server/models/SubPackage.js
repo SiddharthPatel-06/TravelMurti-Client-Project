@@ -13,7 +13,7 @@ const pricingSchema = new mongoose.Schema({
 const subPackageSchema = new mongoose.Schema({
   name: { type: String, required: true },
   description: { type: String, required: true },
-  price: { type: Number, required: true },
+  price: { type: Number, default: null },
   duration: { type: String, required: true },
   packageId: { type: mongoose.Schema.Types.ObjectId, ref: 'Package', required: true },
   imageUrl: { type: String, required: true },

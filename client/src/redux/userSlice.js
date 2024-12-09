@@ -1,36 +1,28 @@
-// userSlice.js
+import { createSlice } from "@reduxjs/toolkit";
 
-import { createSlice } from '@reduxjs/toolkit';
-
-// Initial state
 const initialState = {
   user: {
-    role: '', // Default empty role
-    authToken: null, // To store the token
+    role: "",
+    authToken: null,
     canCreatePackages: false,
-    // Add more user-related properties here
   },
 };
 
-// Create user slice
 const userSlice = createSlice({
-  name: 'user',
+  name: "user",
   initialState,
   reducers: {
-    // Action to set user data and token
     setUser: (state, action) => {
-      state.user.role = action.payload.role; // Set role
-      state.user.authToken = action.payload.token; // Set authToken
+      state.user.role = action.payload.role;
+      state.user.authToken = action.payload.token;
     },
-    // Action to log out user
+
     logoutUser: (state) => {
-      state.user = { role: '', authToken: null }; // Reset user and token
+      state.user = { role: "", authToken: null };
     },
   },
 });
 
-// Export actions
 export const { setUser, logoutUser } = userSlice.actions;
 
-// Export reducer
 export default userSlice.reducer;

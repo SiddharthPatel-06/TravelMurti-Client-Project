@@ -4,8 +4,48 @@ import Card from "./Card";
 import { useNavigate } from "react-router-dom";
 import CardShimmer from "../CardShimmer";
 
+// Static placeholder data (same as your example)
+const staticTourPackages = [
+  {
+    _id: "1",
+    imageUrl: "placeholder-image1.jpg",
+    name: "Port Blair Haelook Neil Island Tour Package",
+    description: "Explore the beauty of nature",
+    price: "Coming Soon",
+    duration: "6NIGHT / 7DAYS",
+    packageId: "1",
+  },
+  {
+    _id: "2",
+    imageUrl: "placeholder-image2.jpg",
+    name: "Port Blair Havelook & Kalapathar Tour Package",
+    description: "Spiritual journey experience",
+    price: "Coming Soon",
+    duration: "5NIGHT / 6DAY",
+    packageId: "2",
+  },
+  {
+    _id: "3",
+    imageUrl: "placeholder-image3.jpg",
+    name: "Port Blair Havelook & Neil Island Tour",
+    description: "Explore cities and hills",
+    price: "Coming Soon",
+    duration: "5NIGHT / 6DAYS",
+    packageId: "3",
+  },
+  {
+    _id: "4",
+    imageUrl: "placeholder-image4.jpg",
+    name: "Andaman & Nicobar Issland Tour Package",
+    description: "Adventure in the hills",
+    price: "Coming Soon",
+    duration: "4NIGHT / 5DAYS",
+    packageId: "4",
+  },
+];
+
 const LatestTourPackages = () => {
-  const [tourPackages, setTourPackages] = useState([]);
+  const [tourPackages, setTourPackages] = useState(staticTourPackages);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -23,8 +63,8 @@ const LatestTourPackages = () => {
           console.error("Received data is not an array");
           setTourPackages([]);
         }
-      }catch (error) {
-        console.error('Error fetching tour packages:', error);
+      } catch (error) {
+        console.error("Error fetching tour packages:", error);
       } finally {
         setLoading(false);
       }

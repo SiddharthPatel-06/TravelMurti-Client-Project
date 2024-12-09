@@ -239,10 +239,10 @@ const SubPackageManager = ({ packageId }) => {
           type="number"
           placeholder="Price"
           value={formData.price}
-          onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+          onChange={(e) => setFormData({ ...formData, price: Number(e.target.value) })}
           className="w-full mb-4 border border-gray-300 rounded px-3 py-2"
-          required
         />
+
         <input
           type="text"
           placeholder="Duration (in days)"

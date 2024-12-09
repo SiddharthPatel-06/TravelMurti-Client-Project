@@ -358,7 +358,6 @@ body {
 }
 
 /* slider in herosection */
-
 .swiper-button-next,
 .swiper-button-prev {
   color: rgb(238, 238, 238) !important;
@@ -369,4 +368,10 @@ body {
   .swiper-button-prev {
     display: none !important;
   }
+}
+
+/* spiritualSubpackage component */
+.spiritualSubpackagesection .swiper-button-next,
+.spiritualSubpackagesection .swiper-button-prev {
+  display: block !important;
 }
