@@ -3,11 +3,41 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchSubPackages } from "../redux/subPackagesSlice";
 import { useNavigate } from "react-router-dom";
 import Card from "./Card";
-import CardShimmer from "../CardShimmer";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
+
+const staticSubPackages = [
+  {
+    _id: "1",
+    imageUrl: "https://res.cloudinary.com/djrxcdfrr/image/upload/v1732555734/uploads/1732555733268-kedarnath.jpg",
+    name: "Chardham Tour Package",
+    price: "6599",
+    duration: "02NIGHT / 03DAYS",
+  },
+  {
+    _id: "2",
+    imageUrl: "https://res.cloudinary.com/djrxcdfrr/image/upload/v1732558046/Dwarka_temple_iasd2h.jpg",
+    name: "Gujarat Tour Package",
+    price: "4599",
+    duration: "1NIGHT / 2DAY",
+  },
+  {
+    _id: "3",
+    imageUrl: "https://res.cloudinary.com/djrxcdfrr/image/upload/v1732555959/uploads/1732555957949-Beauty%20at%20its%20best%21%21%20Alappuzha%20_%20Allepey%20%28Kerala%29.jpg",
+    name: "Rameshwaram Tour",
+    price: "2999",
+    duration: "1NIGHT / 2DAYS",
+  },
+  {
+    _id: "4",
+    imageUrl: "https://res.cloudinary.com/djrxcdfrr/image/upload/v1732556071/uploads/1732556070260-Himachal%20Pradesh.jpg",
+    name: "Amarnath Tour Package",
+    price: "14599",
+    duration: "2NIGHT / 3DAYS",
+  },
+];
 
 const SpiritualSubPackages = () => {
   const dispatch = useDispatch();
@@ -26,6 +56,12 @@ const SpiritualSubPackages = () => {
     navigate(`/subPackages/${subPackageId}`);
   };
 
+  // Use static data until dynamic data is successfully fetched
+  const packagesToShow =
+    status === "succeeded" && subPackages.length > 0
+      ? subPackages
+      : staticSubPackages;
+
   return (
     <div className="container spiritualSubpackagesection mx-auto my-6">
       <h1 className="text-[22px] md:text-2xl font-semibold mb-2 text-gray-700 text-center mx-auto">
@@ -36,15 +72,9 @@ const SpiritualSubPackages = () => {
       </p>
       <hr className="border-[3px] max-w-40 text-center mx-auto border-blue-500 mt-1 mb-6 sm:mb-8 rounded-sm" />
 
-      {status === "loading" ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-screen-xl mx-auto px-4">
-          {[1, 2, 3, 4].map((_, index) => (
-            <CardShimmer key={index} />
-          ))}
-        </div>
-      ) : status === "failed" ? (
-        <p>Error fetching data: {error}</p>
-      ) : subPackages.length > 0 ? (
+      {status === "failed" ? (
+        <p className="text-center text-red-500">Error fetching data: {error}</p>
+      ) : (
         <div className="relative">
           <Swiper
             modules={[Navigation]}
@@ -58,21 +88,19 @@ const SpiritualSubPackages = () => {
             }}
             className="max-w-screen-xl mx-auto px-4"
           >
-            {subPackages.map((subPackage) => (
-              <SwiperSlide key={subPackage._id}>
+            {packagesToShow.map((pkg) => (
+              <SwiperSlide key={pkg._id}>
                 <Card
-                  imageUrl={subPackage.imageUrl}
-                  title={subPackage.name}
-                  price={subPackage.price}
-                  duration={subPackage.duration}
-                  onViewDetails={() => handleViewDetails(subPackage._id)}
+                  imageUrl={pkg.imageUrl}
+                  title={pkg.name}
+                  price={pkg.price}
+                  duration={pkg.duration}
+                  onViewDetails={() => handleViewDetails(pkg._id)}
                 />
               </SwiperSlide>
             ))}
           </Swiper>
         </div>
-      ) : (
-        <p>No subpackages available at the moment.</p>
       )}
     </div>
   );
