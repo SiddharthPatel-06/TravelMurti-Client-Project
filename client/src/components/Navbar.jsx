@@ -4,8 +4,62 @@ import { IoIosArrowDown } from "react-icons/io";
 import axios from "axios";
 import { FiMenu, FiX } from "react-icons/fi";
 
+// Static data for Navbar
+const staticPackages = [
+  {
+    category: "Spiritual Tour",
+    subPackages: [
+      "Chardham Tour Package",
+      "Gujarat Tour Package",
+      "Rameshwaram Tour",
+      "Amarnath Tour Package",
+      "Kailash Mansarovar Yatra",
+      "Mata Vaishno Devi Darshan",
+      "Nau Durga Tour Package",
+      "Puri Tour Package",
+      "Ayodhya Tour Package",
+      "Mathura Vrindavan Tour",
+      "Tirupati Balaji Darshan",
+      "Sirdi Sai Baba Darshan",
+      "12 Jyotirlinga Tour Package",
+      "Chardham India Tour",
+      "South Indian Temple Tour",
+    ],
+  },
+  {
+    category: "Holiday Tour",
+    subPackages: [
+      "Madhya Pradesh Tour",
+      "Kashmir Tour Package",
+      "Leh Ladakh Tour Package",
+      "Golden Triangle Tour",
+      "Gujrat Holiday Tour",
+      "Rajasthan Holiday",
+      "Uttarakhand Holiday",
+      "Goa Holiday",
+      "North Indian Holiday",
+      "South Indian Holiday",
+      "Andaman Holiday",
+    ],
+  },
+  {
+    category: "Honeymoon Tour",
+    subPackages: [
+      "Kausani Honeymoon Package",
+      "Bangalore Ooty Honeymoon Tour",
+      "Uttarakhand Honeymoon",
+      "Himanchal Honeymoon",
+      "Rajasthan Honeymoon Tour",
+      "Ladakh Honeymoon",
+      "Andamn Honeymoon",
+      "Goa Honeymoon Tour",
+      "Jammu & Kashmir Honeymoon",
+    ],
+  },
+];
+
 const Navbar = () => {
-  const [packages, setPackages] = useState([]);
+  const [packages, setPackages] = useState(staticPackages);
   const [subPackages, setSubPackages] = useState({});
   const [isDropdownOpen, setDropdownOpen] = useState({});
   const [timeoutId, setTimeoutId] = useState(null);

@@ -16,11 +16,11 @@ const staticDeals = [
   },
   {
     _id: "2",
-    imageUrl: "placeholder-image2.jpg",
+    imageUrl: "https://res.cloudinary.com/djrxcdfrr/image/upload/v1730131787/uploads/1730131786908-banglore.avif",
     name: "Baidyanath Tour Package",
     description: "Spiritual journey experience",
-    price: "₹5599",
-    duration: "3NIGHT / 4DAYS",
+    price: "₹17599",
+    duration: "3NIGHT / 4DAY",
     packageId: "2",
   },
   {
@@ -40,7 +40,7 @@ const staticDeals = [
     name: "Kedarnath Darshan Tour Ex-haridwar",
     description: "Explore cities and hills",
     price: "₹17599",
-    duration: "02NIGHTS / 03DAYS",
+    duration: "02 NIGHTS / 03 DAYS",
     packageId: "4",
   },
 ];
