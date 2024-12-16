@@ -186,7 +186,7 @@ exports.updateSubPackage = async (req, res) => {
     if (req.body.subPackages) updates.subPackages = req.body.subPackages;
 
     // Handle image update if a new file is uploaded (single file)
-    if (req.file) {
+    if (req.file && req.file.path) {
       updates.imageUrl = req.file.path;
     }
 

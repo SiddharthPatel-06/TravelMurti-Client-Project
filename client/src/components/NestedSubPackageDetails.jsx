@@ -89,11 +89,42 @@ const NestedSubPackageDetails = () => {
         );
       case "includeExclude":
         return (
-          <div
-            dangerouslySetInnerHTML={{
-              __html: DOMPurify.sanitize(subPackage.includeExclude), // Sanitize HTML
-            }}
-          />
+          <div>
+            {/* Package Include Section */}
+            <section>
+              <h2 className="font-semibold text-base">PACKAGE INCLUDE:</h2>
+              <ul className="list-disc pl-5 mb-4">
+                <li>Meeting and assistance on arrival.</li>
+                <li>Accommodations in rooms at hotels.</li>
+                <li>
+                  Vehicle for sightseeing and excursions as per Group Size.
+                </li>
+                <li>Driver Bata, Toll tax, and parking.</li>
+                <li>Hotel and vehicle Tax.</li>
+                <li>Breakfast & Dinner.</li>
+              </ul>
+            </section>
+
+            {/* Package Exclude Section */}
+            <section>
+              <h2 className="font-semibold text-base">PACKAGE EXCLUDE:</h2>
+              <ul className="list-disc pl-5">
+                <li>Coolie/Porter charges.</li>
+                <li>Camera charges.</li>
+                <li>Donations at temples.</li>
+                <li>Extended stay or traveling due to any reason.</li>
+                <li>
+                  Any meals other than those specified in Tour Cost Includes.
+                </li>
+                <li>
+                  Expenses of personal nature such as tips, laundry, liquor,
+                  etc.
+                </li>
+                <li>Any other item not specified in Tour cost includes.</li>
+                <li>Guide & Entrance fees during sightseeing.</li>
+              </ul>
+            </section>
+          </div>
         );
 
       default:
@@ -158,7 +189,7 @@ const NestedSubPackageDetails = () => {
     return (
       <div className="relative mb-4">
         <img
-          src={images[currentImageIndex]?.url || "default-image-url.jpg"}
+          src={images[currentImageIndex]?.imageUrl || "default-image-url.jpg"}
           alt={`Gallery Image ${currentImageIndex + 1}`}
           className="w-full h-64 object-cover rounded"
         />
@@ -251,11 +282,11 @@ const NestedSubPackageDetails = () => {
                   } font-semibold transition duration-200`}
                   onClick={() => handleSectionChange("tourPlan")}
                 >
-                  ITINERARY
+                  ITINEARY
                 </button>
 
                 <button
-                  className={`flex-1 py-2 px-2 mx-1 text-sm rounded text-center ${
+                  className={`flex-1 py-2 px-1 mx-1 text-sm rounded text-center ${
                     activeSection === "includeExclude"
                       ? "bg-white text-blue-600"
                       : "bg-blue-500 text-white"
@@ -272,7 +303,7 @@ const NestedSubPackageDetails = () => {
 
           {subPackage.pricingDetails && subPackage.pricingDetails.length > 0 ? (
             <div className="table-container">
-              <table className="cost-table w-full border-collapse text-center mt-4">
+              <table className="cost-table w-full border-collapse text-center mt-4 mb-2">
                 <thead>
                   <tr className="bg-gray-200">
                     <th className="p-2 border">S.No</th>
