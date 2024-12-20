@@ -52,13 +52,12 @@ const ChatBot = () => {
   const sendToAdmin = async (data) => {
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/send-email`,
+        `https://travelmurti-client-project-2.onrender.com/send-email`,
         data,
         {
           headers: { "Content-Type": "application/json" },
         }
       );
-      console.log("Email sent:", response.data);
     } catch (error) {
       console.error(
         "Error sending email:",
