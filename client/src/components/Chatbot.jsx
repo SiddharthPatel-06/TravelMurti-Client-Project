@@ -52,7 +52,7 @@ const ChatBot = () => {
   const sendToAdmin = async (data) => {
     try {
       const response = await axios.post(
-        `http://localhost:4000/send-email`,
+        `${process.env.REACT_APP_BASE_URL}/send-email`,
         data,
         {
           headers: { "Content-Type": "application/json" },
