@@ -7,23 +7,30 @@ const fs = require("fs");
 const { cloudinary } = require("./config/cloudinaryConfig");
 const multer = require("multer");
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
-// const cloudinary = require("cloudinary").v2;
+const { botAdminEmail } = require("./templates/botAdminEmail");
 
 const app = express();
 require("dotenv").config();
 
-// Middleware to parse JSON
+const transporter = nodemailer.createTransport({
+  host: process.env.MAIL_HOST,
+  port: 587,
+  secure: false,
+  auth: {
+    user: process.env.MAIL_USER,
+    pass: process.env.MAIL_PASS,
+  },
+  tls: {
+    rejectUnauthorized: false,
+  },
+});
+
 app.use(cors());
 app.use(express.json());
 
-// Connect to MongoDB
 const connect = require("./config/db");
 connect.connectDB();
 
-// Initialize Cloudinary
-// cloudinaryConnect();
-
-// Import routes
 const packageRoutes = require("./routes/packageRoutes");
 const subPackageRoutes = require("./routes/subPackageRoutes");
 const contactRoutes = require("./routes/contactRoutes");
@@ -32,7 +39,6 @@ const errorHandlingMiddleware = require("./middleware/errorHandlingMiddleware");
 const enquiryRoutes = require("./routes/enquiryRoutes");
 const jobRoute = require("./routes/jobRoute");
 
-// Use routes
 app.use("/api/packages", packageRoutes);
 app.use("/api/subpackages", subPackageRoutes);
 app.use("/api/contact", contactRoutes);
@@ -40,18 +46,14 @@ app.use("/api/users", userRoutes);
 app.use("/api", enquiryRoutes);
 app.use("/api/jobs", jobRoute);
 
-
-// Error handling middleware must be last
 app.use(errorHandlingMiddleware);
 
-// Configure Cloudinary
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// Set up Cloudinary storage using multer-storage-cloudinary
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
@@ -59,20 +61,16 @@ const storage = new CloudinaryStorage({
   },
 });
 
-// Set up Multer to use Cloudinary storage
 const upload = multer({ storage: storage });
 
-// API endpoint to handle image uploads
 const maxCount = 10;
 app.post("/upload", upload.array("galleryImages", maxCount), (req, res) => {
-  // Check if files are uploaded
   if (!req.files || req.files.length === 0) {
     return res.status(400).send("No files were uploaded.");
   }
 
-  // Here, you can access the uploaded files with req.files
-  console.log(req.files); // Log the files to see the uploaded data
-  // Send a response back
+  console.log(req.files);
+
   res
     .status(200)
     .json({ message: "Files uploaded successfully!", files: req.files });
@@ -84,12 +82,10 @@ app.post("/update-image", upload.single("imageUrl"), async (req, res) => {
       return res.status(400).send("No file uploaded.");
     }
 
-    // The upload is already handled by Multer + CloudinaryStorage
     const result = await cloudinary.uploader.upload(req.file.path, {
       resource_type: "image",
     });
 
-    // Send the response with the image URL
     res.json({ url: result.secure_url });
   } catch (error) {
     console.error("Upload error:", error);
@@ -97,7 +93,31 @@ app.post("/update-image", upload.single("imageUrl"), async (req, res) => {
   }
 });
 
-// Starting the server
+app.post("/send-email", async (req, res) => {
+  const { name, email, phone } = req.body;
+
+  if (!name || !email || !phone) {
+    return res.status(400).json({ error: "All fields are required." });
+  }
+
+  const mailOptions = {
+    from: process.env.MAIL_USER,
+    to: "siddharthpatel199448@gmail.com",
+    subject: "New User Submission from Bot",
+    html: botAdminEmail(name, email, phone),
+  };
+
+  try {
+    await transporter.sendMail(mailOptions);
+    res.status(200).json({ message: "Submission received and email sent." });
+  } catch (error) {
+    console.error("Error sending email:", error);
+    res
+      .status(500)
+      .json({ error: "Failed to send email. Please try again later." });
+  }
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);
