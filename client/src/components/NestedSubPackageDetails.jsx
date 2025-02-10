@@ -189,9 +189,9 @@ const NestedSubPackageDetails = () => {
     return (
       <div className="relative mb-4">
         <img
-          src={images[currentImageIndex]?.imageUrl || "default-image-url.jpg"}
+          src={images[currentImageIndex]?.url || "default-image-url.jpg"}
           alt={`Gallery Image ${currentImageIndex + 1}`}
-          className="w-full h-64 object-cover rounded"
+          className="w-full h-96 object-contain rounded"
         />
         {/* Buttons below the image */}
         <div className="flex justify-between items-center mt-2">

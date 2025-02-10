@@ -100,11 +100,28 @@ const UpdateSubPackageForm = ({ subPackage, onUpdate, onCancel }) => {
     // Prepare form data for submission
     const data = new FormData();
 
-    // Append the updated fields
-    if (formData.imageUrl instanceof File) {
-      data.append("imageUrl", formData.imageUrl);
-  }
-  
+    // Append basic fields
+    Object.keys(formData).forEach((key) => {
+      if (
+        key !== "galleryImages" &&
+        key !== "pricingDetails" &&
+        formData[key] !== null
+      ) {
+        data.append(key, formData[key]);
+      }
+    });
+
+    // Append gallery images if they exist
+    formData.galleryImages.forEach((file) => {
+      if (file) data.append("galleryImages", file);
+    });
+
+    // Append pricing details explicitly
+    formData.pricingDetails.forEach((detail, index) => {
+      data.append(`pricingDetails[${index}][noOfPax]`, detail.noOfPax);
+      data.append(`pricingDetails[${index}][cab]`, detail.cab);
+      data.append(`pricingDetails[${index}][costPerPax]`, detail.costPerPax);
+    });
 
     try {
       const response = await axiosInstance.put(
@@ -131,7 +148,6 @@ const UpdateSubPackageForm = ({ subPackage, onUpdate, onCancel }) => {
         // Something happened in setting up the request
         console.error("Error message:", error.message);
       }
-      alert("An error occurred while updating the sub-package.");
     }
 
     // Prepare updated form data for submission
@@ -282,26 +298,51 @@ const UpdateSubPackageForm = ({ subPackage, onUpdate, onCancel }) => {
       {/* Gallery Images Section */}
       <div className="mb-4">
         <label className="block mb-1">Gallery Images</label>
+
+        {/* Render Existing Images from Backend */}
+        {subPackage?.galleryImages?.length > 0 && (
+          <div className="mb-4">
+            <h4 className="font-medium mb-2">Existing Gallery Images:</h4>
+            <div className="flex flex-wrap gap-1">
+              {subPackage.galleryImages.map((img, index) => (
+                <div key={index} className="relative">
+                  <img
+                    src={img.url}
+                    alt={`Gallery ${index + 1}`}
+                    className="w-[80px] h-[80px] object-cover rounded"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Add or Edit New Images */}
         {showGallery ? (
           formData.galleryImages.map((img, index) => (
-            <div key={index} className="flex space-x-2 mb-2">
+            <div
+              key={index}
+              className="flex flex-col md:flex-row md:space-x-2 mb-2 space-y-2 md:space-y-0"
+            >
               <input
                 type="file"
                 onChange={(e) => handleGalleryChange(index, e.target.files[0])}
-                className="border border-gray-300 rounded px-2 py-1"
+                className="border border-gray-300 rounded px-2 py-1 w-full md:w-auto"
               />
               <button
                 type="button"
                 onClick={() => removeGalleryImage(index)}
-                className="bg-red-500 text-white px-3 py-1 rounded"
+                className="bg-red-500 text-white px-3 py-1 rounded w-full md:w-auto"
               >
                 Remove
               </button>
             </div>
           ))
         ) : (
-          <p>No existing gallery images.</p>
+          <p>No additional gallery images added yet.</p>
         )}
+
+        {/* Button to Add New Image Fields */}
         <button
           type="button"
           onClick={() => {
@@ -319,7 +360,10 @@ const UpdateSubPackageForm = ({ subPackage, onUpdate, onCancel }) => {
         <label className="block mb-1">Pricing Details</label>
         {showPricing ? (
           formData.pricingDetails.map((detail, index) => (
-            <div key={index} className="flex space-x-2 mb-2">
+            <div
+              key={index}
+              className="flex flex-col md:flex-row md:space-x-2 mb-2 space-y-2 md:space-y-0"
+            >
               <input
                 type="number"
                 name={`noOfPax-${index}`}
@@ -328,7 +372,7 @@ const UpdateSubPackageForm = ({ subPackage, onUpdate, onCancel }) => {
                 onChange={(e) =>
                   handlePricingChange(index, "noOfPax", e.target.value)
                 }
-                className="border border-gray-300 rounded px-2 py-1"
+                className="border border-gray-300 rounded px-2 py-1 w-full md:w-auto"
               />
               <input
                 type="text"
@@ -338,7 +382,7 @@ const UpdateSubPackageForm = ({ subPackage, onUpdate, onCancel }) => {
                 onChange={(e) =>
                   handlePricingChange(index, "cab", e.target.value)
                 }
-                className="border border-gray-300 rounded px-2 py-1"
+                className="border border-gray-300 rounded px-2 py-1 w-full md:w-auto"
               />
               <input
                 type="number"
@@ -348,12 +392,12 @@ const UpdateSubPackageForm = ({ subPackage, onUpdate, onCancel }) => {
                 onChange={(e) =>
                   handlePricingChange(index, "costPerPax", e.target.value)
                 }
-                className="border border-gray-300 rounded px-2 py-1"
+                className="border border-gray-300 rounded px-2 py-1 w-full md:w-auto"
               />
               <button
                 type="button"
                 onClick={() => removePricingDetail(index)}
-                className="bg-red-500 text-white px-3 py-1 rounded"
+                className="bg-red-500 text-white px-3 py-1 rounded w-full md:w-auto"
               >
                 Remove
               </button>

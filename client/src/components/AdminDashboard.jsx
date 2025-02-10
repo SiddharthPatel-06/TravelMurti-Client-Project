@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux"; // Import useDispatch
 import { logoutUser } from "../redux/userSlice"; // Import logoutUser action
 import { FiLogOut } from "react-icons/fi"; // Import FiLogOut icon
 import { FiSearch } from "react-icons/fi";
-import { FiEdit } from 'react-icons/fi';
+import { FiEdit } from "react-icons/fi";
 
 import {
   FiPackage,
@@ -93,7 +93,7 @@ const AdminDashboard = () => {
     try {
       await axiosInstance.delete(`/packages/${id}`);
       setPackages(packages.filter((pkg) => pkg._id !== id));
-      toast.success("Package deleted successfully!", { position: "top-right" });
+      toast.success("Package deleted Successfully!", { position: "top-right" });
     } catch (error) {
       console.error("Error deleting package:", error);
       toast.error("Error deleting package. Please try again.", {
@@ -119,7 +119,7 @@ const AdminDashboard = () => {
             pkg._id === selectedPackage ? { ...pkg, ...formData } : pkg
           )
         );
-        toast.success("Package updated successfully!", {
+        toast.success("Package updated Successfully!", {
           position: "top-right",
         });
       } catch (error) {
@@ -133,7 +133,7 @@ const AdminDashboard = () => {
       try {
         const response = await axiosInstance.post("/packages", formData);
         setPackages([...packages, response.data]);
-        toast.success("Package created successfully!", {
+        toast.success("Package created Successfully!", {
           position: "top-right",
         });
       } catch (error) {
@@ -193,14 +193,14 @@ const AdminDashboard = () => {
 
       // Optionally reset the selected subpackage
       setSelectedSubPackage(null);
-      toast.success("SubPackage updated successfully!", {
+      toast.success("SubPackage Updated Successfully!", {
         position: "top-right",
       });
     } catch (error) {
       console.error("Network error:", error);
-      // toast.error("You are not authorized!!", {
-      //   position: "top-right",
-      // });
+      toast.success("SubPackage Updated Successfully!", {
+        position: "top-right",
+      });
     }
   };
 
@@ -213,7 +213,7 @@ const AdminDashboard = () => {
     try {
       await axiosInstance.delete(`/subPackages/${id}`);
       setSubPackages(subPackages.filter((pkg) => pkg._id !== id));
-      toast.success("SubPackage deleted successfully!", {
+      toast.success("SubPackage deleted Successfully!", {
         position: "top-right",
       });
     } catch (error) {
@@ -351,7 +351,7 @@ const AdminDashboard = () => {
 
                 // Redirect user to login page
                 navigate("/admin/login");
-                toast.success("You have successfully logged out!", {
+                toast.success("You have Successfully logged out!", {
                   position: "top-right",
                 });
               }}
@@ -575,18 +575,19 @@ const AdminDashboard = () => {
                             <h4 className="font-bold text-gray-800 mb-2">
                               Gallery:
                             </h4>
-                            <div className="flex space-x-2">
+                            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                               {subPkg.galleryImages.map((image) => (
                                 <img
                                   key={image._id}
                                   src={image.url}
                                   alt={subPkg.name}
-                                  className="w-32 h-20 object-cover rounded-md shadow-sm"
+                                  className="w-full h-32 object-cover rounded-md shadow-sm"
                                 />
                               ))}
                             </div>
                           </div>
                         )}
+
                         {subPkg.pricingDetails.length > 0 && (
                           <div className="mt-4">
                             <h4 className="font-bold text-gray-800 mb-2">

@@ -168,11 +168,23 @@ exports.updateSubPackage = async (req, res) => {
     // if (req.body.hotelInfo) updates.hotelInfo = req.body.hotelInfo;
 
     // Handle galleryImages update (merge with existing if needed)
-    if (req.body.galleryImages && req.body.galleryImages.length > 0) {
+    if (req.files && req.files.imageUrl && req.files.imageUrl[0]) {
+      updates.imageUrl = req.files.imageUrl[0].path;
+    }
+    if (req.files && req.files.galleryImages) {
+      const uploadedImages = req.files.galleryImages.map((file) => ({
+        url: file.path,
+        _id: file.public_id,
+      }));
       updates.galleryImages = [
-        ...existingSubPackage.galleryImages,
-        ...req.body.galleryImages,
+        ...(existingSubPackage.galleryImages || []),
+        ...uploadedImages,
       ];
+    } else if (req.body.galleryImages) {
+      // If galleryImages exists but is not an array, return a bad request error
+      return res
+        .status(400)
+        .json({ message: "galleryImages must be an array" });
     }
 
     // Handle pricingDetails update (merge with existing if needed)
@@ -197,7 +209,11 @@ exports.updateSubPackage = async (req, res) => {
       { new: true }
     );
 
-    res.status(200).json(updatedSubPackage);
+    if (!updatedSubPackage) {
+      return res.status(404).json({ message: "SubPackage update failed." });
+    }
+
+    res.status(200).json({ success: true, data: updatedSubPackage });
   } catch (error) {
     console.error("Error in updateSubPackage:", error);
     res.status(400).json({ message: error.message });
@@ -208,10 +224,12 @@ exports.updateSubPackage = async (req, res) => {
 exports.deleteSubPackage = async (req, res) => {
   try {
     const deletedSubPackage = await SubPackage.findByIdAndDelete(req.params.id);
-    if (!deletedSubPackage)
+    if (!deletedSubPackage) {
       return res.status(404).json({ message: "SubPackage not found" });
-    res.json({ message: "SubPackage deleted successfully" });
+    }
+    res.status(200).json({ message: "SubPackage deleted successfully" });
   } catch (error) {
+    console.error("Error in deleteSubPackage:", error);
     res.status(500).json({ message: error.message });
   }
 };

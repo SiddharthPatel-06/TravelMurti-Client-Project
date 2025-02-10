@@ -37,7 +37,10 @@ router.post(
 
 router.get("/package/:packageId", getSubPackagesByPackageId);
 router.get("/:subPackageId", getSubPackageDetails);
-router.put("/:id", auth, checkPermissions('canUpdateSubPackages'), upload.single("imageUrl"), updateSubPackage);
+router.put("/:id", auth, checkPermissions('canUpdateSubPackages'), upload.fields([
+  { name: "imageUrl", maxCount: 1 },
+  { name: "galleryImages", maxCount: 10 },
+]), updateSubPackage);
 router.delete("/:id", auth, checkPermissions('canDeleteSubPackages'), deleteSubPackage);
 
 module.exports = router;

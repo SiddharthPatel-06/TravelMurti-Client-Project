@@ -9,31 +9,20 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// Configure Multer Storage for Cloudinary
+// Configure Multer Storage for Cloudinary without format restrictions
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
-  params: async (req, file) => {
-    return {
-      folder: 'uploads',
-      allowed_formats: ['jpg', 'png', 'jpeg', 'avif', 'webp'],
-      public_id: `${Date.now()}-${file.originalname.split('.')[0]}`,
-    };
-  },
+  params: async (req, file) => ({
+    folder: 'uploads',
+    public_id: `${Date.now()}-${file.originalname.split('.')[0]}`,
+    resource_type: 'auto', // Allows all file types (image, video, etc.)
+  }),
 });
 
-// Create Multer instance for single and multiple file uploads
+// Create Multer instance without file type restrictions
 const upload = multer({
   storage: storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // Example limit: 5MB
-  fileFilter: (req, file, cb) => {
-    const allowedFormats = ['image/jpeg', 'image/png', 'image/jpg', 'image/avif', 'image/webp'];
-    if (!allowedFormats.includes(file.mimetype)) {
-      const error = new Error('Invalid file type. Only JPEG, PNG, and AVIF are allowed.');
-      error.file = __filename; // Add file name for debugging
-      return cb(error);
-    }
-    cb(null, true);
-  },
+  limits: { fileSize: 10 * 1024 * 1024 }, // Example limit: 10MB
 });
 
 module.exports = { cloudinary, upload };
