@@ -20,6 +20,7 @@ const UpdateSubPackageForm = ({ subPackage, onUpdate, onCancel }) => {
   // State to control visibility of previous data
   const [showGallery, setShowGallery] = useState(false);
   const [showPricing, setShowPricing] = useState(false);
+  const [existingGalleryImages, setExistingGalleryImages] = useState([]);
 
   useEffect(() => {
     if (subPackage) {
@@ -38,8 +39,25 @@ const UpdateSubPackageForm = ({ subPackage, onUpdate, onCancel }) => {
         pricingDetails: [], // Reset to empty array for new pricing details
         imageUrl: null,
       });
+      setExistingGalleryImages(subPackage.galleryImages || []);
     }
   }, [subPackage]);
+
+  // Function to handle deleting an existing image
+  const handleDeleteGalleryImage = async (imageId) => {
+    try {
+      await axiosInstance.delete(
+        `/subpackages/${subPackage._id}/gallery-images/${imageId}`
+      );
+
+      // Remove the deleted image from state
+      setExistingGalleryImages(
+        existingGalleryImages.filter((img) => img._id !== imageId)
+      );
+    } catch (error) {
+      console.error("Error deleting image:", error);
+    }
+  };
 
   // Handle basic field changes
   const handleChange = (e) => {
@@ -311,6 +329,13 @@ const UpdateSubPackageForm = ({ subPackage, onUpdate, onCancel }) => {
                     alt={`Gallery ${index + 1}`}
                     className="w-[80px] h-[80px] object-cover rounded"
                   />
+                  <button
+                    type="button"
+                    onClick={() => handleDeleteGalleryImage(img._id)}
+                    className="absolute top-0 right-0 bg-red-500 text-white px-2 py-1 text-xs rounded-full"
+                  >
+                    X
+                  </button>
                 </div>
               ))}
             </div>

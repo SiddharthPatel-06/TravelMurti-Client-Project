@@ -11,6 +11,7 @@ const {
 } = require("../controllers/subPackageController");
 const { upload } = require("../config/cloudinaryConfig");
 const { auth, checkPermissions } = require("../middleware/authMiddleware");
+const { deleteGalleryImage } = require("../controllers/subPackageController");
 
 const router = express.Router();
 
@@ -42,6 +43,8 @@ router.put("/:id", auth, checkPermissions('canUpdateSubPackages'), upload.fields
   { name: "galleryImages", maxCount: 10 },
 ]), updateSubPackage);
 router.delete("/:id", auth, checkPermissions('canDeleteSubPackages'), deleteSubPackage);
+router.delete("/:subPackageId/gallery-images/:imageId", deleteGalleryImage);
+
 
 module.exports = router;
 

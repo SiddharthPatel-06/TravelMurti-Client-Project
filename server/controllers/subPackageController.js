@@ -1,6 +1,7 @@
 const SubPackage = require("../models/SubPackage");
 const Package = require("../models/Package");
 const { cloudinary } = require("../config/cloudinaryConfig");
+const fs = require("fs");
 
 // Create SubPackage Function
 exports.createSubPackage = async (req, res) => {
@@ -273,5 +274,51 @@ exports.getLatestTourPackages = async (req, res) => {
       message: "Error retrieving latest Deal of the Day tour packages",
       error: error.message,
     });
+  }
+};
+
+// GalleryImage delete Controller function
+exports.deleteGalleryImage = async (req, res) => {
+  try {
+    const { subPackageId, imageId } = req.params;
+
+    // Find the sub-package containing the image
+    const subPackage = await SubPackage.findById(subPackageId);
+    if (!subPackage) {
+      return res.status(404).json({ message: "SubPackage not found" });
+    }
+
+    // Find the image in galleryImages
+    const image = subPackage.galleryImages.find(
+      (img) => img._id.toString() === imageId
+    );
+    if (!image) {
+      return res.status(404).json({ message: "Image not found" });
+    }
+
+    // Remove image from MongoDB
+    subPackage.galleryImages = subPackage.galleryImages.filter(
+      (img) => img._id.toString() !== imageId
+    );
+
+    // OPTIONAL: Delete from Cloudinary
+    if (image.public_id) {
+      await cloudinary.uploader.destroy(image.public_id);
+    }
+
+    // OPTIONAL: Delete from local storage
+    if (fs.existsSync(image.url)) {
+      fs.unlinkSync(image.url);
+    }
+
+    // Save the updated subPackage
+    await subPackage.save();
+
+    res
+      .status(200)
+      .json({ success: true, message: "Image deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting image:", error);
+    res.status(500).json({ success: false, message: "Server error" });
   }
 };

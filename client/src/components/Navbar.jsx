@@ -109,46 +109,30 @@ const Navbar = () => {
 
   const handleMouseEnter = (pkgCategory, packageId) => {
     if (!isMobile) {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
-      setDropdownOpen((prevState) => ({
-        ...prevState,
-        [pkgCategory]: true,
-      }));
-
-      if (!subPackages[packageId]) {
-        fetchSubPackages(packageId);
-      }
+      if (timeoutId) clearTimeout(timeoutId);
+      setDropdownOpen((prev) => ({ ...prev, [pkgCategory]: true }));
+      fetchSubPackages(packageId);
     }
   };
 
   const handleMouseLeave = (pkgCategory) => {
     if (!isMobile) {
       const id = setTimeout(() => {
-        setDropdownOpen((prevState) => ({
-          ...prevState,
-          [pkgCategory]: false,
-        }));
+        setDropdownOpen((prev) => ({ ...prev, [pkgCategory]: false }));
+        setTimeoutId(null);
       }, 200);
-
       setTimeoutId(id);
     }
   };
 
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!isMobileMenuOpen);
-  };
+  const toggleMobileMenu = () => setMobileMenuOpen((prev) => !prev);
 
   const toggleMobileDropdown = (pkgCategory, packageId) => {
-    setMobileDropdownOpen((prevState) => ({
-      ...prevState,
-      [pkgCategory]: !prevState[pkgCategory],
+    setMobileDropdownOpen((prev) => ({
+      ...prev,
+      [pkgCategory]: !prev[pkgCategory],
     }));
-
-    if (!subPackages[packageId]) {
-      fetchSubPackages(packageId);
-    }
+    fetchSubPackages(packageId);
   };
 
   const handleLinkClick = () => {
@@ -192,7 +176,7 @@ const Navbar = () => {
         {packages.length > 0 &&
           packages.map((pkg) => (
             <div
-              key={pkg._id}
+              key={pkg._id || pkg.category}
               className="group relative px-2 py-3 transition-all z-10"
               onMouseLeave={() => handleMouseLeave(pkg.category)}
             >
@@ -204,22 +188,18 @@ const Navbar = () => {
                 <IoIosArrowDown className="rotate transition-all group-hover:rotate-0" />
               </p>
               {/* Sub-package dropdown */}
-              {isDropdownOpen[pkg.category] && subPackages[pkg._id] && (
+              {isDropdownOpen[pkg.category] && (
                 <div className="border absolute -right-16 top-10 w-auto flex-col gap-1 rounded-md bg-white py-3 shadow-sm opacity-100 transition-opacity">
-                  {subPackages[pkg._id].length > 0 ? (
-                    subPackages[pkg._id].map((subPkg) => (
+                  {(subPackages[pkg._id] || pkg.subPackages).map(
+                    (subPkg, index) => (
                       <Link
-                        to={`/subpackages/${subPkg._id}`} // Dynamic routing
-                        key={subPkg._id}
+                        key={index}
+                        to={`/subpackages/${subPkg._id || subPkg}`}
                         className="block cursor-pointer items-center min-w-60 py-1 pl-8 pr-8 text-black hover:text-blue-900"
                       >
-                        {subPkg.name}
+                        {subPkg.name }
                       </Link>
-                    ))
-                  ) : (
-                    <p className="px-4 py-2 text-sm text-gray-500">
-                      No sub-packages
-                    </p>
+                    )
                   )}
                 </div>
               )}
@@ -239,40 +219,37 @@ const Navbar = () => {
           <Link to="/about" onClick={handleLinkClick}>
             <p>About Us</p>
           </Link>
-          {packages.length > 0 &&
-            packages.map((pkg) => (
-              <div key={pkg._id}>
-                <p
-                  className="flex items-center justify-between"
-                  onClick={() => toggleMobileDropdown(pkg.category, pkg._id)}
-                >
-                  <span>{pkg.category}</span>
-                  <IoIosArrowDown
-                    className={`transition-transform duration-300 ${
-                      mobileDropdownOpen[pkg.category] ? "rotate-180" : ""
-                    }`}
-                  />
-                </p>
-                {mobileDropdownOpen[pkg.category] && subPackages[pkg._id] && (
-                  <div className="flex flex-col mt-2 bg-gray-50 text-black overflow-hidden transition-all duration-300 ease-in-out border rounded-md">
-                    {subPackages[pkg._id]?.length > 0 ? (
-                      subPackages[pkg._id].map((subPkg) => (
-                        <Link
-                          to={`/subpackages/${subPkg._id}`}
-                          key={subPkg._id}
-                          onClick={handleLinkClick}
-                          className="block px-4 py-2 hover:text-blue-900"
-                        >
-                          {subPkg.name}
-                        </Link>
-                      ))
-                    ) : (
-                      <p className="px-4 py-2 text-gray-500">No sub-packages</p>
-                    )}
-                  </div>
-                )}
-              </div>
-            ))}
+          {packages.map((pkg) => (
+            <div key={pkg._id || pkg.category}>
+              <button
+                className="flex items-center justify-between"
+                onClick={() => toggleMobileDropdown(pkg.category, pkg._id)}
+              >
+                {pkg.category}
+                <IoIosArrowDown
+                  className={`transition-transform duration-300 ${
+                    mobileDropdownOpen[pkg.category] ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+              {mobileDropdownOpen[pkg.category] && (
+                <div className="flex flex-col mt-2 bg-gray-50 text-black overflow-hidden transition-all duration-300 ease-in-out border rounded-md">
+                  {(subPackages[pkg._id] || pkg.subPackages).map(
+                    (subPkg, index) => (
+                      <Link
+                        key={index}
+                        to={`/subpackages/${subPkg._id || subPkg}`}
+                        className="block px-4 py-2 hover:text-blue-900"
+                        onClick={toggleMobileMenu}
+                      >
+                        {subPkg.name}
+                      </Link>
+                    )
+                  )}
+                </div>
+              )}
+            </div>
+          ))}
           <Link to="/contact" onClick={handleLinkClick}>
             <p className="pr-4">Contact Us</p>
           </Link>
