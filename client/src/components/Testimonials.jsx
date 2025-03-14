@@ -7,16 +7,16 @@ const testimonials = [
       "We went on a Chopta tour with Travel Murti. Despite some planning issues, our trip leader Amit was super helpful and arranged bonfires at most camps. The hotels were nice, and we saw nearly all the attractions. It was a memorable experience! 🙏",
     name: "Siddharth Patel",
     role: "Software Engineer",
-    image: "https://via.placeholder.com/150",
+    image: "https://res.cloudinary.com/djrxcdfrr/image/upload/v1741976699/bfkwnaus4mgc2vmwxftl.png",
     rating: 5,
   },
   {
     id: 2,
     quote:
       "My first Chadham trip with Travel Murti and it was an amazing experience. All the service provided by the Travel Murti were excellent.They arranged everything in proper line with perfect hotel, rooms, car driver everything. I recommended them..",
-    name: "SANTHOSH KAVUPARAMBIL",
+    name: "Santhosh Kavuparambil",
     role: "Working Professional",
-    image: "https://via.placeholder.com/150",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiTEJIIr8IGnCWmECJw3stWQBl_hv9U4ZEdA&s",
     rating: 4.5,
   },
   {
@@ -25,7 +25,7 @@ const testimonials = [
       "My first trip with Travel Murti and it was an amazing experience. All the service provided by the Travel Murti were excellent.They made sure that everything was on proper line with perfect hotel, rooms, car driver everything.",
     name: "Saurav Chauhan",
     role: "Working Professional",
-    image: "https://via.placeholder.com/150",
+    image: "https://res.cloudinary.com/djrxcdfrr/image/upload/v1741976824/zlbglujtltf56hi6qgr8.png",
     rating: 5,
   },
   {
@@ -34,7 +34,7 @@ const testimonials = [
       "Travel Murti has planned our three dham yatra meticulously as per our time &need. Amitji has taken all his best efforts to provide good service. Journey was safe as the vehicle & driver provided by tour operator were very good.We enjoyed the stay and food as well.",
     name: "Asha Chandrakar",
     role: "Working Professional",
-    image: "https://via.placeholder.com/150",
+    image: "https://res.cloudinary.com/djrxcdfrr/image/upload/v1741976911/images_y8wr3y.png",
     rating: 5,
   },
   {
@@ -43,7 +43,7 @@ const testimonials = [
       "Thanks to Travel Murti for making all the arrangements for our journey Manali. They are absolutely fantastic and they did better than we wanted. They make our honeymoon a very memorable one. I recommend this place very strongly for tourists.",
     name: "Saurav Chauhan",
     role: "Working Professional",
-    image: "https://via.placeholder.com/150",
+    image: "https://res.cloudinary.com/djrxcdfrr/image/upload/v1741977270/fy5hgjeeqxvtbpocx4sh.jpg",
     rating: 3.5,
   },
   {
@@ -52,7 +52,7 @@ const testimonials = [
       "We visited Vaishno Devi Dham and had an amazing experience! The journey was beautiful, and the atmosphere was serene. The temple was awe-inspiring, making it a truly memorable trip! Thank you, Mr. Amit, for arranging this! 🙏",
     name: "Sandeep Kumar Mehta",
     role: "Software Engineer",
-    image: "https://via.placeholder.com/150",
+    image: "https://res.cloudinary.com/djrxcdfrr/image/upload/v1741977333/sandeep_image_pkeimf.jpg",
     rating: 5,
   },
 ];
