@@ -1,5 +1,6 @@
 exports.contactUsEmail = (name, email, mobile, enquiry) => {
-    return `<!DOCTYPE html>
+  const currentYear = new Date().getFullYear();
+  return `<!DOCTYPE html>
     <html lang="en">
   
     <head>
@@ -88,11 +89,10 @@ exports.contactUsEmail = (name, email, mobile, enquiry) => {
                 <a href="mailto:info@connectwithsiddh.com">info@connectwithsiddh.com</a>. We are here to assist you!
             </div>
             <div class="footer">
-                &copy; 2024 Your Company Name. All rights reserved.
+                &copy; ${currentYear} Travel Murti. All rights reserved.
             </div>
         </div>
     </body>
   
     </html>`;
-  };
-  
+};

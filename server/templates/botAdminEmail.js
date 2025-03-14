@@ -1,4 +1,5 @@
 exports.botAdminEmail = (name, email, phone) => {
+    const year = new Date().getFullYear();
     return `<!DOCTYPE html>
     <html lang="en">
   
@@ -85,7 +86,7 @@ exports.botAdminEmail = (name, email, phone) => {
                 <a href="mailto:contact@travelmurti.com">contact@travelmurti.com</a>.
             </div>
             <div class="footer">
-                &copy; 2024 Travel Murti. All rights reserved.
+                &copy; ${year} Travel Murti. All rights reserved.
             </div>
         </div>
     </body>

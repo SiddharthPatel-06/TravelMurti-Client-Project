@@ -9,6 +9,7 @@ exports.enquiryEmailTemplate = (
   departure,
   travelRequirement
 ) => {
+  const year = new Date().getFullYear();
   return `<!DOCTYPE html>
     <html lang="en">
 
@@ -84,7 +85,7 @@ exports.enquiryEmailTemplate = (
                 <p>Thank you for attending to this enquiry details.</p>
             </div>
             <div class="footer">
-                &copy; 2024 Your Company Name. All rights reserved.
+                &copy; ${year} Travel Murti. All rights reserved.
             </div>
         </div>
     </body>
@@ -93,6 +94,7 @@ exports.enquiryEmailTemplate = (
 };
 
 exports.userConfirmationEmailTemplate = (name) => {
+  const year = new Date().getFullYear();
   return `<!DOCTYPE html>
     <html lang="en">
 
@@ -162,7 +164,7 @@ exports.userConfirmationEmailTemplate = (name) => {
 
             </div>
             <div class="footer">
-                &copy; 2024 Your Company Name. All rights reserved.
+                &copy; ${year} Travel Murti. All rights reserved.
             </div>
         </div>
     </body>
