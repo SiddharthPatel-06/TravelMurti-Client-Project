@@ -118,6 +118,10 @@ app.post("/send-email", async (req, res) => {
   }
 });
 
+app.get("/api/status", (req, res) => {
+  res.json({ status: "Backend is running 🚀" });
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);
