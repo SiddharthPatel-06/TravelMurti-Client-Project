@@ -264,7 +264,7 @@ const NestedSubPackageDetails = () => {
 
               <div className="section-buttons flex flex-row w-full gap-[1px] mb-4 bg-blue-500 rounded-lg md:py-2 py-2">
                 <button
-                  className={`flex-1 py-2 px-2 mx-1 rounded-lg text-center text-sm ${
+                  className={`flex-1 py-2 px-2 mx-1 rounded-lg text-center text-xs md:text-sm ${
                     activeSection === "introduction"
                       ? "bg-white text-blue-600"
                       : "bg-blue-500 text-white"
@@ -275,7 +275,7 @@ const NestedSubPackageDetails = () => {
                 </button>
 
                 <button
-                  className={`flex-1 py-2 px- mx- rounded text-center text-sm ${
+                  className={`flex-1 py-2 px- mx- rounded text-center text-xs md:text-sm ${
                     activeSection === "tourPlan"
                       ? "bg-white text-blue-600"
                       : "bg-blue-500 text-white"
@@ -286,7 +286,7 @@ const NestedSubPackageDetails = () => {
                 </button>
 
                 <button
-                  className={`flex-1 py-2 px-1 mx-1 text-sm rounded text-center ${
+                  className={`flex-1 py-2 px-1 mx-1 text-xs md:text-sm rounded text-center ${
                     activeSection === "includeExclude"
                       ? "bg-white text-blue-600"
                       : "bg-blue-500 text-white"

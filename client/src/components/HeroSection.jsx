@@ -13,7 +13,7 @@ const heroData = [
       "https://res.cloudinary.com/djrxcdfrr/image/upload/v1730076611/kadarnath-transformed_n2uz2w.jpg",
     title: "Chardham Yatra Pilgrimage & Religious Tours",
     description: "Sacred Visit to Badrinath, Kedarnath, Gangotri & Yamunotri.",
-    link: "/subpackages/671e8f16a52b50bdeacc4896",
+    link: "/subpackages/6744b321b266c768dd5f7845",
   },
   {
     id: 2,
@@ -22,7 +22,7 @@ const heroData = [
     title: "Gujarat Tours Packages",
     description:
       "In Gujarat all temples are very famous for their worship and pilgrims.",
-    link: "/subpackages/671e8537a52b50bdeacc42f7",
+    link: "/subpackages/6744b36fb266c768dd5f786c",
   },
   {
     id: 3,
@@ -31,7 +31,7 @@ const heroData = [
     title: "South Indian Temple Tour",
     description:
       "Experience the spiritual essence of South India, known for its ancient and revered temples",
-    link: "/subpackages/671e8b84a52b50bdeacc472d",
+    link: "/subpackages/6744b893b266c768dd5f7c53",
   },
   {
     id: 4,

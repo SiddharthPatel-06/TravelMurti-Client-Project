@@ -13,7 +13,7 @@ const CancellationRefundPolicy = () => {
           className="banner-image w-full h-48 md:h-64 object-cover"
         />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-white bg-black bg-opacity-50">
-          <p className="font-bold text-4xl md:text-5xl">
+          <p className="font-bold text-center text-4xl md:text-5xl">
             Cancellation & Refund Policy
           </p>
           <p className="text-md flex items-center pt-2">
