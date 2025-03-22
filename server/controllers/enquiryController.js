@@ -42,7 +42,7 @@ exports.submitEnquiry = async (req, res) => {
   // Prepare admin email
   const adminMailOptions = {
     from: process.env.MAIL_USER,
-    to: "siddharthpatel199448@gmail.com",
+    to: "contact.travelmurti@gmail.com",
     subject: "New Enquiry from Website",
     html: enquiryEmailTemplate(
       name,

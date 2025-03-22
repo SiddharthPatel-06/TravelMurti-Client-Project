@@ -45,7 +45,7 @@ router.post('/enquiry', (req, res) => {
 
   const mailOptions = {
     from: process.env.MAIL_USER, // Use MAIL_USER for 'from'
-    to: 'siddharthpatel199448@gmail.com',
+    to: 'contact.travelmurti@gmail.com',
     subject: 'New Enquiry from Website',
     html: enquiryEmail(name, email, contactNo, country, adults, children, arrival, departure, travelRequirement),
   };

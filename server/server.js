@@ -102,7 +102,7 @@ app.post("/send-email", async (req, res) => {
 
   const mailOptions = {
     from: process.env.MAIL_USER,
-    to: "siddharthpatel199448@gmail.com",
+    to: "contact.travelmurti@gmail.com",
     subject: "New User Submission from Bot",
     html: botAdminEmail(name, email, phone),
   };

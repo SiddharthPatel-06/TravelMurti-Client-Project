@@ -18,7 +18,7 @@ exports.createContact = async (req, res) => {
     // Send email to the user
     await transporter.sendMail({
       from: process.env.MAIL_USER,
-      to: "siddharthpatel199448@gmail.com",
+      to: "contact.travelmurti@gmail.com",
       subject: "New Contact Form Confirmation",
       html: emailContent,
     });

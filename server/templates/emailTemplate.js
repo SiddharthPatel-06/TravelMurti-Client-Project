@@ -86,7 +86,7 @@ exports.contactUsEmail = (name, email, mobile, enquiry) => {
             </div>
             <div class="support">
                 If you have any further questions, feel free to reach out to us at 
-                <a href="mailto:info@connectwithsiddh.com">info@connectwithsiddh.com</a>. We are here to assist you!
+                <a href="mailto:contact.travelmurti@gmail.com">contact.travelmurti@gmail.com</a>. We are here to assist you!
             </div>
             <div class="footer">
                 &copy; ${currentYear} Travel Murti. All rights reserved.

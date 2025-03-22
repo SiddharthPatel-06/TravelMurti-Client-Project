@@ -159,7 +159,7 @@ exports.userConfirmationEmailTemplate = (name) => {
                 <p>Dear ${name},</p>
                 <p>Thank you for contacting us! We have received your enquiry and appreciate your interest.</p>
                 <p>Our team will review the details and get back to you shortly.</p>
-                <p>If you have any urgent questions, please feel free to reply to this email or reach us at <a href="mailto:info@connectwithsiddh.com">info@connectwithsiddh.com</a>.</p>
+                <p>If you have any urgent questions, please feel free to reply to this email or reach us at <a href="mailto:contact.travelmurti@gmail.com">contact.travelmurti@gmail.com</a>.</p>
                 <p>We appreciate your patience and look forward to assisting you!</p>
 
             </div>
