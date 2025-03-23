@@ -8,6 +8,7 @@ const { cloudinary } = require("./config/cloudinaryConfig");
 const multer = require("multer");
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const { botAdminEmail } = require("./templates/botAdminEmail");
+const https = require('https');
 
 const app = express();
 require("dotenv").config();
@@ -123,6 +124,13 @@ app.get("/api/status", (req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Server running on port ${PORT}`);
+// Load SSL Certificates
+const options = {
+    key: fs.readFileSync('/etc/letsencrypt/live/www.travelmurti.com/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/www.travelmurti.com/fullchain.pem')
+};
+
+// Start HTTPS server
+https.createServer(options, app).listen(PORT, "0.0.0.0", () => {
+    console.log(`🚀 Secure server running on https://0.0.0.0:${PORT}`);
 });
