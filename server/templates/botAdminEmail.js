@@ -83,7 +83,7 @@ exports.botAdminEmail = (name, email, phone) => {
             </div>
             <div class="support">
                 If you need further assistance, feel free to reach out to support at 
-                <a href="mailto:contact@travelmurti.com">contact@travelmurti.com</a>.
+                <a href="mailto:contact@travelmurti.com">contact@travelmurti.com</a>
             </div>
             <div class="footer">
                 &copy; ${year} Travel Murti. All rights reserved.
