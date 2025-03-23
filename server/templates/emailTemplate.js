@@ -76,8 +76,7 @@ exports.contactUsEmail = (name, email, mobile, enquiry) => {
             <div class="message">Contact Form Confirmation</div>
             <div class="body">
                 <p>Dear Admin,</p>
-                <p>You have received a new contact-info from the website. Here are the details:p>
-                <p><strong>Details are as follows:</strong></p>
+                <p>You have received a new contact-info from the website. Here are the details: </p>
                 <p><strong>Name:</strong> ${name}</p>
                 <p><strong>Email:</strong> ${email}</p>
                 <p><strong>Mobile Number:</strong> ${mobile}</p>
