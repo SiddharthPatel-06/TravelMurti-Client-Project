@@ -75,21 +75,18 @@ exports.contactUsEmail = (name, email, mobile, enquiry) => {
             <img class="logo" src="https://lh4.googleusercontent.com/-43TdC72iuWI/AAAAAAAAAAI/AAAAAAAAAAA/vLm5URYYrSY/s44-p-k-no-ns-nd/photo.jpg" alt="Company Logo">
             <div class="message">Contact Form Confirmation</div>
             <div class="body">
-                <p>Dear ${name},</p>
-                <p>Thank you for reaching out to us! We have received your enquiry and will respond shortly.</p>
-                <p><strong>Here are the details you provided:</strong></p>
+                <p>Dear Admin,</p>
+                <p>You have received a new contact-info from the website. Here are the details:p>
+                <p><strong>Details are as follows:</strong></p>
                 <p><strong>Name:</strong> ${name}</p>
                 <p><strong>Email:</strong> ${email}</p>
                 <p><strong>Mobile Number:</strong> ${mobile}</p>
                 <p><strong>Enquiry:</strong> ${enquiry}</p>
-                <p>Your interest is important to us, and we appreciate your patience while we get back to you.</p>
+                <p><strong>Action Required:</strong> Please follow up with the user at your earliest convenience.</p>
             </div>
-            <div class="support">
-                If you have any further questions, feel free to reach out to us at 
-                <a href="mailto:contact.travelmurti@gmail.com">contact.travelmurti@gmail.com</a> We are here to assist you!
-            </div>
+            
             <div class="footer">
-                &copy; ${currentYear} Travel Murti. All rights reserved.
+                &copy; ${currentYear} Travel Murti | Internal Use Only
             </div>
         </div>
     </body>

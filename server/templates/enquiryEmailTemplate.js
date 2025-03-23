@@ -85,7 +85,7 @@ exports.enquiryEmailTemplate = (
                 <p>Thank you for attending to this enquiry details.</p>
             </div>
             <div class="footer">
-                &copy; ${year} Travel Murti. All rights reserved.
+                &copy; ${year} Travel Murti | Internal Use Only
             </div>
         </div>
     </body>
