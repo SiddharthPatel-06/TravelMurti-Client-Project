@@ -1,6 +1,6 @@
 exports.botAdminEmail = (name, email, phone) => {
-    const year = new Date().getFullYear();
-    return `<!DOCTYPE html>
+  const year = new Date().getFullYear();
+  return `<!DOCTYPE html>
     <html lang="en">
   
     <head>
@@ -81,12 +81,9 @@ exports.botAdminEmail = (name, email, phone) => {
                 <p><strong>Email:</strong> ${email}</p>
                 <p><strong>Phone Number:</strong> ${phone}</p>
             </div>
-            <div class="support">
-                If you need further assistance, feel free to reach out to support at 
-                <a href="mailto:contact@travelmurti.com">contact@travelmurti.com</a>
-            </div>
+            
             <div class="footer">
-                &copy; ${year} Travel Murti. All rights reserved.
+                &copy; ${year} Travel Murti | Internal Use Only
             </div>
         </div>
     </body>
