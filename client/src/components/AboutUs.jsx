@@ -18,7 +18,7 @@ function AboutUs() {
             About Us
           </h1>
           <p className="text-white mt-3 text-sm md:text-lg font-medium drop-shadow-md">
-            Home &gt; About Us
+            <Link to="/">Home </Link> &gt; About Us
           </p>
         </div>
       </section>
