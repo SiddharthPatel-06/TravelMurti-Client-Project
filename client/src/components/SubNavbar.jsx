@@ -21,7 +21,7 @@ const SubNavbar = () => {
           className="text-white text-sm cursor-pointer hover:underline mx- flex items-center"
           onClick={handlePhoneClick}
         >
-          <FaPhoneAlt className="mr-1" />
+          <FaPhoneAlt className="mr-1 hidden md:block" />
           {phoneNumber}
         </span>
 
