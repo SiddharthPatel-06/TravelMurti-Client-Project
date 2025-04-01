@@ -23,7 +23,7 @@ const WeAreHiring = () => {
 
   const handleApplyClick = () => {
     window.open(
-      "mailto:contact@travelmurti.com?subject=Application for Travel Sales Consultant",
+      "mailto:contact.travelmurti@gmail.com?subject=Application for Travel Sales Consultant",
       "_blank"
     );
   };

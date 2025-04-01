@@ -35,7 +35,7 @@ function ContactUs() {
           <div className="bg-white shadow-md rounded-lg p-6 flex flex-col items-center">
             <FaEnvelope className="text-blue-500 w-8 h-8 mb-2" />
             <h4 className="font-semibold text-gray-800">Email</h4>
-            <p className="text-gray-600 text-center">contact@travelmurti.com</p>
+            <p className="text-gray-600 text-center">contact.travelmurti@gmail.com</p>
           </div>
         </div>
 

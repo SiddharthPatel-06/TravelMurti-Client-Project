@@ -421,7 +421,7 @@ const NestedSubPackageDetails = () => {
             <p>For Tour Packages, Vehicle Rental, and Customer Care Support</p>
             <div className="mt-4">
               <p>Phone: +91 8527036496</p>
-              <p>Email: contact@travelmurti.com</p>
+              <p>Email: contact.travelmurti@gmail.com</p>
             </div>
           </div>
 

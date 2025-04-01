@@ -11,7 +11,7 @@ const Footer = () => {
   const contactInfo = [
     "4th Floor, Kamal Bhati Market, Sector-86, Yakubpur, Noida, Uttar Pradesh, 201305, India",
     "Mob: +91 8527036496",
-    "Email: contact@travelmurti.com",
+    "Email: contact.travelmurti@gmail.com",
   ];
 
   const services = [
