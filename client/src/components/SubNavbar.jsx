@@ -2,7 +2,7 @@ import React from "react";
 import { FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 
 const SubNavbar = () => {
-  const phoneNumber = "+91 8527036496";
+  const phoneNumber = "8527036496";
   const email = "contact.travelmurti@gmail.com";
 
   const handlePhoneClick = () => {
