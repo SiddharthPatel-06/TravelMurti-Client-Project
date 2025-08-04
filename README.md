@@ -1,26 +1,89 @@
-# TravelMurti-Client-Project
+# 🧳TravelMurti – Smart Tourism Management Platform
 
-TravelMurti is an easy-to-use online platform that makes travel planning fun and straightforward. Users can browse and manage various travel packages, with secure logins for clients and employees for personalized access. The admin panel allows efficient management of user accounts, roles, and inquiries.
+✨ **TravelMurti** is a complete travel booking and management system. It helps travelers explore destinations and send inquiries easily. Meanwhile, admins get full control to manage packages, employee access, job hiring, and customer communications — all from a clean dashboard.
 
-Users can submit inquiries and contact forms, receiving immediate email confirmations, while admins get detailed notifications in a friendly format. We prioritize security by using DOMPurify to protect user data from XSS attacks. The site is responsive, ensuring a great experience on any device.
+### Live Website
+[https://www.travelmurti.com](https://www.travelmurti.com)
 
-All user interactions, including inquiries and feedback, are automatically logged into a Google Sheet for easy tracking. Our beautifully designed "About Us" and "Contact Us" pages enhance user engagement. TravelMurti is committed to providing the tools you need for confident and efficient travel planning.
+---
 
-Live Project Url: https://www.travelmurti.com/
+## What is TravelMurti?
 
-# Key Features:
+It’s a smart, easy-to-use tourism platform:
 
-<ul>
-    <li>Manage Packages: Create, update, and delete travel packages easily.</li>
-    <li>User Accounts: Secure sign-up, login, and logout for clients and employees.</li>
-    <li>Admin Panel: Manage users, assign roles, and set permissions effortlessly.</li>
-    <li>Inquiry and Contact Forms: Simple forms for users with automatic email confirmations.</li>
-    <li>Email Notifications: Admins receive detailed updates for inquiries; users get confirmation emails.</li>
-    <li>Chat Feature: Collects user info for quick admin responses.</li>
-    <li>Security Measures: Protects against XSS attacks using DOMPurify.</li>
-    <li>Data Management: Inquiry data and employee details displayed for easy management.</li>
-    <li>Responsive Design: Looks great and works well on all devices.</li>
-    <li>Dynamic Data Fetching: Fetches data from the backend server, minimizing static content.</li>
-    <li>Attractive Pages: Beautifully designed "About Us" and "Contact Us" pages.</li>
-    <li>Google Sheets Integration: Automatically logs user information for tracking.</li>
-</ul>
+- **Travelers** can browse travel packages, send queries, and get updates.
+- **Travel agencies (admins)** can handle packages, employees, customer messages, and hiring from one place.
+
+---
+
+## 🔑 Key Features
+
+### Travel Package Management
+- Admin can add or edit travel packages and sub-packages (like Shimla, Manali).
+- Full details and images included for each destination.
+
+### Role-Based Admin & Employee Panel
+- Admin can create employee accounts.
+- Assign roles: add, edit, view, or delete packages.
+- Roles can be updated anytime.
+
+### Client & Employee Login System
+- Secure login for both users and employees.
+- JWT-based authentication used for safety.
+
+### Inquiry and Contact Form
+- Users can send travel inquiries.
+- All data is sent directly to the admin’s Gmail.
+
+### Email Notifications
+- Confirmation emails are sent to both users and admins for every form submission.
+
+### Simple Chatbot (Admin Alerts)
+- A small chatbot collects customer info and sends it to the admin’s Gmail.
+- Helps in fast and smooth lead follow-ups.
+
+### Fast Image Loading with Cloudinary
+- All images are stored and served via Cloudinary.
+- Makes loading faster, even on slow connections.
+
+### Protected Forms (XSS Security)
+- DOMPurify is used to sanitize inputs and block XSS attacks.
+
+### Responsive UI
+- Mobile-first, fully responsive design across all screen sizes.
+
+### Contact Us & About Us Pages
+- Clean and informative static pages to build trust.
+
+### Job Hiring Page
+- Admin can post job openings.
+- Collect applications and manage hiring — all from the dashboard.
+
+### Hosting with Hostinger VPS
+- Deployed on Hostinger VPS for better control and speed.
+- Added setup to block spam emails (common issue in shared hosting).
+
+---
+
+### ☁️ Deployment
+
+| Part        | Platform       |
+|-------------|----------------|
+| Email Service | Gmail SMTP   |
+| Hosting     | Hostinger VPS  |
+| Database    | MongoDB Atlas  |
+| Media Files | Cloudinary     |
+
+
+---
+
+## Connect with Me
+
+- [LinkedIn](https://www.linkedin.com/in/siddharth-patel-b1ba53270/)
+- [Twitter](https://x.com/Siddharth0693)
+- [Email](mailto:connectwithsiddh@gmail.com)
+- [Portfolio](https://siddharth-genai.vercel.app/)
+
+---
+
+Made with ❤️ by **Siddharth Patel**
