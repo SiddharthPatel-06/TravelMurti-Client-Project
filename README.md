@@ -81,7 +81,7 @@ It’s a smart, easy-to-use tourism platform:
 
 - [LinkedIn](https://www.linkedin.com/in/siddharth-patel-b1ba53270/)
 - [Twitter](https://x.com/Siddharth0693)
-- [Email](mailto:connectwithsiddh@gmail.com)
+- [Email](mailto:heycodewithsid@gmail.com)
 - [Portfolio](https://siddharth-genai.vercel.app/)
 
 ---
