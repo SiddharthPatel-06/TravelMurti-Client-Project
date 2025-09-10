@@ -79,10 +79,10 @@ It’s a smart, easy-to-use tourism platform:
 
 ## Connect with Me
 
-- [LinkedIn](https://www.linkedin.com/in/siddharth-patel-b1ba53270/)
+- [LinkedIn](https://www.linkedin.com/in/siddharth-dev/)
 - [Twitter](https://x.com/Siddharth0693)
 - [Email](mailto:heycodewithsid@gmail.com)
-- [Portfolio](https://siddharth-genai.vercel.app/)
+- [Portfolio](https://siddharth-dev.vercel.app/)
 
 ---
 
